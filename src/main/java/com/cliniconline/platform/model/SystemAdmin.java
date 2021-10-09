@@ -17,7 +17,8 @@ public class SystemAdmin implements Admin{
 
     private String firstName;
     private String lastName;
-    private final Authority authority = Authority.SYSTEM_ADMIN;
+    private String password;
+    private final Role role = Role.SYSTEM_ADMIN;
 
     public SystemAdmin() {
 
@@ -54,11 +55,6 @@ public class SystemAdmin implements Admin{
     }
 
     @Override
-    public void setId(Long id) {
-
-    }
-
-    @Override
     public String getFirstName() {
         return null;
     }
@@ -79,7 +75,22 @@ public class SystemAdmin implements Admin{
     }
 
     @Override
-    public Authority getAuthority() {
+    public String getEmail() {
+        return null;
+    }
+
+    @Override
+    public void setEmail() {
+
+    }
+
+    @Override
+    public void changePassword(String password) {
+
+    }
+
+    @Override
+    public Role getAuthority() {
         return null;
     }
 
@@ -89,7 +100,7 @@ public class SystemAdmin implements Admin{
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", authority=" + authority +
+                ", authority=" + role +
                 '}';
     }
 

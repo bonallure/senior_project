@@ -15,8 +15,6 @@ public interface Admin {
 
     Long getId();
 
-    void setId(Long id);
-
     String getFirstName();
 
     void setFirstName(String firstName);
@@ -25,7 +23,13 @@ public interface Admin {
 
     void setLastName(String lastName);
 
-    Authority getAuthority();
+    String getEmail();
+
+    void setEmail();
+
+    void changePassword(String password);
+
+    Role getAuthority();
 
     @Override
     String toString();

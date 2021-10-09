@@ -11,21 +11,24 @@ import javax.persistence.Id;
 @Entity
 public class ClinicAdmin implements Admin{
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String firstName;
     private String lastName;
-    private final Authority authority = Authority.CLINIC_ADMIN;
+
+    @Id
+    private String email;
+    private String password;
+    private final Role role = Role.CLINIC_ADMIN;
 
     public ClinicAdmin() {
 
     }
 
-    public ClinicAdmin(String firstName, String lastName) {
+    public ClinicAdmin(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
     }
 
     @Override
@@ -52,10 +55,6 @@ public class ClinicAdmin implements Admin{
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -72,8 +71,23 @@ public class ClinicAdmin implements Admin{
         this.lastName = lastName;
     }
 
-    public Authority getAuthority() {
-        return authority;
+    @Override
+    public String getEmail() {
+        return null;
+    }
+
+    @Override
+    public void setEmail() {
+
+    }
+
+    @Override
+    public void changePassword(String password) {
+
+    }
+
+    public Role getAuthority() {
+        return role;
     }
 
     @Override
@@ -82,7 +96,7 @@ public class ClinicAdmin implements Admin{
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", authority=" + authority +
+                ", authority=" + role +
                 '}';
     }
 

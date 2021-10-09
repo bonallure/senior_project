@@ -1,0 +1,55 @@
+package com.cliniconline.platform.model;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by bonallure on 10/8/21
+ */
+public interface User {
+
+    void startCall(Call call);
+
+    void joinCall(Call call);
+
+    void sendMessage(String message);
+
+    void replyToMessage(String response);
+
+    Set<Message> viewMessages();
+
+    Set<Appointment> viewAllAppointments();
+
+    Set<Prescription> viewPrescriptions();
+
+    User viewAccount();
+
+    Long getId();
+
+    String getFirstName();
+
+    void setFirstName(String firstName);
+
+    String getLastName();
+
+    void setLastName(String lastName);
+
+    String getAddress();
+
+    void setAddress(Address address);
+
+    void changePassword(String password);
+
+    void setPassword(String password);
+
+    int getPhoneNumber();
+
+    void setPhoneNumber(int number);
+
+    int getSSN();
+
+    void setSSN(int ssn);
+
+    Date getDOB();
+}

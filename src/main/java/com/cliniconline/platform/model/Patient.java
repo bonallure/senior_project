@@ -1,197 +1,165 @@
 package com.cliniconline.platform.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by bonallure on 10/8/21
+ * Created by bonallure on 10/10/21
  */
-@Entity
-public class Patient implements User{
+public abstract class Patient implements User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String email;
     private String firstName;
     private String lastName;
     private String password;
-    private Object address;
+    private Address address;
     private int phoneNumber;
-    private Date DOB;
+    private Calendar DOB;
     private int SSN;
     private final Role role = Role.PATIENT;
 
     @ManyToOne
     private Doctor doctor;
+
     @OneToMany
-    private Set<Dependent> dependents;
+    private Set<Prescription> prescriptions = new HashSet<>();;
     @OneToMany
-    private Set<Prescription> prescriptions;
+    private Set<Appointment> appointments = new HashSet<>();
     @OneToMany
-    private Set<Appointment> appointments;
-    @OneToMany
-    private Set<Message> messages;
+    private Set<Message> messages = new HashSet<>();
 
     public Patient() {
     }
 
-    public Patient(String email, String firstName, String lastName, Date DOB, int SSN) {
+    public Patient(String email, String firstName, String lastName, String password, Address address,
+                        int phoneNumber, Calendar DOB, int SSN, Doctor doctor) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
         this.DOB = DOB;
         this.SSN = SSN;
-    }
-
-    void addDependent(String firstName, String lastName, Date DOB, int SSN){
-        dependents.add(new Dependent(this.email, firstName, lastName, DOB, SSN));
+        this.doctor = doctor;
     }
 
     @Override
     public void startCall(Call call) {
-
+        // TODO
     }
 
     @Override
     public void joinCall(Call call) {
-
+        // TODO
     }
 
     @Override
     public void sendMessage(String message) {
-
+        // TODO
     }
 
     @Override
     public void replyToMessage(String response) {
-
+        // TODO
     }
 
     @Override
     public Set<Message> viewMessages() {
-        return new HashSet<Message>();
-    }
-
-    Set<User> viewDoctors(){
-        return null;
-    }
-
-    Set<User> viewDependents(){
-        return null;
+        return messages;
     }
 
     @Override
     public Set<Appointment> viewAllAppointments() {
-        return null;
+        return appointments;
+    }
+
+    @Override
+    public void addApointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
+
+    @Override
+    public void addPrescription(Prescription prescription) {
+        prescriptions.add(prescription);
     }
 
     @Override
     public Set<Prescription> viewPrescriptions() {
-        return null;
+        return prescriptions;
     }
 
     @Override
     public User viewAccount() {
-        return null;
+        return this;
     }
 
     @Override
     public Long getId() {
-        return null;
+        return id;
     }
 
     @Override
     public String getFirstName() {
-        return null;
+        return firstName;
     }
 
 
     @Override
     public void setFirstName(String firstName) {
-
+        this.firstName = firstName;
     }
 
     @Override
     public String getLastName() {
-        return null;
+        return lastName;
     }
 
     @Override
     public void setLastName(String lastName) {
-
+        this.lastName = lastName;
     }
 
     @Override
-    public String getAddress() {
-        return null;
+    public Address getAddress() {
+        return address;
     }
 
     @Override
     public void setAddress(Address address) {
-
+        this.address = address;
     }
 
     @Override
     public void changePassword(String password) {
-
+        this.password = password;
     }
 
     @Override
     public void setPassword(String password) {
-
+        this.password = password;
     }
 
     @Override
     public int getPhoneNumber() {
-        return 0;
+        return phoneNumber;
     }
 
     @Override
     public void setPhoneNumber(int number) {
-
+        phoneNumber = number;
     }
 
     @Override
     public int getSSN() {
-        return 0;
+        return SSN;
     }
 
     @Override
-    public void setSSN(int ssn) {
-
-    }
-
-    @Override
-    public Date getDOB() {
-        return null;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Patient patient = (Patient) o;
-
-        if (id != null ? !id.equals(patient.id) : patient.id != null) return false;
-        if (firstName != null ? !firstName.equals(patient.firstName) : patient.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(patient.lastName) : patient.lastName != null) return false;
-        if (email != null ? !email.equals(patient.email) : patient.email != null) return false;
-        if (password != null ? !password.equals(patient.password) : patient.password != null) return false;
-        return role == patient.role;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + role.hashCode();
-        return result;
+    public Calendar getDOB() {
+        return DOB;
     }
 }

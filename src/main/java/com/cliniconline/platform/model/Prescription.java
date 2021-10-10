@@ -17,7 +17,7 @@ public class Prescription {
     private Doctor doctor;
 
     @OneToOne
-    private Patient patient;
+    private AdultPatient adultPatient;
 
     public Long getId() {
         return id;

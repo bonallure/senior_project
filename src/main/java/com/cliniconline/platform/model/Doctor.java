@@ -1,7 +1,7 @@
 package com.cliniconline.platform.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,26 +19,26 @@ public class Doctor implements User{
     private String password;
     private Object address;
     private int phoneNumber;
-    private Date DOB;
+    private Calendar DOB;
     private int SSN;
     private final Role role = Role.DOCTOR;
 
     @OneToMany
-    private Set<Patient> patients;
+    private Set<AdultPatient> adultPatients = new HashSet<>();
 
     @ManyToMany
-    private Set<Prescription> prescriptions;
+    private Set<Prescription> prescriptions = new HashSet<>();
 
     @ManyToMany
-    private Set<Appointment> appointments;
+    private Set<Appointment> appointments = new HashSet<>();
 
     @ManyToMany
-    private Set<Message> messages;
+    private Set<Message> messages = new HashSet<>();
 
     public Doctor() {
     }
 
-    public Doctor(Long id, String firstName, String lastName, String email, Date DOB, int SSN) {
+    public Doctor(Long id, String firstName, String lastName, String email, Calendar DOB, int SSN) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -49,112 +49,117 @@ public class Doctor implements User{
 
     @Override
     public void changePassword(String password) {
-
+        this.password = password;
     }
 
     @Override
     public void setPassword(String password) {
-
+        this.password = password;
     }
 
     @Override
     public int getPhoneNumber() {
-        return 0;
+        return phoneNumber;
     }
 
     @Override
     public void setPhoneNumber(int number) {
-
+        phoneNumber = number;
     }
 
     @Override
     public int getSSN() {
-        return 0;
+        return SSN;
     }
 
     @Override
-    public void setSSN(int ssn) {
-
-    }
-
-    @Override
-    public Date getDOB() {
-        return null;
+    public Calendar getDOB() {
+        return DOB;
     }
 
     @Override
     public void startCall(Call call) {
-
+        //TODO
     }
 
     @Override
     public void joinCall(Call call) {
-
+        //TODO
     }
 
     @Override
     public void sendMessage(String message) {
-
+        //TODO
     }
 
     @Override
     public void replyToMessage(String response) {
-
+        //TODO
     }
 
     @Override
     public Set<Message> viewMessages() {
-        return new HashSet<>();
+        return messages;
     }
 
     @Override
     public Set<Appointment> viewAllAppointments() {
-        return new HashSet<>();
+        return appointments;
+    }
+
+    @Override
+    public void addApointment(Appointment appointment) {
+        appointments.add(appointment);
     }
 
     @Override
     public Set<Prescription> viewPrescriptions() {
-        return null;
+        return prescriptions;
+    }
+
+    @Override
+    public void addPrescription(Prescription prescription) {
+        prescriptions.add(prescription);
     }
 
     @Override
     public User viewAccount() {
-        return null;
+        return this;
     }
 
     @Override
     public Long getId() {
-        return null;
+        return id;
     }
 
     @Override
     public String getFirstName() {
-        return null;
+        return firstName;
     }
 
     @Override
     public void setFirstName(String firstName) {
-
+        this.firstName = firstName;
     }
 
     @Override
     public String getLastName() {
-        return null;
+        return lastName;
     }
 
     @Override
     public void setLastName(String lastName) {
-
+        this.lastName = lastName;
     }
 
     @Override
-    public String getAddress() {
-        return null;
+    public Address getAddress() {
+        return (Address) address;
     }
 
     @Override
     public void setAddress(Address address) {
-
+        this.address = address;
     }
 
     @Override

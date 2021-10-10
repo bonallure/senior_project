@@ -1,7 +1,6 @@
 package com.cliniconline.platform.model;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Calendar;
 import java.util.Set;
 
 /**
@@ -21,7 +20,11 @@ public interface User {
 
     Set<Appointment> viewAllAppointments();
 
+    void addApointment(Appointment appointment);
+
     Set<Prescription> viewPrescriptions();
+
+    void addPrescription(Prescription prescription);
 
     User viewAccount();
 
@@ -35,7 +38,7 @@ public interface User {
 
     void setLastName(String lastName);
 
-    String getAddress();
+    Address getAddress();
 
     void setAddress(Address address);
 
@@ -49,7 +52,5 @@ public interface User {
 
     int getSSN();
 
-    void setSSN(int ssn);
-
-    Date getDOB();
+    Calendar getDOB();
 }

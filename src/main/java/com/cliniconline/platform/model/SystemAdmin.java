@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * Created by bonallure on 10/8/21
@@ -30,7 +31,7 @@ public class SystemAdmin implements Admin{
     }
 
     @Override
-    public void addPatient(Patient patient) {
+    public void addPatient(AdultPatient adultPatient) {
 
     }
 
@@ -52,6 +53,11 @@ public class SystemAdmin implements Admin{
     @Override
     public Long getId() {
         return null;
+    }
+
+    @Override
+    public void addDependent(Dependent dependent, AdultPatient gardian, Doctor doctor) {
+
     }
 
     @Override

@@ -1,11 +1,13 @@
 package com.cliniconline.platform.model;
 
+import java.util.Date;
+
 /**
  * Created by bonallure on 10/8/21
  */
 public interface Admin {
 
-    void addPatient(Patient patient);
+    void addPatient(AdultPatient adultPatient);
 
     void addDoctor(Doctor doctor);
 
@@ -14,6 +16,8 @@ public interface Admin {
     void graduatePatient();
 
     Long getId();
+
+    void addDependent(Dependent dependent, AdultPatient gardian, Doctor doctor);
 
     String getFirstName();
 

@@ -1,7 +1,6 @@
 package com.cliniconline.platform.model;
 
 import javax.persistence.*;
-import javax.print.Doc;
 
 /**
  * Created by bonallure on 10/8/21
@@ -17,7 +16,7 @@ public class Message {
     private Doctor doctor;
 
     @OneToOne
-    private Patient patient;
+    private AdultPatient adultPatient;
 
     public Long getId() {
         return id;

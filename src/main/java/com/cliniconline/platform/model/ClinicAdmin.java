@@ -32,7 +32,7 @@ public class ClinicAdmin implements Admin{
     }
 
     @Override
-    public void addPatient(Patient patient) {
+    public void addPatient(AdultPatient adultPatient) {
 
     }
 
@@ -53,6 +53,11 @@ public class ClinicAdmin implements Admin{
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public void addDependent(Dependent dependent, AdultPatient gardian, Doctor doctor) {
+
     }
 
     public String getFirstName() {

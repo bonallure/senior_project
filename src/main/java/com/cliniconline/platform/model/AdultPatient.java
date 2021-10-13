@@ -19,6 +19,14 @@ public class AdultPatient extends Patient implements User{
     @OneToMany
     private Set<Dependent> dependents = new HashSet<>();
 
+    public AdultPatient() {
+    }
+
+    public AdultPatient(String email, String firstName, String lastName, String password, Address address,
+                   int phoneNumber, Calendar DOB, int SSN, Doctor doctor) {
+        super(email, firstName, lastName, password, address, phoneNumber, DOB, SSN, doctor);
+    }
+
     public Set<Dependent> getDependents() {
 
         return dependents;

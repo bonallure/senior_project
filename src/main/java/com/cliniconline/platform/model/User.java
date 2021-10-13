@@ -24,8 +24,6 @@ public interface User {
 
     Set<Prescription> viewPrescriptions();
 
-    void addPrescription(Prescription prescription);
-
     User viewAccount();
 
     Long getId();
@@ -49,8 +47,6 @@ public interface User {
     int getPhoneNumber();
 
     void setPhoneNumber(int number);
-
-    int getSSN();
 
     Calendar getDOB();
 }

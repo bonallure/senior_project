@@ -20,31 +20,33 @@ public class Doctor implements User{
     private Object address;
     private int phoneNumber;
     private Calendar DOB;
-    private int SSN;
     private final Role role = Role.DOCTOR;
 
     @OneToMany
-    private Set<AdultPatient> adultPatients = new HashSet<>();
+    private Set<AdultPatient> adultPatients;
 
     @ManyToMany
-    private Set<Prescription> prescriptions = new HashSet<>();
+    private Set<Prescription> prescriptions;
 
     @ManyToMany
-    private Set<Appointment> appointments = new HashSet<>();
+    private Set<Appointment> appointments;
 
     @ManyToMany
-    private Set<Message> messages = new HashSet<>();
+    private Set<Message> messages;
 
     public Doctor() {
     }
 
-    public Doctor(Long id, String firstName, String lastName, String email, Calendar DOB, int SSN) {
+    public Doctor(Long id, String firstName, String lastName, String email, Calendar DOB) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.DOB = DOB;
-        this.SSN = SSN;
+        messages = new HashSet<>();
+        appointments = new HashSet<>();
+        prescriptions = new HashSet<>();
+        adultPatients = new HashSet<>();
     }
 
     @Override
@@ -65,11 +67,6 @@ public class Doctor implements User{
     @Override
     public void setPhoneNumber(int number) {
         phoneNumber = number;
-    }
-
-    @Override
-    public int getSSN() {
-        return SSN;
     }
 
     @Override
@@ -117,7 +114,6 @@ public class Doctor implements User{
         return prescriptions;
     }
 
-    @Override
     public void addPrescription(Prescription prescription) {
         prescriptions.add(prescription);
     }

@@ -25,11 +25,11 @@ public abstract class Patient implements User{
     private Doctor doctor;
 
     @OneToMany
-    private Set<Prescription> prescriptions = new HashSet<>();;
+    private Set<Prescription> prescriptions;
     @OneToMany
-    private Set<Appointment> appointments = new HashSet<>();
+    private Set<Appointment> appointments;
     @OneToMany
-    private Set<Message> messages = new HashSet<>();
+    private Set<Message> messages;
 
     public Patient() {
     }
@@ -45,6 +45,9 @@ public abstract class Patient implements User{
         this.DOB = DOB;
         this.SSN = SSN;
         this.doctor = doctor;
+        messages = new HashSet<>();
+        appointments = new HashSet<>();
+        prescriptions = new HashSet<>();
     }
 
     @Override
@@ -83,11 +86,6 @@ public abstract class Patient implements User{
     }
 
     @Override
-    public void addPrescription(Prescription prescription) {
-        prescriptions.add(prescription);
-    }
-
-    @Override
     public Set<Prescription> viewPrescriptions() {
         return prescriptions;
     }
@@ -106,7 +104,6 @@ public abstract class Patient implements User{
     public String getFirstName() {
         return firstName;
     }
-
 
     @Override
     public void setFirstName(String firstName) {
@@ -153,7 +150,6 @@ public abstract class Patient implements User{
         phoneNumber = number;
     }
 
-    @Override
     public int getSSN() {
         return SSN;
     }

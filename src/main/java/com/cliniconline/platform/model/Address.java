@@ -11,6 +11,10 @@ public class Address {
     private int zipCode;
     private String country = "USA";
 
+    public Address(){
+
+    }
+
     public Address(String addressLine1, String addressLine2, String city, String state, int zipCode) {
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;

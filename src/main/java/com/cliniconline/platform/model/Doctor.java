@@ -31,8 +31,9 @@ public class Doctor implements User{
     @ManyToMany
     private Set<Appointment> appointments;
 
-    @ManyToMany
-    private Set<Message> messages;
+    @OneToMany
+    private Set<Long> inbox;
+    private Set<Long> outbox;
 
     public Doctor() {
     }
@@ -43,7 +44,8 @@ public class Doctor implements User{
         this.lastName = lastName;
         this.email = email;
         this.DOB = DOB;
-        messages = new HashSet<>();
+        inbox = new HashSet<>();
+        outbox = new HashSet<>();
         appointments = new HashSet<>();
         prescriptions = new HashSet<>();
         adultPatients = new HashSet<>();
@@ -75,12 +77,7 @@ public class Doctor implements User{
     }
 
     @Override
-    public void startCall(Call call) {
-        //TODO
-    }
-
-    @Override
-    public void joinCall(Call call) {
+    public void joinAppointment(Appointment appointment) {
         //TODO
     }
 
@@ -95,8 +92,23 @@ public class Doctor implements User{
     }
 
     @Override
-    public Set<Message> viewMessages() {
-        return messages;
+    public Set<Message> viewInbox() {
+        return null;
+    }
+
+    @Override
+    public void addToInbox(Long messageID) {
+        inbox.add(messageID);
+    }
+
+    @Override
+    public Set<Message> viewOutbox() {
+        return null;
+    }
+
+    @Override
+    public void addToOutbox(Long messageID) {
+        outbox.add(messageID);
     }
 
     @Override
@@ -105,7 +117,7 @@ public class Doctor implements User{
     }
 
     @Override
-    public void addApointment(Appointment appointment) {
+    public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
     }
 

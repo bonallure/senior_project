@@ -41,6 +41,16 @@ public class Dependent extends Patient implements User{
     }
 
     @Override
+    public void addToInbox(Long messageID) {
+
+    }
+
+    @Override
+    public void addToOutbox(Long messageID) {
+
+    }
+
+    @Override
     public Long getId() {
         return id;
     }

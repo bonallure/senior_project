@@ -8,19 +8,23 @@ import java.util.Set;
  */
 public interface User {
 
-    void startCall(Call call);
-
-    void joinCall(Call call);
+    void joinAppointment(Appointment appointment);
 
     void sendMessage(String message);
 
     void replyToMessage(String response);
 
-    Set<Message> viewMessages();
+    Set<Message> viewInbox();
+
+    void addToInbox(Long messageID);
+
+    Set<Message> viewOutbox();
+
+    void addToOutbox(Long messageID);
 
     Set<Appointment> viewAllAppointments();
 
-    void addApointment(Appointment appointment);
+    void addAppointment(Appointment appointment);
 
     Set<Prescription> viewPrescriptions();
 

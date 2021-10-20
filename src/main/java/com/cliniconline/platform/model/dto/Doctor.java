@@ -1,7 +1,7 @@
-package com.cliniconline.platform.model;
+package com.cliniconline.platform.model.dto;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,48 +12,85 @@ import java.util.Set;
 public class Doctor implements User{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private Object address;
+    private String address;
     private int phoneNumber;
-    private Calendar DOB;
+    private Date DOB;
     private final Role role = Role.DOCTOR;
+    @OneToMany
+    @JoinColumn(name = "MESSAGE_ID")
+    private Set<Message> messages = new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "APPOINTMENT_ID")
+    private Set<Appointment> appointments = new HashSet<>();
 
     @OneToMany
-    private Set<AdultPatient> adultPatients;
-
-    @ManyToMany
-    private Set<Prescription> prescriptions;
-
-    @ManyToMany
-    private Set<Appointment> appointments;
+    @JoinColumn(name = "PATIENT_ID")
+    private Set<AdultPatient> adultPatients = new HashSet<>();
 
     @OneToMany
-    private Set<Long> inbox;
-    private Set<Long> outbox;
+    @JoinColumn(name = "PATIENT_ID")
+    private Set<Dependent> dependents = new HashSet<>();
 
     public Doctor() {
     }
 
-    public Doctor(Long id, String firstName, String lastName, String email, Calendar DOB) {
+    public Doctor(Long id, String firstName, String lastName, String email, String password, String address,
+                  int phoneNumber, Date DOB) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
         this.DOB = DOB;
-        inbox = new HashSet<>();
-        outbox = new HashSet<>();
-        appointments = new HashSet<>();
-        prescriptions = new HashSet<>();
-        adultPatients = new HashSet<>();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setDOB(Date DOB) {
+        this.DOB = DOB;
+    }
+
+    public Set<AdultPatient> getAdultPatients() {
+        return adultPatients;
+    }
+
+    public void setAdultPatients(Set<AdultPatient> patients) {
+        this.adultPatients.addAll(patients);
+    }
+
+    public Set<Dependent> getDependents() {
+        return dependents;
+    }
+
+    public void setDependents(Set<Dependent> dependents) {
+        this.dependents.addAll(dependents);
     }
 
     @Override
     public void changePassword(String password) {
-        this.password = password;
+        setAddress(password);
     }
 
     @Override
@@ -72,67 +109,38 @@ public class Doctor implements User{
     }
 
     @Override
-    public Calendar getDOB() {
+    public Date getDOB() {
         return DOB;
     }
 
     @Override
-    public void joinAppointment(Appointment appointment) {
-        //TODO
+    public void setRole(Role role) {
+
     }
 
     @Override
-    public void sendMessage(String message) {
-        //TODO
-    }
-
-    @Override
-    public void replyToMessage(String response) {
-        //TODO
-    }
-
-    @Override
-    public Set<Message> viewInbox() {
+    public Role getRole() {
         return null;
     }
 
     @Override
-    public void addToInbox(Long messageID) {
-        inbox.add(messageID);
+    public Set<Message> getMessages() {
+        return messages;
     }
 
     @Override
-    public Set<Message> viewOutbox() {
-        return null;
+    public void setMessages(Set<Message> messages) {
+        this.messages.addAll(messages);
     }
 
     @Override
-    public void addToOutbox(Long messageID) {
-        outbox.add(messageID);
-    }
-
-    @Override
-    public Set<Appointment> viewAllAppointments() {
+    public Set<Appointment> getAppointments() {
         return appointments;
     }
 
     @Override
-    public void addAppointment(Appointment appointment) {
-        appointments.add(appointment);
-    }
-
-    @Override
-    public Set<Prescription> viewPrescriptions() {
-        return prescriptions;
-    }
-
-    public void addPrescription(Prescription prescription) {
-        prescriptions.add(prescription);
-    }
-
-    @Override
-    public User viewAccount() {
-        return this;
+    public void setAppointments(Set<Appointment> appointments) {
+        this.appointments.addAll(appointments);
     }
 
     @Override
@@ -161,12 +169,12 @@ public class Doctor implements User{
     }
 
     @Override
-    public Address getAddress() {
-        return (Address) address;
+    public String getAddress() {
+        return address;
     }
 
     @Override
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

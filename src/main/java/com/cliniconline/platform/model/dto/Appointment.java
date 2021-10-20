@@ -1,8 +1,9 @@
-package com.cliniconline.platform.model;
+package com.cliniconline.platform.model.dto;
 
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by bonallure on 10/8/21
@@ -20,44 +21,62 @@ public class Appointment {
     @Column(name = "id", nullable = false)
     private Long id;
     @ManyToOne
-    private Doctor doctor;
+    private Long doctorId;
     @ManyToOne
-    private AdultPatient patient;
+    private Long patientId;
     private Calendar date;
     private String link;
     private Address location = null;
     private AppointmentType type;
     private boolean isConfirmed;
+    private String note;
+    private Set<Long> prescriptions;
 
     public Appointment() {
     }
 
-    public Appointment(Patient patient, Doctor doctor, Calendar suggestedDateTime){
-        this.patient = (AdultPatient) patient;
-        this.doctor = doctor;
+    public Appointment(Long patientId, Long doctorId, Calendar suggestedDateTime){
+        this.patientId = patientId;
+        this.doctorId = doctorId;
         this.date = suggestedDateTime;
         this.type = AppointmentType.VIDEO;
         this.isConfirmed = false;
+    }
+
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        isConfirmed = confirmed;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public Long getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public AdultPatient getPatient() {
-        return patient;
+    public Long getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(AdultPatient patient) {
-        this.patient = patient;
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
     }
 
     public Calendar getDate() {
@@ -95,5 +114,13 @@ public class Appointment {
     public List<Calendar> confirmAppointment(boolean isConfirmed, List<Calendar> suggestedTimes){
         this.isConfirmed = isConfirmed;
         return suggestedTimes;
+    }
+
+    public Set<Long> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(Set<Long> prescriptions) {
+        this.prescriptions = prescriptions;
     }
 }

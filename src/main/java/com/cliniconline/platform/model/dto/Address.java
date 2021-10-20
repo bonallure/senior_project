@@ -1,4 +1,4 @@
-package com.cliniconline.platform.model;
+package com.cliniconline.platform.model.dto;
 
 /**
  * Created by bonallure on 10/8/21

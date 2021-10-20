@@ -1,4 +1,4 @@
-package com.cliniconline.platform.model;
+package com.cliniconline.platform.model.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,26 +9,24 @@ import javax.persistence.Id;
  * Created by bonallure on 10/8/21
  */
 @Entity
-public class ClinicAdmin implements Admin{
-
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String firstName;
-    private String lastName;
+public class SystemAdmin implements Admin{
 
     @Id
-    private String email;
-    private String password;
-    private final Role role = Role.CLINIC_ADMIN;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    public ClinicAdmin() {
+    private String firstName;
+    private String lastName;
+    private String password;
+    private final Role role = Role.SYSTEM_ADMIN;
+
+    public SystemAdmin() {
 
     }
 
-    public ClinicAdmin(String firstName, String lastName, String email) {
+    public SystemAdmin(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
     }
 
     @Override
@@ -42,38 +40,38 @@ public class ClinicAdmin implements Admin{
     }
 
     @Override
-    public void addPharmacy(Pharmacy pharmacy) {
-
-    }
-
-    @Override
     public void graduatePatient() {
 
     }
 
+    @Override
     public Long getId() {
-        return id;
+        return null;
     }
 
     @Override
-    public void addDependent(Dependent dependent, AdultPatient gardian, Doctor doctor) {
+    public void addDependent(Dependent dependent, AdultPatient guardian, Doctor doctor) {
 
     }
 
+    @Override
     public String getFirstName() {
-        return firstName;
+        return null;
     }
 
+    @Override
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+
     }
 
+    @Override
     public String getLastName() {
-        return lastName;
+        return null;
     }
 
+    @Override
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+
     }
 
     @Override
@@ -91,13 +89,14 @@ public class ClinicAdmin implements Admin{
 
     }
 
+    @Override
     public Role getAuthority() {
-        return role;
+        return null;
     }
 
     @Override
     public String toString() {
-        return "Clinic Admin{" +
+        return "System Admin{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -110,7 +109,7 @@ public class ClinicAdmin implements Admin{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ClinicAdmin that = (ClinicAdmin) o;
+        SystemAdmin that = (SystemAdmin) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
     }

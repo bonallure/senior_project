@@ -1,33 +1,34 @@
-package com.cliniconline.platform.model;
+package com.cliniconline.platform.model.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 /**
  * Created by bonallure on 10/8/21
  */
 @Entity
-public class SystemAdmin implements Admin{
+public class ClinicAdmin implements Admin{
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String firstName;
     private String lastName;
-    private String password;
-    private final Role role = Role.SYSTEM_ADMIN;
 
-    public SystemAdmin() {
+    @Id
+    private String email;
+    private String password;
+    private final Role role = Role.CLINIC_ADMIN;
+
+    public ClinicAdmin() {
 
     }
 
-    public SystemAdmin(String firstName, String lastName) {
+    public ClinicAdmin(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
     }
 
     @Override
@@ -41,43 +42,33 @@ public class SystemAdmin implements Admin{
     }
 
     @Override
-    public void addPharmacy(Pharmacy pharmacy) {
-
-    }
-
-    @Override
     public void graduatePatient() {
 
     }
 
-    @Override
     public Long getId() {
-        return null;
+        return id;
     }
 
     @Override
-    public void addDependent(Dependent dependent, AdultPatient gardian, Doctor doctor) {
+    public void addDependent(Dependent dependent, AdultPatient guardian, Doctor doctor) {
 
     }
 
-    @Override
     public String getFirstName() {
-        return null;
+        return firstName;
     }
 
-    @Override
     public void setFirstName(String firstName) {
-
+        this.firstName = firstName;
     }
 
-    @Override
     public String getLastName() {
-        return null;
+        return lastName;
     }
 
-    @Override
     public void setLastName(String lastName) {
-
+        this.lastName = lastName;
     }
 
     @Override
@@ -95,14 +86,13 @@ public class SystemAdmin implements Admin{
 
     }
 
-    @Override
     public Role getAuthority() {
-        return null;
+        return role;
     }
 
     @Override
     public String toString() {
-        return "System Admin{" +
+        return "Clinic Admin{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -115,7 +105,7 @@ public class SystemAdmin implements Admin{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SystemAdmin that = (SystemAdmin) o;
+        ClinicAdmin that = (ClinicAdmin) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
     }

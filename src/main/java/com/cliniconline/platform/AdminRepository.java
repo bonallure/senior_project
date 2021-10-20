@@ -1,6 +1,6 @@
 package com.cliniconline.platform;
 
-import com.cliniconline.platform.model.Admin;
+import com.cliniconline.platform.model.dto.Admin;
 import org.springframework.data.repository.CrudRepository;
 
 /**

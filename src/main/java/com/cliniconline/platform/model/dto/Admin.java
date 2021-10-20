@@ -1,6 +1,4 @@
-package com.cliniconline.platform.model;
-
-import java.util.Date;
+package com.cliniconline.platform.model.dto;
 
 /**
  * Created by bonallure on 10/8/21
@@ -11,13 +9,11 @@ public interface Admin {
 
     void addDoctor(Doctor doctor);
 
-    void addPharmacy(Pharmacy pharmacy);
-
     void graduatePatient();
 
     Long getId();
 
-    void addDependent(Dependent dependent, AdultPatient gardian, Doctor doctor);
+    void addDependent(Dependent dependent, AdultPatient guardian, Doctor doctor);
 
     String getFirstName();
 

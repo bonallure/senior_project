@@ -8,25 +8,32 @@ import javax.persistence.Id;
 /**
  * Created by bonallure on 10/8/21
  */
-@Entity
+
 public class SystemAdmin implements Admin{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+    private int id;
     private String firstName;
     private String lastName;
     private String password;
     private final Role role = Role.SYSTEM_ADMIN;
 
     public SystemAdmin() {
-
     }
 
-    public SystemAdmin(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     @Override
@@ -45,8 +52,8 @@ public class SystemAdmin implements Admin{
     }
 
     @Override
-    public Long getId() {
-        return null;
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -111,11 +118,20 @@ public class SystemAdmin implements Admin{
 
         SystemAdmin that = (SystemAdmin) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        if (id != that.id) return false;
+        if (!firstName.equals(that.firstName)) return false;
+        if (!lastName.equals(that.lastName)) return false;
+        if (!password.equals(that.password)) return false;
+        return role == that.role;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = id;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + role.hashCode();
+        return result;
     }
 }

@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public interface User {
 
-    Long getId();
+    int getId();
 
     String getFirstName();
 

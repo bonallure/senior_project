@@ -1,7 +1,7 @@
 package com.cliniconline.platform.model.dto;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -13,34 +13,20 @@ enum AppointmentType {
     VIDEO, PHONE, PHYSICAL
 }
 
-@Entity
 public class Appointment {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
-    @ManyToOne
-    private Long doctorId;
-    @ManyToOne
-    private Long patientId;
-    private Calendar date;
+    private int id;
+    private int doctorId;
+    private int patientId;
+    private Date date;
     private String link;
-    private Address location = null;
+    private String location = null;
     private AppointmentType type;
     private boolean isConfirmed;
     private String note;
-    private Set<Long> prescriptions;
+    private Set<Integer> prescriptions;
 
     public Appointment() {
-    }
-
-    public Appointment(Long patientId, Long doctorId, Calendar suggestedDateTime){
-        this.patientId = patientId;
-        this.doctorId = doctorId;
-        this.date = suggestedDateTime;
-        this.type = AppointmentType.VIDEO;
-        this.isConfirmed = false;
     }
 
     public boolean isConfirmed() {
@@ -59,31 +45,31 @@ public class Appointment {
         this.note = note;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public Long getDoctorId() {
+    public int getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(Long doctorId) {
+    public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
 
-    public Long getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(Long patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -95,11 +81,11 @@ public class Appointment {
         this.link = link;
     }
 
-    public Address getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Address location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -111,16 +97,16 @@ public class Appointment {
         this.type = type;
     }
 
-    public List<Calendar> confirmAppointment(boolean isConfirmed, List<Calendar> suggestedTimes){
+    public List<Date> confirmAppointment(boolean isConfirmed, List<Date> suggestedTimes){
         this.isConfirmed = isConfirmed;
         return suggestedTimes;
     }
 
-    public Set<Long> getPrescriptions() {
+    public Set<Integer> getPrescriptions() {
         return prescriptions;
     }
 
-    public void setPrescriptions(Set<Long> prescriptions) {
-        this.prescriptions = prescriptions;
+    public void setPrescriptions(Set<Integer> prescriptions) {
+        this.prescriptions.addAll(prescriptions);
     }
 }

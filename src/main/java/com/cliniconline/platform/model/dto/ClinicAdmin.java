@@ -1,34 +1,43 @@
 package com.cliniconline.platform.model.dto;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Created by bonallure on 10/8/21
  */
-@Entity
+
 public class ClinicAdmin implements Admin{
 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String firstName;
     private String lastName;
-
-    @Id
     private String email;
     private String password;
     private final Role role = Role.CLINIC_ADMIN;
 
     public ClinicAdmin() {
-
     }
 
-    public ClinicAdmin(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     @Override
@@ -46,7 +55,7 @@ public class ClinicAdmin implements Admin{
 
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -107,11 +116,22 @@ public class ClinicAdmin implements Admin{
 
         ClinicAdmin that = (ClinicAdmin) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        if (id != that.id) return false;
+        if (!firstName.equals(that.firstName)) return false;
+        if (!lastName.equals(that.lastName)) return false;
+        if (!email.equals(that.email)) return false;
+        if (!password.equals(that.password)) return false;
+        return role == that.role;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = id;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + role.hashCode();
+        return result;
     }
 }

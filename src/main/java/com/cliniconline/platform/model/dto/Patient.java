@@ -1,7 +1,6 @@
 package com.cliniconline.platform.model.dto;
 
 import javax.persistence.*;
-import javax.print.Doc;
 import java.util.Calendar;
 import java.sql.Date;
 import java.util.HashSet;
@@ -12,9 +11,7 @@ import java.util.Set;
  */
 public abstract class Patient implements User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String email;
     private String firstName;
     private String lastName;
@@ -24,34 +21,12 @@ public abstract class Patient implements User{
     private Date DOB;
     private int SSN;
     protected Role role;
-    @OneToMany
-    @JoinColumn(name = "MESSAGE_ID")
     private Set<Message> messages = new HashSet<>();
-    @OneToMany
-    @JoinColumn(name = "APPOINTMENT_ID")
     private Set<Appointment> appointments = new HashSet<>();
-    @ManyToOne
     private Doctor doctor;
 
-    public Patient() {
-    }
-
-    public Patient(String email, String firstName, String lastName, String password, String address,
-                   int phoneNumber, Date DOB, int SSN, Role role) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.DOB = DOB;
-        this.SSN = SSN;
-        this.role = role;
-    }
-
-
     @Override
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

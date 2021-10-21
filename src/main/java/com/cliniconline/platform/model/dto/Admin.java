@@ -11,7 +11,7 @@ public interface Admin {
 
     void graduatePatient();
 
-    Long getId();
+    int getId();
 
     void addDependent(Dependent dependent, AdultPatient guardian, Doctor doctor);
 

@@ -5,15 +5,17 @@ package com.cliniconline.platform.model.dto;
  */
 public interface Admin {
 
-    void addPatient(AdultPatient adultPatient);
+    AdultPatient addPatient(AdultPatient adultPatient);
 
-    void addDoctor(Doctor doctor);
+    Doctor addDoctor(Doctor doctor);
 
-    void graduatePatient();
+    AdultPatient graduatePatient(String email, Dependent dependent);
 
-    Long getId();
+    void setId(int id);
 
-    void addDependent(Dependent dependent, AdultPatient guardian, Doctor doctor);
+    int getId();
+
+    Dependent addDependent(Dependent dependent);
 
     String getFirstName();
 
@@ -25,12 +27,18 @@ public interface Admin {
 
     String getEmail();
 
-    void setEmail();
+    void setEmail(String email);
+
+    String getPassword();
+
+    void setPassword(String password);
 
     void changePassword(String password);
 
-    Role getAuthority();
-
     @Override
     String toString();
+
+    void setRole(String role);
+
+    String getRole();
 }

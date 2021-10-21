@@ -1,58 +1,26 @@
 package com.cliniconline.platform.model.dto;
 
-import javax.persistence.*;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by bonallure on 10/8/21
  */
-@Entity
 public class Doctor implements User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
+    private String email;
     private String firstName;
     private String lastName;
-    private String email;
     private String password;
     private String address;
     private int phoneNumber;
     private Date DOB;
     private final Role role = Role.DOCTOR;
-    @OneToMany
-    @JoinColumn(name = "MESSAGE_ID")
-    private Set<Message> messages = new HashSet<>();
-    @OneToMany
-    @JoinColumn(name = "APPOINTMENT_ID")
-    private Set<Appointment> appointments = new HashSet<>();
-
-    @OneToMany
-    @JoinColumn(name = "PATIENT_ID")
-    private Set<AdultPatient> adultPatients = new HashSet<>();
-
-    @OneToMany
-    @JoinColumn(name = "PATIENT_ID")
-    private Set<Dependent> dependents = new HashSet<>();
 
     public Doctor() {
     }
 
-    public Doctor(Long id, String firstName, String lastName, String email, String password, String address,
-                  int phoneNumber, Date DOB) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.DOB = DOB;
-    }
-
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -70,22 +38,6 @@ public class Doctor implements User{
 
     public void setDOB(Date DOB) {
         this.DOB = DOB;
-    }
-
-    public Set<AdultPatient> getAdultPatients() {
-        return adultPatients;
-    }
-
-    public void setAdultPatients(Set<AdultPatient> patients) {
-        this.adultPatients.addAll(patients);
-    }
-
-    public Set<Dependent> getDependents() {
-        return dependents;
-    }
-
-    public void setDependents(Set<Dependent> dependents) {
-        this.dependents.addAll(dependents);
     }
 
     @Override
@@ -119,32 +71,12 @@ public class Doctor implements User{
     }
 
     @Override
-    public Role getRole() {
-        return null;
+    public String getRole() {
+        return role.toString();
     }
 
     @Override
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    @Override
-    public void setMessages(Set<Message> messages) {
-        this.messages.addAll(messages);
-    }
-
-    @Override
-    public Set<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    @Override
-    public void setAppointments(Set<Appointment> appointments) {
-        this.appointments.addAll(appointments);
-    }
-
-    @Override
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -185,21 +117,27 @@ public class Doctor implements User{
 
         Doctor doctor = (Doctor) o;
 
-        if (id != null ? !id.equals(doctor.id) : doctor.id != null) return false;
-        if (firstName != null ? !firstName.equals(doctor.firstName) : doctor.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(doctor.lastName) : doctor.lastName != null) return false;
-        if (email != null ? !email.equals(doctor.email) : doctor.email != null) return false;
-        if (password != null ? !password.equals(doctor.password) : doctor.password != null) return false;
+        if (id != doctor.id) return false;
+        if (phoneNumber != doctor.phoneNumber) return false;
+        if (!firstName.equals(doctor.firstName)) return false;
+        if (!lastName.equals(doctor.lastName)) return false;
+        if (!email.equals(doctor.email)) return false;
+        if (!password.equals(doctor.password)) return false;
+        if (!address.equals(doctor.address)) return false;
+        if (!DOB.equals(doctor.DOB)) return false;
         return role == doctor.role;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
+        int result = id;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + address.hashCode();
+        result = 31 * result + phoneNumber;
+        result = 31 * result + DOB.hashCode();
         result = 31 * result + role.hashCode();
         return result;
     }

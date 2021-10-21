@@ -1,52 +1,48 @@
 package com.cliniconline.platform.model.dto;
 
-import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
+import java.time.Instant;
 
 /**
  * Created by bonallure on 10/9/21
  */
-@Entity
+
 public class Prescription {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
-    @ManyToOne
-    private Long doctorId;
-    @ManyToOne
-    private Long patientId;
+    private int id;
+    private int doctorId;
+    private int patientId;
+    private LocalDate date_prescribed;
     private String medicine;
     private String dosage;
     private int quantity;
     private boolean refillable;
 
-    public Prescription(Long doctorId, Long patientId, String medicine, String dosage, int quantity, boolean refillable) {
-        this.doctorId = doctorId;
-        this.patientId = patientId;
-        this.medicine = medicine;
-        this.dosage = dosage;
-        this.quantity = quantity;
-        this.refillable = refillable;
-    }
-
     public Prescription() {
-
     }
 
-    public Long getDoctorId() {
+    public LocalDate getDate_prescribed() {
+        return date_prescribed;
+    }
+
+    public void setDate_prescribed(Date date_prescribed) {
+        this.date_prescribed = LocalDate.parse(date_prescribed.toString());
+    }
+
+    public int getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(Long doctorId) {
+    public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
 
-    public Long getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(Long patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 
@@ -82,7 +78,41 @@ public class Prescription {
         this.refillable = refillable;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Prescription)) return false;
+
+        Prescription that = (Prescription) o;
+
+        if (id != that.id) return false;
+        if (doctorId != that.doctorId) return false;
+        if (patientId != that.patientId) return false;
+        if (quantity != that.quantity) return false;
+        if (refillable != that.refillable) return false;
+        if (!date_prescribed.equals(that.date_prescribed)) return false;
+        if (!medicine.equals(that.medicine)) return false;
+        return dosage.equals(that.dosage);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + doctorId;
+        result = 31 * result + patientId;
+        result = 31 * result + date_prescribed.hashCode();
+        result = 31 * result + medicine.hashCode();
+        result = 31 * result + dosage.hashCode();
+        result = 31 * result + quantity;
+        result = 31 * result + (refillable ? 1 : 0);
+        return result;
     }
 }

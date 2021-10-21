@@ -7,7 +7,7 @@ public enum Role {
     CLINIC_ADMIN, SYSTEM_ADMIN, DOCTOR, PATIENT, DEPENDENT;
 
     public static Role getRole(String role){
-        switch (role){
+        switch (role.toUpperCase()){
             case "CLINIC_ADMIN":
                 return CLINIC_ADMIN;
             case "SYSTEM_ADMIN":

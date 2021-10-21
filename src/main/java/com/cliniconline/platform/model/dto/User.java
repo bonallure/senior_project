@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public interface User {
 
-    Long getId();
+    int getId();
 
     String getFirstName();
 
@@ -34,13 +34,5 @@ public interface User {
 
     void setRole(Role role);
 
-    Role getRole();
-
-    Set<Message> getMessages();
-
-    void setMessages(Set<Message> messages);
-
-    Set<Appointment> getAppointments();
-
-    void setAppointments(Set<Appointment> appointments);
+    String getRole();
 }

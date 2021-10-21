@@ -1,32 +1,50 @@
 package com.cliniconline.platform.model.dto;
 
-import javax.persistence.*;
-import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * Created by bonallure on 10/9/21
  */
-@Entity
+
 public class Dependent extends Patient implements User{
 
-    @ManyToOne
-    protected AdultPatient guardian;
+    protected int guardianId;
 
     public Dependent() {
     }
 
-    public Dependent(String email, String firstName, String lastName, String password, String address, int phoneNumber,
-                     Date DOB, int SSN, Role role) {
-        super(email, firstName, lastName, password, address, phoneNumber, DOB, SSN, role);
+    public int getGuardianId() {
+
+        return guardianId;
     }
 
-    public AdultPatient getGuardian() {
+    public void setGuardianId(int guardianId) {
 
-        return guardian;
+        this.guardianId = guardianId;
     }
 
-    public void setGuardian(AdultPatient guardian) {
+    public boolean isAdult(){
+        Calendar ageOfMaturity = (Calendar) getDOB().clone();
+        ageOfMaturity.add(Calendar.YEAR, -18);
 
-        this.guardian = guardian;
+        return ageOfMaturity.before(Calendar.getInstance());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Dependent)) return false;
+        if (!super.equals(o)) return false;
+
+        Dependent dependent = (Dependent) o;
+
+        return guardianId == dependent.guardianId;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + guardianId;
+        return result;
     }
 }

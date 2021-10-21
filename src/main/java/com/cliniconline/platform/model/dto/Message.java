@@ -1,86 +1,92 @@
 package com.cliniconline.platform.model.dto;
 
-import javax.persistence.*;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Calendar;
+import java.sql.Date;
 
 /**
  * Created by bonallure on 10/8/21
  */
-@Entity
-public class Message {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    private Long recipientId;
-    private Long senderId;
+public class Message {
+
+    private int id;
+    private Role recipientRole;
+    private Role senderRole;
     private String message;
-    private Calendar dateTime;
-    private Long parent = null;
-    @ManyToOne
-    private Doctor doctor;
-    @ManyToOne
-    private AdultPatient patient;
+    private Date date;
+    private LocalTime time;
+    private int parentMessageId;
+    private int doctorId;
+    private int patientId;
 
     public Message() {
-
     }
 
-    public Message(Long senderId, Long recipientId, String message){
-        this.dateTime = Calendar.getInstance();
-        this.message = message;
-        this.senderId = senderId;
-        this.recipientId = recipientId;
-    }
+    public Message reply(String text){
+        Message newMessage = new Message();
 
-    public void sendMessage(){
-    }
+        Date now = new Date(Calendar.getInstance().getTimeInMillis());
+        newMessage.setTime(new Time(now.getTime()));
+        now.setTime(0);
+        newMessage.setDate(now);
 
-    public Message reply(Message originalMessage, String text){
-        Message newMessage = new Message(originalMessage.recipientId, originalMessage.senderId, text);
-        newMessage.parent = originalMessage.id;
-        // TODO
+        newMessage.setMessage(text);
+        newMessage.parentMessageId = this.getParentMessageId();
+        newMessage.setSenderRole(this.getRecipientRole());
+        newMessage.setRecipientRole(this.getSenderRole());
+        newMessage.setDoctorId(this.doctorId);
+        newMessage.setPatientId(this.patientId);
         return newMessage;
     }
 
-    public Long getId() {
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = LocalTime.parse(time.toString());
+    }
+
+    public int getId() {
         return id;
     }
 
-    public Long getRecipientId() {
-        return recipientId;
+    public String getRecipientRole() {
+        return recipientRole.name();
     }
 
-    public void setRecipientId(Long recipientId) {
-        this.recipientId = recipientId;
+    public void setRecipientRole(String role) {
+        this.recipientRole = Role.getRole(role);
     }
 
-    public Long getSenderId() {
-        return senderId;
+    public String getSenderRole() {
+        return senderRole.name();
     }
 
-    public void setSenderId(Long senderId) {
-        this.senderId = senderId;
+    public void setSenderRole(String role) {
+        this.senderRole = Role.getRole(role);
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public AdultPatient getPatient() {
-        return patient;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(AdultPatient adultPatient) {
-        this.patient = adultPatient;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getMessage() {
@@ -91,20 +97,53 @@ public class Message {
         this.message = message;
     }
 
-    public Calendar getDateTime() {
-        return dateTime;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDateTime(Calendar dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(Date date) {
+        date.setTime(0);
+        this.date = date;
     }
 
-    public Long getParent() {
-        return parent;
+    public int getParentMessageId() {
+        return parentMessageId;
     }
 
-    public void setParent(Long parent) {
-        this.parent = parent;
+    public void setParentMessageId(int parentMessageId) {
+        this.parentMessageId = parentMessageId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Message)) return false;
+
+        Message message1 = (Message) o;
+
+        if (id != message1.id) return false;
+        if (parentMessageId != message1.parentMessageId) return false;
+        if (doctorId != message1.doctorId) return false;
+        if (patientId != message1.patientId) return false;
+        if (recipientRole != message1.recipientRole) return false;
+        if (senderRole != message1.senderRole) return false;
+        if (!message.equals(message1.message)) return false;
+        if (!(date.compareTo(message1.date) == 0)) return false;
+        return (time.compareTo(message1.time) == 0);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + recipientRole.hashCode();
+        result = 31 * result + senderRole.hashCode();
+        result = 31 * result + message.hashCode();
+        result = 31 * result + date.toString().hashCode();
+        result = 31 * result + time.toString().hashCode();
+        result = 31 * result + parentMessageId;
+        result = 31 * result + doctorId;
+        result = 31 * result + patientId;
+        return result;
     }
 }
 

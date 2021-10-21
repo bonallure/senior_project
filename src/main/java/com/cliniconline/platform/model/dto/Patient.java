@@ -1,20 +1,13 @@
 package com.cliniconline.platform.model.dto;
 
-import javax.persistence.*;
-import javax.print.Doc;
-import java.util.Calendar;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by bonallure on 10/10/21
  */
 public abstract class Patient implements User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String email;
     private String firstName;
     private String lastName;
@@ -24,34 +17,10 @@ public abstract class Patient implements User{
     private Date DOB;
     private int SSN;
     protected Role role;
-    @OneToMany
-    @JoinColumn(name = "MESSAGE_ID")
-    private Set<Message> messages = new HashSet<>();
-    @OneToMany
-    @JoinColumn(name = "APPOINTMENT_ID")
-    private Set<Appointment> appointments = new HashSet<>();
-    @ManyToOne
-    private Doctor doctor;
-
-    public Patient() {
-    }
-
-    public Patient(String email, String firstName, String lastName, String password, String address,
-                   int phoneNumber, Date DOB, int SSN, Role role) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.DOB = DOB;
-        this.SSN = SSN;
-        this.role = role;
-    }
-
+    private int doctorId;
 
     @Override
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -114,26 +83,6 @@ public abstract class Patient implements User{
         return DOB;
     }
 
-    @Override
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    @Override
-    public void setMessages(Set<Message> messages) {
-        this.messages.addAll(messages);
-    }
-
-    @Override
-    public Set<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    @Override
-    public void setAppointments(Set<Appointment> appointments) {
-        this.appointments.addAll(appointments);
-    }
-
     public String getEmail() {
         return email;
     }
@@ -146,26 +95,68 @@ public abstract class Patient implements User{
         return password;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public boolean isAdult(){
-        Calendar ageOfMaturity = (Calendar) getDOB().clone();
-        ageOfMaturity.add(Calendar.YEAR, -18);
 
-        return ageOfMaturity.before(Calendar.getInstance());
-    }
-
-    public Role getRole() {
-        return role;
+    public String getRole() {
+        return role.toString();
     }
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDOB(Date DOB) {
+        this.DOB = DOB;
+    }
+
+    public void setSSN(int SSN) {
+        this.SSN = SSN;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Patient)) return false;
+
+        Patient patient = (Patient) o;
+
+        if (id != patient.id) return false;
+        if (phoneNumber != patient.phoneNumber) return false;
+        if (SSN != patient.SSN) return false;
+        if (doctorId != patient.doctorId) return false;
+        if (!email.equals(patient.email)) return false;
+        if (!firstName.equals(patient.firstName)) return false;
+        if (!lastName.equals(patient.lastName)) return false;
+        if (!password.equals(patient.password)) return false;
+        if (!address.equals(patient.address)) return false;
+        if (!DOB.equals(patient.DOB)) return false;
+        return role == patient.role;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + email.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + address.hashCode();
+        result = 31 * result + phoneNumber;
+        result = 31 * result + DOB.hashCode();
+        result = 31 * result + SSN;
+        result = 31 * result + role.hashCode();
+        result = 31 * result + doctorId;
+        return result;
     }
 }

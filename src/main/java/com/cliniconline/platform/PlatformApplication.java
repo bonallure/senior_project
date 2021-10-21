@@ -25,9 +25,6 @@ public class PlatformApplication implements CommandLineRunner {
 		SpringApplication.run(PlatformApplication.class, args);
 	}
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
-
 	@Override
 	public void run(String... args) throws Exception {}
 	

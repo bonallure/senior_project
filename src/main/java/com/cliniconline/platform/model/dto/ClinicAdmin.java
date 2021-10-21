@@ -1,58 +1,80 @@
 package com.cliniconline.platform.model.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.cliniconline.platform.model.dao.AdultPatientDao;
+import com.cliniconline.platform.model.dao.DependentDao;
+import com.cliniconline.platform.model.dao.DoctorDao;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by bonallure on 10/8/21
  */
-@Entity
+
 public class ClinicAdmin implements Admin{
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String firstName;
     private String lastName;
-
-    @Id
     private String email;
     private String password;
     private final Role role = Role.CLINIC_ADMIN;
 
-    public ClinicAdmin() {
+    @Autowired
+    protected AdultPatientDao adultPatientDao;
 
+    @Autowired
+    protected DoctorDao doctorDao;
+
+    @Autowired
+    protected DependentDao dependentDao;
+
+    public ClinicAdmin() {
     }
 
-    public ClinicAdmin(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    @Override
-    public void addPatient(AdultPatient adultPatient) {
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role.toString();
     }
 
     @Override
-    public void addDoctor(Doctor doctor) {
-
+    public AdultPatient addPatient(AdultPatient adultPatient) {
+        return adultPatientDao.addAdultPatient(adultPatient);
     }
 
     @Override
-    public void graduatePatient() {
-
+    public Doctor addDoctor(Doctor doctor) {
+        return doctorDao.addDoctor(doctor);
     }
 
-    public Long getId() {
+    @Override
+    public AdultPatient graduatePatient(String email, Dependent dependent) {
+        AdultPatient newPatient = new AdultPatient();
+        newPatient.setEmail(email);
+        // TODO
+        return adultPatientDao.addAdultPatient(newPatient);
+    }
+
+    public int getId() {
         return id;
     }
 
     @Override
-    public void addDependent(Dependent dependent, AdultPatient guardian, Doctor doctor) {
-
+    public Dependent addDependent(Dependent dependent) {
+        return dependentDao.addDependent(dependent);
     }
 
     public String getFirstName() {
@@ -73,21 +95,12 @@ public class ClinicAdmin implements Admin{
 
     @Override
     public String getEmail() {
-        return null;
-    }
-
-    @Override
-    public void setEmail() {
-
+        return this.email;
     }
 
     @Override
     public void changePassword(String password) {
-
-    }
-
-    public Role getAuthority() {
-        return role;
+        this.password = password;
     }
 
     @Override
@@ -101,17 +114,32 @@ public class ClinicAdmin implements Admin{
     }
 
     @Override
+    public void setRole(String role) {
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         ClinicAdmin that = (ClinicAdmin) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        if (id != that.id) return false;
+        if (!firstName.equals(that.firstName)) return false;
+        if (!lastName.equals(that.lastName)) return false;
+        if (!email.equals(that.email)) return false;
+        if (!password.equals(that.password)) return false;
+        return role == that.role;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = id;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + role.hashCode();
+        return result;
     }
 }

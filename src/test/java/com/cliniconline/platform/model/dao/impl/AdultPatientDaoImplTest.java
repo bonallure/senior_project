@@ -179,7 +179,7 @@ public class AdultPatientDaoImplTest {
         // Act
         patient = dao.addAdultPatient(patient);
 
-        List<AdultPatient> patients = dao.getAllAdultPatientByDoctor(doctor);
+        List<AdultPatient> patients = dao.getAllAdultPatientByDoctor(doctor.getId());
 
         // Assert the patient was successfully retrieved
         assertEquals(1, patients.size());

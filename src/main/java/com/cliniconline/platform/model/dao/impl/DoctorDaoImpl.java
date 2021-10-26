@@ -25,6 +25,9 @@ public class DoctorDaoImpl implements DoctorDao {
     private static final String SELECT_DOCTOR_SQL =
             "select * from doctor where id = ?";
 
+    private static final String SELECT_DOCTOR_BY_EMAIL_SQL =
+            "select * from doctor where email = ?";
+
     private static final String SELECT_ALL_DOCTORS_SQL =
             "select * from doctor";
 
@@ -85,6 +88,17 @@ public class DoctorDaoImpl implements DoctorDao {
     public Doctor getDoctor(int doctorId) {
         try {
             return jdbcTemplate.queryForObject(SELECT_DOCTOR_SQL, this::mapRowToDoctor, doctorId);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public Doctor getDoctorByEmail(String email) {
+        try {
+            return jdbcTemplate.queryForObject(SELECT_DOCTOR_BY_EMAIL_SQL, this::mapRowToDoctor, email);
         }
         catch (EmptyResultDataAccessException e)
         {

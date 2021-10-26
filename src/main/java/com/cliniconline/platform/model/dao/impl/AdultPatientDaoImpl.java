@@ -3,7 +3,6 @@ package com.cliniconline.platform.model.dao.impl;
 import com.cliniconline.platform.model.dao.AdultPatientDao;
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Dependent;
-import com.cliniconline.platform.model.dto.Doctor;
 import com.cliniconline.platform.model.dto.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -55,7 +54,7 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
     @Override
     public AdultPatient getPatient(String email) {
         try {
-            return jdbcTemplate.queryForObject(SELECT_ADULT_PATIENT_BY_EMAIL_SQL, this::mapRowToAdultPAtient, email);
+            return jdbcTemplate.queryForObject(SELECT_ADULT_PATIENT_BY_EMAIL_SQL, this::mapRowToAdultPatient, email);
         }
         catch (EmptyResultDataAccessException e)
         {
@@ -66,7 +65,7 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
     @Override
     public AdultPatient getGuardian(Dependent dependent) {
         try {
-            return jdbcTemplate.queryForObject(SELECT_ADULT_PATIENT_BY_ID_SQL, this::mapRowToAdultPAtient,
+            return jdbcTemplate.queryForObject(SELECT_ADULT_PATIENT_BY_ID_SQL, this::mapRowToAdultPatient,
                     dependent.getGuardianId());
         }
         catch (EmptyResultDataAccessException e)
@@ -77,7 +76,7 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
 
     @Override
     public List<AdultPatient> getAllAdultPatient() {
-        return jdbcTemplate.query(SELECT_ALL_ADULT_PATIENTS_SQL, this::mapRowToAdultPAtient);
+        return jdbcTemplate.query(SELECT_ALL_ADULT_PATIENTS_SQL, this::mapRowToAdultPatient);
     }
 
     @Override
@@ -124,13 +123,13 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
     }
 
     @Override
-    public List<AdultPatient> getAllAdultPatientByDoctor(Doctor doctor) {
+    public List<AdultPatient> getAllAdultPatientByDoctor(int doctorId) {
 
-        return jdbcTemplate.query(SELECT_ALL_ADULT_PATIENTS_PER_DOCTOR_SQL, this::mapRowToAdultPAtient,  doctor.getId());
+        return jdbcTemplate.query(SELECT_ALL_ADULT_PATIENTS_PER_DOCTOR_SQL, this::mapRowToAdultPatient,  doctorId);
     }
 
     // mapToRowAdultPatient
-    private AdultPatient mapRowToAdultPAtient(ResultSet rs, int rowNum) throws SQLException {
+    private AdultPatient mapRowToAdultPatient(ResultSet rs, int rowNum) throws SQLException {
 
         AdultPatient adultPatient = new AdultPatient();
         adultPatient.setId(rs.getInt("id"));

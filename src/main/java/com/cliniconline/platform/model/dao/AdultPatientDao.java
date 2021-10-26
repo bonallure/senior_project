@@ -2,7 +2,7 @@ package com.cliniconline.platform.model.dao;
 
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Dependent;
-import com.cliniconline.platform.model.dto.Doctor;
+
 import java.util.List;
 
 /**
@@ -23,5 +23,5 @@ public interface AdultPatientDao {
 
     List<AdultPatient> getAllAdultPatient();
 
-    List<AdultPatient> getAllAdultPatientByDoctor(Doctor doctor);
+    List<AdultPatient> getAllAdultPatientByDoctor(int doctorId);
 }

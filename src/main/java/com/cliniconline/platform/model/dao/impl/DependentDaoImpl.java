@@ -1,9 +1,7 @@
 package com.cliniconline.platform.model.dao.impl;
 
 import com.cliniconline.platform.model.dao.DependentDao;
-import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Dependent;
-import com.cliniconline.platform.model.dto.Doctor;
 import com.cliniconline.platform.model.dto.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -45,6 +43,7 @@ public class DependentDaoImpl implements DependentDao {
     private static final String SELECT_ALL_DEPENDENTS_PER_ADULT_PATIENT_SQL =
             "select * from dependent where guardian_id = ?";
 
+
     // jdbctemplate
     private JdbcTemplate jdbcTemplate;
 
@@ -65,10 +64,10 @@ public class DependentDaoImpl implements DependentDao {
     }
 
     @Override
-    public List<Dependent> getAllDependentsPerAdultPatient(AdultPatient adultPatient) {
+    public List<Dependent> getAllDependentsPerAdultPatient(int adultPatientId) {
 
         return jdbcTemplate.query(SELECT_ALL_DEPENDENTS_PER_ADULT_PATIENT_SQL, this::mapRowToDependent,
-                adultPatient.getId());
+                adultPatientId);
     }
 
     @Override
@@ -123,9 +122,9 @@ public class DependentDaoImpl implements DependentDao {
     }
 
     @Override
-    public List<Dependent> getAllDependentByDoctor(Doctor doctor) {
+    public List<Dependent> getAllDependentsPerDoctor(int doctorId) {
 
-        return jdbcTemplate.query(SELECT_ALL_DEPENDENTS_PER_DOCTOR_SQL,this::mapRowToDependent, doctor.getId());
+        return jdbcTemplate.query(SELECT_ALL_DEPENDENTS_PER_DOCTOR_SQL,this::mapRowToDependent, doctorId);
     }
 
     // mapToRowAdultPatient

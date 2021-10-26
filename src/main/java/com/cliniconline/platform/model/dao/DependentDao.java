@@ -1,8 +1,7 @@
 package com.cliniconline.platform.model.dao;
 
-import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Dependent;
-import com.cliniconline.platform.model.dto.Doctor;
+
 import java.util.List;
 
 /**
@@ -19,9 +18,9 @@ public interface DependentDao {
 
     Dependent getDependent(int dependentId);
 
-    List<Dependent> getAllDependentsPerAdultPatient(AdultPatient adultPatient);
+    List<Dependent> getAllDependentsPerAdultPatient(int adultPatientId);
 
     List<Dependent> getAllDependents();
 
-    List<Dependent> getAllDependentByDoctor(Doctor doctor);
+    List<Dependent> getAllDependentsPerDoctor(int doctorId);
 }

@@ -1,0 +1,132 @@
+package com.cliniconline.platform.controller;
+
+import com.cliniconline.platform.model.dao.*;
+import com.cliniconline.platform.model.dto.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Created by bonallure on 10/25/21
+ */
+@RestController
+public class PatientController implements UserController {
+
+    private final Role ROLE = Role.PATIENT;
+
+    private DoctorDao doctorDao;
+    private AdultPatientDao adultPatientDao;
+    private DependentDao dependentDao;
+    private MessageDao messageDao;
+    private AppointmentDao appointmentDao;
+    private PrescriptionDao prescriptionDao;
+
+
+    @RequestMapping(value = "/patient/login/{email},{password}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @Override
+    public User login(@PathVariable String email, @PathVariable String password) {
+        AdultPatient adultPatient = adultPatientDao.getPatient(email);
+
+        if (adultPatient.getPassword().equals(password))
+            return adultPatient;
+        else
+            return null;
+    }
+
+
+    @RequestMapping(value = "/patient/account/{email}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    @Override
+    public User viewAccount(@PathVariable String email) {
+        return adultPatientDao.getPatient(email);
+    }
+
+    @RequestMapping(value = "/patient/dependents/{adultPatientId}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    public Set<Dependent> getDependents(@PathVariable int adultPatientId) {
+        return new HashSet<>(dependentDao.getAllDependentsPerAdultPatient(adultPatientId));
+    }
+
+    @RequestMapping(value = "/patient/message", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @Override
+    public Message sendMessage(@RequestBody Message message) {
+        return messageDao.addMessage(message);
+    }
+
+    @RequestMapping(value = "/patient/message/{messageId}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    @Override
+    public Message viewMessage(@PathVariable int messageId) {
+        return messageDao.getMessage(messageId);
+    }
+
+    @RequestMapping(value = "/patient/messages/inbox/{patientId}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    @Override
+    public Set<Message> viewInbox(@PathVariable int patientId) {
+        return new HashSet<>(messageDao.getPatientInbox(patientId));
+    }
+
+    @RequestMapping(value = "/patient/messages/outbox/{patientId}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    @Override
+    public Set<Message> viewOutbox(@PathVariable int patientId) {
+        return new HashSet<>(messageDao.getPatientOutbox(patientId));
+    }
+
+    @RequestMapping(value = "/patient/appointments/{patientId}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    @Override
+    public Set<Appointment> viewAppointments(@PathVariable int patientId) {
+        return new HashSet<>(appointmentDao.getAllAppointmentsPerPatient(patientId));
+    }
+
+    @RequestMapping(value = "/patient/appointment/{appointmentId}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    @Override
+    public Appointment viewAppointment(@PathVariable int appointmentId) {
+        return appointmentDao.getAppointment(appointmentId);
+    }
+
+    @Override
+    public void joinAppointment(int appointment, int user_id) {
+
+    }
+
+    @Override
+    public void endAppointment(int appointmentId) {
+
+    }
+
+    @RequestMapping(value = "/patient/appointment", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @Override
+    public Appointment addAppointment(Appointment appointment) {
+        return appointmentDao.addAppointment(appointment);
+    }
+
+    @RequestMapping(value = "/patient/appointment/{appointmentId}", method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    @Override
+    public void cancelAppointment(@PathVariable int appointmentId) {
+        appointmentDao.deleteAppointment(appointmentId);
+    }
+
+    @RequestMapping(value = "/patient/prescriptions/{patientId}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    @Override
+    public Set<Prescription> viewPrescriptions(@PathVariable int patientId) {
+        return new HashSet<>(prescriptionDao.getAllPrescriptionsPerPatient(patientId));
+    }
+
+    @RequestMapping(value = "/patient/prescription/{prescriptionId}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    @Override
+    public Prescription viewPrescription(@PathVariable int prescriptionId) {
+        return prescriptionDao.getPrescription(prescriptionId);
+    }
+}

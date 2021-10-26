@@ -121,8 +121,8 @@ public class DependentDaoImplTest {
             assertEquals(dependent1, dependent);
 
             // Act
-            List<Dependent> dependentsPerDoctor = dao.getAllDependentByDoctor(doctor);
-            List<Dependent> dependentsPerAdultPatient = dao.getAllDependentsPerAdultPatient(patient);
+            List<Dependent> dependentsPerDoctor = dao.getAllDependentsPerDoctor(doctor.getId());
+            List<Dependent> dependentsPerAdultPatient = dao.getAllDependentsPerAdultPatient(patient.getId());
 
             // Assert that the get by doctor/adult patient are equal and valid
             assertEquals(1, dependentsPerDoctor.size());

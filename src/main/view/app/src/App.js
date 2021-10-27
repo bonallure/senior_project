@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
+import Login from './Pages/Login';
+import { Redirect, Route } from "react-router-dom";
+import axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      user: {},
+  }
+
+  login = async (loginObj) => {
+    const response = await axios.post("/", loginObj);
+    console.log(response.data.data);
+    this.setState({ user: response.data.data }, () => {
+      history.push("/");
+    });
+  };
+
+  render()
+  {
+    return(
+      <div>
+        <Route exact path = '/' Component = {Login} ></Route>
+      </div> 
+    );
+  }
+}}
 
 export default App;

@@ -1,9 +1,9 @@
 package com.cliniconline.platform.model.dao.impl;
 
 import com.cliniconline.platform.model.dao.AdultPatientDao;
+import com.cliniconline.platform.model.dao.DoctorDao;
 import com.cliniconline.platform.model.dao.PrescriptionDao;
 import com.cliniconline.platform.model.dto.Prescription;
-import com.cliniconline.platform.model.dao.DoctorDao;
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Doctor;
 import com.cliniconline.platform.model.dto.Role;
@@ -14,10 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.security.KeyStore;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

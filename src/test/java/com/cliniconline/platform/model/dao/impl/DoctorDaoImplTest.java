@@ -1,16 +1,12 @@
 package com.cliniconline.platform.model.dao.impl;
 
-import com.cliniconline.platform.model.dao.AdminDao;
 import com.cliniconline.platform.model.dao.DoctorDao;
-import com.cliniconline.platform.model.dto.Admin;
-import com.cliniconline.platform.model.dto.ClinicAdmin;
 import com.cliniconline.platform.model.dto.Doctor;
 import com.cliniconline.platform.model.dto.Role;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

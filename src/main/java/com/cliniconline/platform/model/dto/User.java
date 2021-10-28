@@ -35,4 +35,8 @@ public interface User {
     void setRole(Role role);
 
     String getRole();
+
+    String getEmail();
+
+    String getPassword();
 }

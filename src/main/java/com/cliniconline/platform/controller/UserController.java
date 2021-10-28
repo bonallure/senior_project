@@ -1,7 +1,10 @@
 package com.cliniconline.platform.controller;
 
 import com.cliniconline.platform.model.dto.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.boot.web.reactive.context.StandardReactiveWebEnvironment;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -9,7 +12,7 @@ import java.util.Set;
  */
 public interface UserController {
 
-    User login(String email, String password);
+    User login(Map user);
 
     User viewAccount(String email);
 

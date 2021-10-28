@@ -1,14 +1,17 @@
 package com.cliniconline.platform.controller;
 
+import com.cliniconline.platform.model.dao.*;
+import com.cliniconline.platform.model.dto.AdultPatient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,6 +22,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(PatientController.class)
 public class PatientControllerTest {
+
+    @Autowired
+    protected DoctorDao doctorDao;
+
+    @Autowired
+    protected AdultPatientDao adultPatientDao;
+    @Autowired
+    protected DependentDao dependentDao;
+    @Autowired
+    protected MessageDao messageDao;
+    @Autowired
+    protected AppointmentDao appointmentDao;
+    @Autowired
+    protected PrescriptionDao prescriptionDao;
 
     // wiring in the MockMvc objects
     @Autowired
@@ -31,63 +48,23 @@ public class PatientControllerTest {
     // Testing GET /patient/login
     @Test
     public void login() throws Exception {
-        // Arrange
+        // ARRANGE
+        AdultPatient patient = new AdultPatient();
+        String email = "patient@clinic1.com";
+        String password = "New/Password";
+        patient.setEmail(email);
+        patient.setPassword(password);
 
-        //ACT
-        mockMvc.perform(get("/patient/login/?email=patient@clinic1.com&password=Mal.Com.Ex"))
-                .andDo(print())
-                .andExpect(status().isAccepted());
-    }
+        // Convert Java Object to JSON
+        String inputJson = mapper.writeValueAsString(patient);
 
-    @Test
-    public void viewAccount() {
-    }
-
-    @Test
-    public void getDependents() {
-    }
-
-    @Test
-    public void sendMessage() {
-    }
-
-    @Test
-    public void viewMessage() {
-    }
-
-    @Test
-    public void viewInbox() {
-    }
-
-    @Test
-    public void viewOutbox() {
-    }
-
-    @Test
-    public void viewAppointments() {
-    }
-
-    @Test
-    public void viewAppointment() {
-    }
-
-    @Test
-    public void joinAppointment() {
-    }
-
-    @Test
-    public void endAppointment() {
-    }
-
-    @Test
-    public void cancelAppointment() {
-    }
-
-    @Test
-    public void viewPrescriptions() {
-    }
-
-    @Test
-    public void viewPrescription() {
+        // ACT
+        mockMvc.perform(
+                get("/patient/login")                   // Perform the POST request
+                        .content(inputJson)                       // Set the request body
+                        .contentType(MediaType.APPLICATION_JSON)  // Tell the server it's in JSON format
+        )
+                .andDo(print())                                // Print results to console
+                .andExpect(status().isAccepted());              // ASSERT ( proper status code)
     }
 }

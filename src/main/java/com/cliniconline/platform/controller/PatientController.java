@@ -1,11 +1,16 @@
 package com.cliniconline.platform.controller;
 
 import com.cliniconline.platform.model.dao.*;
+import com.cliniconline.platform.model.dao.impl.AdultPatientDaoImpl;
+import com.cliniconline.platform.model.dao.impl.DoctorDaoImpl;
 import com.cliniconline.platform.model.dto.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,22 +21,36 @@ public class PatientController implements UserController {
 
     private final Role ROLE = Role.PATIENT;
 
-    private DoctorDao doctorDao;
-    private AdultPatientDao adultPatientDao;
-    private DependentDao dependentDao;
-    private MessageDao messageDao;
-    private AppointmentDao appointmentDao;
-    private PrescriptionDao prescriptionDao;
+    @Autowired
+    protected DoctorDao doctorDao;
+    @Autowired
+    protected AdultPatientDao adultPatientDao;
+    @Autowired
+    protected DependentDao dependentDao;
+    @Autowired
+    protected MessageDao messageDao;
+    @Autowired
+    protected AppointmentDao appointmentDao;
+    @Autowired
+    protected PrescriptionDao prescriptionDao;
 
+    @Autowired
+    public PatientController(){
+    }
 
-    @RequestMapping(value = "/patient/login/{email},{password}", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getLoginPage(){
+        return "login Page";
+    }
+
+    @RequestMapping(value = "/patient/login/", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Override
-    public User login(@PathVariable String email, @PathVariable String password) {
-        AdultPatient adultPatient = adultPatientDao.getPatient(email);
+    public User login(@RequestBody Map adultPatient) {
+        AdultPatient adultPatient1 = adultPatientDao.getPatient((String) adultPatient.get("email"));
 
-        if (adultPatient.getPassword().equals(password))
-            return adultPatient;
+        if (adultPatient1.getPassword().equals( (String) adultPatient.get("password")))
+            return adultPatient1;
         else
             return null;
     }
@@ -41,6 +60,8 @@ public class PatientController implements UserController {
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
     public User viewAccount(@PathVariable String email) {
+
+        // System.out.println(email);
         return adultPatientDao.getPatient(email);
     }
 
@@ -109,7 +130,7 @@ public class PatientController implements UserController {
         return appointmentDao.addAppointment(appointment);
     }
 
-    @RequestMapping(value = "/patient/appointment/{appointmentId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/patient/appointment/{appointmentId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
     public void cancelAppointment(@PathVariable int appointmentId) {

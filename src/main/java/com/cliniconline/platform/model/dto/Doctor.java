@@ -24,6 +24,7 @@ public class Doctor implements User{
         this.id = id;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

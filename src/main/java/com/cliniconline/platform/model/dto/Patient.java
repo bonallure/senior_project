@@ -83,6 +83,7 @@ public abstract class Patient implements User{
         return DOB;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

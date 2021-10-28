@@ -2,10 +2,12 @@ package com.cliniconline.platform.controller;
 
 import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -14,25 +16,30 @@ import java.util.Set;
 @RestController
 public class DoctorController implements UserController{
 
-
     private final Role ROLE = Role.DOCTOR;
 
-    private DoctorDao doctorDao;
-    private AdultPatientDao adultPatientDao;
-    private DependentDao dependentDao;
-    private MessageDao messageDao;
-    private AppointmentDao appointmentDao;
-    private PrescriptionDao prescriptionDao;
+    @Autowired
+    protected DoctorDao doctorDao;
+    @Autowired
+    protected AdultPatientDao adultPatientDao;
+    @Autowired
+    protected DependentDao dependentDao;
+    @Autowired
+    protected MessageDao messageDao;
+    @Autowired
+    protected AppointmentDao appointmentDao;
+    @Autowired
+    protected PrescriptionDao prescriptionDao;
 
-    @RequestMapping(value = "/doctor/login/{email},{password}", method = RequestMethod.GET)
+    @RequestMapping(value = "/doctor/login/", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Override
-    public User login(@PathVariable String email, @PathVariable String password) {
+    public User login(@RequestBody Map doctor) {
 
-        Doctor doctor = doctorDao.getDoctorByEmail(email);
+        Doctor doctor1 = doctorDao.getDoctorByEmail((String) doctor.get("email"));
 
-        if (doctor.getPassword().equals(password))
-            return doctor;
+        if (doctor1.getPassword().equals((String) doctor.get("password")))
+            return doctor1;
         else
             return null;
     }
@@ -112,7 +119,7 @@ public class DoctorController implements UserController{
         return appointmentDao.addAppointment(appointment);
     }
 
-    @RequestMapping(value = "/doctor/appointment/{appointmentId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/doctor/appointment/{appointmentId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
     public void cancelAppointment(@PathVariable int appointmentId) {

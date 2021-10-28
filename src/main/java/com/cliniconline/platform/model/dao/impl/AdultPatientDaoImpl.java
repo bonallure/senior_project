@@ -20,7 +20,7 @@ import java.util.List;
 public class AdultPatientDaoImpl implements AdultPatientDao {
 
     // Prepare statements
-    private static final String INSERT_ADULT_PATIEN_SQL =
+    private static final String INSERT_ADULT_PATIENT_SQL =
             "insert into adult_patient (email, f_name, l_name, password, address, phone, dob, ssn, role, doctor_id) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -82,7 +82,7 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
     @Override
     public AdultPatient addAdultPatient(AdultPatient adultPatient) {
 
-        jdbcTemplate.update(INSERT_ADULT_PATIEN_SQL,
+        jdbcTemplate.update(INSERT_ADULT_PATIENT_SQL,
                 adultPatient.getEmail(),
                 adultPatient.getFirstName(),
                 adultPatient.getLastName(),

@@ -27,6 +27,9 @@ const Registration = ({ register }) => {
                 <Input type = "text" id = "dateOB" />
                 <br />
                 <Input type = "text" id = "email" />
+                <br />
+                <br />
+                <Button type = "submit" id = "registerBtn" btnName = "newUserRequest" />
                 </form>
             </div>
         </div>

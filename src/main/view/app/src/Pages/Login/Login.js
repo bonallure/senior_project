@@ -12,13 +12,23 @@ class Login extends React.Component{
     }
 
     handleChange = (e) => {
-        const {name, value} = e.target
-        this.setState({[name]: value})
+        const {id, value} = e.target
+        this.state[id] = value
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault()
+        console.log(this.state)
+        axios.post("http://localhost:8080/patient/login/", this.state)
+            .then(function (response) {
+                console.log(this)
+                console.log("this is the response", response.data);
+            })
+            .catch(function (error) {
+                console.log("this is the error", error);
+            });
     }
+
     render(){
         return(
             <div>
@@ -26,10 +36,10 @@ class Login extends React.Component{
                 <p> Login </p>
                 <br />
                 <form onSubmit = {this.handleSubmit}>
-                    <input type = "text" id = "email" placeHolder = "Email" onChange = {this.handleChange}/>
+                    <input type = "text" id = "email" placeholder= "Email" onChange = {this.handleChange}/>
                     <br />
                     <br />
-                    <input type = "text" id = "pwd" placeHolder = "Password"onChange = {this.handleChange}/>
+                    <input type = "password" id = "password" placeholder= "Password" onChange = {this.handleChange}/>
                     <br />
                     <br />
                     <br />

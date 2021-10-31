@@ -11,9 +11,9 @@ function App(){
             <Router>
                 <div>
                     <Switch>
-                        <Route path = "/appointment" component = {Appointment}></Route>
-                        <Route path = "/registration" component = {Registration}></Route> 
-                        <Route path = "/" component = {Login}></Route>                      
+                        <Route path = "/appointment" component = {Appointment}/>
+                        <Route path = "/registration" component = {Registration}/>
+                        <Route path = "/" component = {Login}/>
                     </Switch>
                 </div>
             </Router>

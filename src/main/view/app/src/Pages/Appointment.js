@@ -1,18 +1,21 @@
 import axios from "axios"
+import React from "react";
+import NavBar from "../Componets/NavBar/NavBar";
 
-<<<<<<< HEAD
-const Appointment = ({ appointment }) => {
-    const 
-=======
-function Appointment (props){
-    return(
-        <div className = "Appointment">
-            <p> Appointment </p>
-            <div className = "CurrentAppt">
-                
+
+class Appointment extends React.Component{
+    
+    render(){
+        return(
+            <div className = "Appointment">
+                <NavBar/>
+                <p style = {{textAlign: "left"}}> Appointment </p>
+                <div className = "CurrentAppt">
+                </div>
+                <p style = {{textAlign: "left"}}> Upcoming </p>
             </div>
-            <p> Upcoming </p>
-        </div>
-    );
->>>>>>> origin/frontend
+        );
+    }
 }
+
+export default Appointment;

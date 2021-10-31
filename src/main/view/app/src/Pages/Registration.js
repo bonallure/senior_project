@@ -9,10 +9,10 @@ const Registration = ({ register }) => {
         e.prventDefault();
 
     const registrationObj = {
-        firstName = e.target[0].value,
-        lastName = e.target[1].value,
-        dateOB = e.target[3].value,
-        email = e.target[4].value,
+        firstName : e.target[0].value,
+        lastName : e.target[1].value,
+        dateOB : e.target[3].value,
+        email : e.target[4].value,
     };
     };
 
@@ -27,12 +27,10 @@ const Registration = ({ register }) => {
                 <Input type = "text" id = "dateOB" />
                 <br />
                 <Input type = "text" id = "email" />
-<<<<<<< HEAD
-=======
+
                 <br />
                 <br />
                 <Button type = "submit" id = "registerBtn" btnName = "newUserRequest" />
->>>>>>> origin/frontend
                 </form>
             </div>
         </div>

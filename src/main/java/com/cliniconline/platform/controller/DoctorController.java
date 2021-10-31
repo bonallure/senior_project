@@ -14,6 +14,7 @@ import java.util.Set;
  * Created by bonallure on 10/25/21
  */
 @RestController
+@CrossOrigin
 public class DoctorController implements UserController{
 
     private final Role ROLE = Role.DOCTOR;

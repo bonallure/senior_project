@@ -1,12 +1,9 @@
 package com.cliniconline.platform.controller;
 
 import com.cliniconline.platform.model.dao.*;
-import com.cliniconline.platform.model.dao.impl.AdultPatientDaoImpl;
-import com.cliniconline.platform.model.dao.impl.DoctorDaoImpl;
 import com.cliniconline.platform.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -17,10 +14,13 @@ import java.util.Set;
  * Created by bonallure on 10/25/21
  */
 @RestController
+@CrossOrigin
 public class PatientController implements UserController {
 
+    // Patient Role
     private final Role ROLE = Role.PATIENT;
 
+    // Wiring the data access objects
     @Autowired
     protected DoctorDao doctorDao;
     @Autowired
@@ -34,15 +34,18 @@ public class PatientController implements UserController {
     @Autowired
     protected PrescriptionDao prescriptionDao;
 
+    // Wiring the controller
     @Autowired
     public PatientController(){
     }
 
+    // Get the login page # not using
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getLoginPage(){
         return "login Page";
     }
 
+    // Logging in a patient
     @RequestMapping(value = "/patient/login/", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Override

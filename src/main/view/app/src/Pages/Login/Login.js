@@ -27,12 +27,12 @@ class Login extends React.Component{
             .catch(function (error) {
                 console.log("this is the error", error);
             });
+        this.props.history.push('/appointment')
     }
 
     render(){
         return(
-            <div>
-                <NavBar/>
+            <div className={Login}>
                 <p> Login </p>
                 <br />
                 <form onSubmit = {this.handleSubmit}>

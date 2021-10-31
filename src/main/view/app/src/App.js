@@ -1,5 +1,7 @@
 import Login from './Pages/Login/Login';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Registration from './Pages/Registration/Registration';
+import Appointment from './Pages/Appointment';
 import axios from "axios";
 
 
@@ -9,8 +11,9 @@ function App(){
             <Router>
                 <div>
                     <Switch>
-                        <Route path = "/" component = {Login}></Route>
-                        <Login/>
+                        <Route path = "/appointment" component = {Appointment}></Route>
+                        <Route path = "/registration" component = {Registration}></Route> 
+                        <Route path = "/" component = {Login}></Route>                      
                     </Switch>
                 </div>
             </Router>

@@ -52,6 +52,12 @@ public class DoctorController implements UserController{
         return doctorDao.getDoctorByEmail(email);
     }
 
+    @RequestMapping(value = "/doctor/{id}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    public User getDoctor(@PathVariable int id) {
+        return doctorDao.getDoctor(id);
+    }
+
     @RequestMapping(value = "/doctor/patients/{doctorId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     public Set<User> getPatients(@PathVariable int doctorId) {

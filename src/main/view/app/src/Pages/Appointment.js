@@ -1,10 +1,7 @@
 import axios from "axios"
 import React from "react";
 import NavBarAuth from "../Componets/NavBarAuth";
-import {alignPropType} from "react-bootstrap/types";
 import { Paper } from "@mui/material";
-import { padding } from "@mui/system";
-
 
 
 class Appointment extends React.Component{
@@ -12,7 +9,8 @@ class Appointment extends React.Component{
         super(props);
         this.state = {
             userId: props.userId,
-            appointments: []
+            appointments: [],
+            doctorName: ""
         }
     }
 
@@ -27,6 +25,12 @@ class Appointment extends React.Component{
         })
     }
 
+    updateDoctorState = (data) => {
+        this.setState(state => {
+            return{doctorName: data.lastName}
+        })
+    }
+
     getAllPatientAppointments() {
         console.log(this.state)
         const url = "http://localhost:8080/patient/appointments/" + this.state.userId
@@ -34,7 +38,19 @@ class Appointment extends React.Component{
         axios.get(url)
             .then(response =>{
                 console.log("this is the response", response.data);
-                this.props.handleAppointments(response.data)
+                this.updateState(response.data)
+            })
+            .catch(function (error) {
+                console.log("this is the error", error);
+            });
+    }
+
+    getDoctor() {
+        const url = "http://localhost:8080/doctor/13"
+        axios.get(url)
+            .then(response =>{
+                console.log("this is the response", response.data);
+                this.updateDoctorState(response.data)
             })
             .catch(function (error) {
                 console.log("this is the error", error);
@@ -43,6 +59,7 @@ class Appointment extends React.Component{
 
     componentDidMount() {
         this.getAllPatientAppointments()
+        // this.getDoctor()
     }
 
     render(){
@@ -53,13 +70,10 @@ class Appointment extends React.Component{
                     <button onClick={this.onClick}>New Appointment</button>
                     <p style = {{textAlign: "left"}}> Appointment </p>
                     <div className = "CurrentAppt">
-                        /*TODO: Change map function to print out appointments */
                         <Paper elevation={3} style={{padding:'50px 20px',width:600, margin:"20px auto"}}>
-                            {appointment.map(appointment =>(
+                            {this.state.appointments.map(appointment =>(
                                 <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
-                                    Date:{}
-                                    Doctor:{}
-                                    Link:{}
+                                    {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
                                 </Paper>
                             ))}
                         </Paper>

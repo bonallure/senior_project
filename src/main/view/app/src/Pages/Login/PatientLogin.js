@@ -41,7 +41,7 @@ class PatientLogin extends React.Component{
 
     render(){
         return(
-            <div className={PatientLogin}>
+            <div className="PatientLogin">
                 <NavBar/>
                 <p> Login </p>
                 <br />

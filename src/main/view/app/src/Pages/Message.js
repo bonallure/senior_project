@@ -1,6 +1,7 @@
 import React from "react";  
 import NavBarAuth from "../Componets/NavBarAuth";
 import axios from "axios";
+import {Paper} from "@mui/material";
 
 class Message extends React.Component{
     constructor(props) {
@@ -37,9 +38,8 @@ class Message extends React.Component{
                 <div className = "messages">
                     <p style = {{textAlign: "left"}}> Messages </p>
                     <div className = "CurrentMessages">
-                    /*TODO: Change map function to print out appointments */
                         <Paper elevation={3} style={{padding:'50px 20px',width:600, margin:"20px auto"}}>
-                                {message.map(message =>(
+                                {this.state.messages.map(message =>(
                                     <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={message.userId}>
                                         Recipient:{}
                                         Date:{}

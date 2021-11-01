@@ -4,10 +4,12 @@ import NavBar from "./Componets/NavBar/NavBar";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Appointment from "./Pages/Appointment";
 import Registration from "./Pages/Registration/Registration";
-import Login from "./Pages/Login/Login";
+import Login from "./Pages/Login/PatientLogin";
 import axios from "axios";
 import Message from "./Pages/Message";
 import Calendar from "./Pages/Calendar";
+import PatientLogin from "./Pages/Login/PatientLogin";
+import AdminLogin from "./Pages/Login/AdminLogin";
 
 
 export default class App extends Component{
@@ -103,9 +105,9 @@ export default class App extends Component{
                         />
                         <Route
                             exact
-                            path={"/login"}
+                            path={"/systemAdmin/login"}
                             render={props => (
-                                <Login
+                                <AdminLogin
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}
@@ -117,9 +119,9 @@ export default class App extends Component{
                         />
                         <Route
                             exact
-                            path={"/login"}
+                            path={"/patient/login"}
                             render={props => (
-                                <Login
+                                <PatientLogin
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}

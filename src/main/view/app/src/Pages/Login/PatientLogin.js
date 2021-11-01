@@ -5,7 +5,7 @@ import Input from "../../Componets/Input";
 import NavBar from "../../Componets/NavBar/NavBar";
 import "./Login.css"
 
-class Login extends React.Component{
+class PatientLogin extends React.Component{
     constructor(props) {
         super(props);
 
@@ -44,7 +44,7 @@ class Login extends React.Component{
 
     render(){
         return(
-            <div className={Login}>
+            <div className={PatientLogin}>
                 <NavBar/>
                 <p> Login </p>
                 <br />
@@ -63,4 +63,4 @@ class Login extends React.Component{
     }
 }
 
-export default Login;
+export default PatientLogin;

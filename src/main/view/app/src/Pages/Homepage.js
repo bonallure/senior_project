@@ -1,8 +1,5 @@
 import React from "react";
 import NavBar from "../Componets/NavBar/NavBar";
-import axios from "axios";
-import {Redirect} from "react-router";
-import Login from "./Login/Login";
 
 class Homepage extends React.Component{
     // declaring state
@@ -20,7 +17,7 @@ class Homepage extends React.Component{
         return(
             <div>
                 <NavBar/>
-                <div className="mainPaper">
+                <div className="mainPaper" style={{textAlign:"center"}}>
                     <p> Welcome to Clinic Online </p>
                     <button onClick={this.onSubmit}>Login</button>
                 </div>

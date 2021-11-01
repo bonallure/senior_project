@@ -1,6 +1,6 @@
 import axios from "axios"
 import React from "react";
-import NavBar from "../Componets/NavBar/NavBar";
+import NavBarAuth from "../Componets/NavBarAuth";
 
 
 
@@ -36,7 +36,7 @@ class Appointment extends React.Component{
     render(){
         return(
             <div>
-                <NavBar/>
+                <NavBarAuth/>
                 <div className = "Appointment">
                     <p style = {{textAlign: "left"}}> Appointment </p>
                     <div className = "CurrentAppt">

@@ -45,6 +45,7 @@ class Login extends React.Component{
     render(){
         return(
             <div className={Login}>
+                <NavBar/>
                 <p> Login </p>
                 <br />
                 <form onSubmit={this.handleSubmit}>

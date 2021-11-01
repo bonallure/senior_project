@@ -6,6 +6,8 @@ import Appointment from "./Pages/Appointment";
 import Registration from "./Pages/Registration/Registration";
 import Login from "./Pages/Login/Login";
 import axios from "axios";
+import Message from "./Pages/Message";
+import Calendar from "./Pages/Calendar";
 
 
 export default class App extends Component{
@@ -115,9 +117,51 @@ export default class App extends Component{
                         />
                         <Route
                             exact
-                            path={"/appointment"}
+                            path={"/login"}
                             render={props => (
-                                <Appointment
+                                <Login
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    handleSuccessfulAuth={this.handleSuccessfulAuth}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/registration"}
+                            render={props => (
+                                <Registration
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    userId = {this.state.user.id}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/message"}
+                            render={props => (
+                                <Message
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    userId = {this.state.user.id}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/calendar"}
+                            render={props => (
+                                <Calendar
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}

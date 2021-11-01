@@ -36,7 +36,7 @@ public interface UserController {
 
     void endAppointment(int appointmentId);
 
-    Appointment addAppointment(Appointment appointment);
+    Appointment addAppointment(Map appointment);
 
     void cancelAppointment(int appointmentId);
 

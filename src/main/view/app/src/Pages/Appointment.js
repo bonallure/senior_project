@@ -9,16 +9,20 @@ class Appointment extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            userId: "",
-            appointments: [],
+            userId: props.userId,
+            appointments: []
         }
-        console.log(this.props.state)
-        this.state.userId = props.userId
     }
 
-    onSubmit = (e) => {
+    onClick = (e) => {
         e.preventDefault();
         this.props.history.push("/patient/appointment/new")
+    }
+
+    updateState = (data) => {
+        this.setState(state => {
+            return{appointments: data}
+        })
     }
 
     getAllPatientAppointments() {
@@ -26,9 +30,9 @@ class Appointment extends React.Component{
         const url = "http://localhost:8080/patient/appointments/" + this.state.userId
         console.log(url)
         axios.get(url)
-            .then(function (response) {
+            .then(response =>{
                 console.log("this is the response", response.data);
-                this.state.appointments = response.data
+                this.props.handleAppointments(response.data)
             })
             .catch(function (error) {
                 console.log("this is the error", error);
@@ -44,7 +48,7 @@ class Appointment extends React.Component{
             <div>
                 <NavBarAuth/>
                 <div className = "Appointment">
-                    <button onClick={this.onSubmit}>New Appointment</button>
+                    <button onClick={this.onClick}>New Appointment</button>
                     <p style = {{textAlign: "left"}}> Appointment </p>
                     <div className = "CurrentAppt">
 

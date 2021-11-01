@@ -1,5 +1,6 @@
 import React from "react";  
 import NavBarAuth from "../Componets/NavBarAuth";
+import axios from "axios";
 
 class Message extends React.Component{
     constructor(props) {
@@ -12,18 +13,18 @@ class Message extends React.Component{
     }
 
     /* TODO: Change url to messages*/
-    // getAllMessages() {
-    //     console.log(this.state)
-    //     const url = "http://localhost:8080/patient/appointments/" + this.state.userId
-    //     axios.get(url)
-    //         .then(function (response) {
-    //             console.log("this is the response", response.data);
-    //             this.state.appointments = response.data
-    //         })
-    //         .catch(function (error) {
-    //             console.log("this is the error", error);
-    //         });
-    // }
+    getAllMessages() {
+        console.log(this.state)
+        const url = "http://localhost:8080/patient/messages/inbox/" + this.state.userId
+        axios.get(url)
+            .then(function (response) {
+                console.log("this is the response", response.data);
+                this.state.messages = response.data
+            })
+            .catch(function (error) {
+                console.log("this is the error", error);
+            });
+    }
 
     componentDidMount() {
         this.getAllMessages();

@@ -116,8 +116,8 @@ public class DoctorController implements UserController{
     @RequestMapping(value = "/doctor/appointment", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
-    public Appointment addAppointment(Appointment appointment) {
-        return appointmentDao.addAppointment(appointment);
+    public Appointment addAppointment(Map appointment) {
+        return appointmentDao.addAppointment((Appointment) appointment);
     }
 
     @RequestMapping(value = "/doctor/appointment/{appointmentId}", method = RequestMethod.DELETE)

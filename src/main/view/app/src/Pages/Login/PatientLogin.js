@@ -1,7 +1,5 @@
 import axios from "axios"
 import React from "react";
-import Button from "../../Componets/Button";
-import Input from "../../Componets/Input";
 import NavBar from "../../Componets/NavBar/NavBar";
 import "./Login.css"
 
@@ -25,10 +23,10 @@ class PatientLogin extends React.Component{
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         const { email, password } = this.state;
         console.log(this.state)
-        axios
-            .post(
+        axios.post(
                 "http://localhost:8080/patient/login", {"email": email, "password":password}
             )
             .then(response => {
@@ -39,7 +37,6 @@ class PatientLogin extends React.Component{
             .catch(error => {
                 console.log("login error", error);
             });
-        event.preventDefault();
     }
 
     render(){

@@ -1,16 +1,14 @@
 import React, {Component} from "react";
 import Homepage from "./Pages/Homepage";
-import NavBar from "./Componets/NavBar/NavBar";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Appointment from "./Pages/Appointment";
 import Registration from "./Pages/Registration/Registration";
-import Login from "./Pages/Login/PatientLogin";
 import axios from "axios";
 import Message from "./Pages/Message";
 import Calendar from "./Pages/Calendar";
 import PatientLogin from "./Pages/Login/PatientLogin";
 import AdminLogin from "./Pages/Login/AdminLogin";
-import AppointmentForm from "./Pages/Registration/AppointmentForm";
+import AppointmentForm from "./Pages/AppointmentForm";
 
 
 export default class App extends Component{
@@ -23,7 +21,8 @@ export default class App extends Component{
                 email: "",
                 password:""
             },
-            user: {}
+            user: {},
+            appointments: {}
         }
         this.handleLogin = this.handleLogin.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
@@ -33,6 +32,11 @@ export default class App extends Component{
         console.log(user)
         this.handleLogin(user);
         this.history.push("/appointment");
+    }
+
+    handleSuccessfulRetrieval(data) {
+        console.log(data)
+        this.handleAppointments(data);
     }
 
     handleLogoutClick() {
@@ -80,6 +84,12 @@ export default class App extends Component{
         this.setState({
             isLoggedIn: true,
             user: data
+        })
+    }
+
+    handleAppointments(data) {
+        this.state.setState({
+           appointments: data
         })
     }
 
@@ -143,6 +153,7 @@ export default class App extends Component{
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
                                     userId = {this.state.user.id}
+
                                 />
                             )}
                         />
@@ -157,12 +168,15 @@ export default class App extends Component{
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
                                     userId = {this.state.user.id}
+                                    user={this.state.user}
+                                    handleAppointments={this.handleAppointments}
+                                    appointments = {this.state.appointments}
                                 />
                             )}
                         />
                         <Route
                             exact
-                            path={"/appointment/new"}
+                            path={"/patient/appointment/new"}
                             render={props => (
                                 <AppointmentForm
                                     {...props}

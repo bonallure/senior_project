@@ -32,8 +32,6 @@ public interface User {
 
     Date getDOB();
 
-    void setRole(Role role);
-
     String getRole();
 
     String getEmail();

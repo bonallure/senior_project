@@ -16,7 +16,7 @@ public abstract class Patient implements User{
     private int phoneNumber;
     private Date DOB;
     private int SSN;
-    protected Role role;
+    protected final Role role = Role.PATIENT;
     private int doctorId;
 
     @Override
@@ -109,11 +109,7 @@ public abstract class Patient implements User{
         return role.toString();
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

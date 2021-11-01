@@ -39,12 +39,6 @@ public class PatientController implements UserController {
     public PatientController(){
     }
 
-    // Get the login page # not using
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String getLoginPage(){
-        return "login Page";
-    }
-
     // Logging in a patient
     @RequestMapping(value = "/patient/login", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)

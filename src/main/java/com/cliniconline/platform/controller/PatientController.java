@@ -46,7 +46,7 @@ public class PatientController implements UserController {
     }
 
     // Logging in a patient
-    @RequestMapping(value = "/patient/login/", method = RequestMethod.POST)
+    @RequestMapping(value = "/patient/login", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Override
     public User login(@RequestBody Map adultPatient) {

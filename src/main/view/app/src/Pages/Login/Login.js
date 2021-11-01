@@ -6,28 +6,40 @@ import NavBar from "../../Componets/NavBar/NavBar";
 import "./Login.css"
 
 class Login extends React.Component{
-    state = {
-        email: '',
-        password: ''
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            email: "",
+            password: "",
+            loginErrors: ""
+        }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange = (e) => {
         const {id, value} = e.target
         this.state[id] = value
+        console.log("hi")
     }
 
-    handleSubmit = async (e) => {
-        e.preventDefault()
+    handleSubmit(event) {
+        const { email, password } = this.state;
         console.log(this.state)
-        axios.post("http://localhost:8080/patient/login/", this.state)
-            .then(function (response) {
-                console.log(this)
-                console.log("this is the response", response.data);
+        axios
+            .post(
+                "http://localhost:8080/patient/login", {"email": email, "password":password}
+            )
+            .then(response => {
+                if (response.data.email === email) {
+                    this.props.handleSuccessfulAuth(response.data);
+                }
             })
-            .catch(function (error) {
-                console.log("this is the error", error);
+            .catch(error => {
+                console.log("login error", error);
             });
-        this.props.history.push('/appointment')
+        event.preventDefault();
     }
 
     render(){
@@ -35,7 +47,7 @@ class Login extends React.Component{
             <div className={Login}>
                 <p> Login </p>
                 <br />
-                <form onSubmit = {this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <input type = "text" id = "email" placeholder= "Email" onChange = {this.handleChange}/>
                     <br />
                     <br />
@@ -43,7 +55,7 @@ class Login extends React.Component{
                     <br />
                     <br />
                     <br />
-                    <button onSubmit = {this.handleSubmit}> Login </button>
+                    <button type="submit"> Login </button>
                 </form>
             </div>
         )

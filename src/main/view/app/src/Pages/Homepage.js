@@ -7,7 +7,7 @@ import Login from "./Login/Login";
 class Homepage extends React.Component{
     // declaring state
     state = {
-        email: '',
+        isLoggedIn: "",
         password: ''
     }
 
@@ -19,6 +19,7 @@ class Homepage extends React.Component{
     render(){
         return(
             <div>
+                <NavBar/>
                 <div className="mainPaper">
                     <p> Welcome to Clinic Online </p>
                     <button onClick={this.onSubmit}>Login</button>

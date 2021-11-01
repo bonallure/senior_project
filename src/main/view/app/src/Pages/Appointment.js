@@ -2,6 +2,8 @@ import axios from "axios"
 import React from "react";
 import NavBarAuth from "../Componets/NavBarAuth";
 import {alignPropType} from "react-bootstrap/types";
+import { Paper } from "@mui/material";
+import { padding } from "@mui/system";
 
 
 
@@ -51,7 +53,16 @@ class Appointment extends React.Component{
                     <button onClick={this.onClick}>New Appointment</button>
                     <p style = {{textAlign: "left"}}> Appointment </p>
                     <div className = "CurrentAppt">
-
+                        /*TODO: Change map function to print out appointments */
+                        <Paper elevation={3} style={{padding:'50px 20px',width:600, margin:"20px auto"}}>
+                            {appointment.map(appointment =>(
+                                <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
+                                    Date:{}
+                                    Doctor:{}
+                                    Link:{}
+                                </Paper>
+                            ))}
+                        </Paper>
                     </div>
                     <p style = {{textAlign: "left"}}> Upcoming </p>
                 </div>

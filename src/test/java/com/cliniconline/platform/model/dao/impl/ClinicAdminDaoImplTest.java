@@ -43,7 +43,7 @@ public class ClinicAdminDaoImplTest {
         clinicAdmin.setEmail("laurent@cliniconline.com");
         clinicAdmin.setFirstName("Laurent");
         clinicAdmin.setLastName("Mwamba");
-        clinicAdmin.setPassword("password");
+        clinicAdmin.setPassword("password".hashCode());
 
         // Act
         clinicAdmin = (ClinicAdmin) dao.addAdmin(clinicAdmin);
@@ -69,7 +69,7 @@ public class ClinicAdminDaoImplTest {
         clinicAdmin.setEmail("laurent@cliniconline.com");
         clinicAdmin.setFirstName("Laurent");
         clinicAdmin.setLastName("Mwamba");
-        clinicAdmin.setPassword("password");
+        clinicAdmin.setPassword("password".hashCode());
 
         // Act
         clinicAdmin = (ClinicAdmin) dao.addAdmin(clinicAdmin);

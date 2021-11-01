@@ -39,7 +39,7 @@ public class DoctorController implements UserController{
 
         Doctor doctor1 = doctorDao.getDoctorByEmail((String) doctor.get("email"));
 
-        if (doctor1.getPassword().equals((String) doctor.get("password")))
+        if (doctor1.getPassword() == ((String) doctor.get("password")).hashCode())
             return doctor1;
         else
             return null;

@@ -50,11 +50,10 @@ public class DoctorDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey");
+        doctor.setPassword("Doc.John.Grey".hashCode());
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890);
         doctor.setDOB(Date.valueOf("1987-03-13"));
-        doctor.setRole(Role.DOCTOR);
 
         // Act
         doctor = dao.addDoctor(doctor);
@@ -80,11 +79,10 @@ public class DoctorDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey");
+        doctor.setPassword("Doc.John.Grey".hashCode());
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890);
         doctor.setDOB(Date.valueOf("1987-03-13"));
-        doctor.setRole(Role.DOCTOR);
 
         // Act
         doctor = dao.addDoctor(doctor);

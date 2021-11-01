@@ -136,12 +136,11 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
         adultPatient.setEmail(rs.getString("email"));
         adultPatient.setFirstName(rs.getString("f_name"));
         adultPatient.setLastName(rs.getString("l_name"));
-        adultPatient.setPassword(rs.getString("password"));
+        adultPatient.setPassword(rs.getInt("password"));
         adultPatient.setAddress(rs.getString("address"));
         adultPatient.setPhoneNumber(rs.getInt("phone"));
         adultPatient.setDOB(rs.getDate("dob"));
         adultPatient.setSSN(rs.getInt("ssn"));
-        adultPatient.setRole(Role.getRole(rs.getString("role")));
         adultPatient.setDoctorId(rs.getInt("doctor_id"));
 
         return adultPatient;

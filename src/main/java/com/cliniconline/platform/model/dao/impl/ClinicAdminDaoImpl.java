@@ -101,7 +101,7 @@ public class ClinicAdminDaoImpl implements AdminDao {
         clinicAdmin.setEmail(rs.getString("email"));
         clinicAdmin.setFirstName(rs.getString("f_name"));
         clinicAdmin.setLastName(rs.getString("l_name"));
-        clinicAdmin.setPassword(rs.getString("password"));
+        clinicAdmin.setPassword(rs.getInt("password"));
         clinicAdmin.setRole(rs.getString("role"));
 
         return clinicAdmin;

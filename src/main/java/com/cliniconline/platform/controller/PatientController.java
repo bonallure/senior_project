@@ -46,7 +46,7 @@ public class PatientController implements UserController {
     public User login(@RequestBody Map adultPatient) {
         AdultPatient adultPatient1 = adultPatientDao.getPatient((String) adultPatient.get("email"));
 
-        if (adultPatient1.getPassword().equals( (String) adultPatient.get("password")))
+        if (adultPatient1.getPassword() == (( (String) adultPatient.get("password"))).hashCode())
             return adultPatient1;
         else
             return null;

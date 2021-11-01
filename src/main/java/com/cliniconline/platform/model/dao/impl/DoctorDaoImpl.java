@@ -119,11 +119,10 @@ public class DoctorDaoImpl implements DoctorDao {
         doctor.setEmail(rs.getString("email"));
         doctor.setFirstName(rs.getString("f_name"));
         doctor.setLastName(rs.getString("l_name"));
-        doctor.setPassword(rs.getString("password"));
+        doctor.setPassword(rs.getInt("password"));
         doctor.setPhoneNumber(rs.getInt("phone"));
         doctor.setAddress(rs.getString("address"));
         doctor.setDOB(rs.getDate("dob"));
-        doctor.setRole(Role.getRole(rs.getString("role")));
 
         return doctor;
     }

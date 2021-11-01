@@ -22,9 +22,9 @@ public interface User {
 
     void setAddress(String address);
 
-    void changePassword(String password);
+    void changePassword(int password);
 
-    void setPassword(String password);
+    void setPassword(int password);
 
     int getPhoneNumber();
 
@@ -36,5 +36,5 @@ public interface User {
 
     String getEmail();
 
-    String getPassword();
+    int getPassword();
 }

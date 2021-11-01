@@ -74,11 +74,10 @@ public class DependentDaoImplTest {
             doctor.setFirstName("John");
             doctor.setLastName("Grey");
             doctor.setEmail("jgrey@clinic1.com");
-            doctor.setPassword("Doc.John.Grey");
+            doctor.setPassword("Doc.John.Grey".hashCode());
             doctor.setAddress("address 1");
             doctor.setPhoneNumber(1234567890);
             doctor.setDOB(Date.valueOf("1987-03-13"));
-            doctor.setRole(Role.DOCTOR);
 
             // Act
             doctor = doctorDao.addDoctor(doctor);
@@ -88,12 +87,11 @@ public class DependentDaoImplTest {
             patient.setEmail("patient@clinic1.com");
             patient.setFirstName("Malcolm");
             patient.setLastName("Ex");
-            patient.setPassword("Mal.Com.Ex");
+            patient.setPassword("Mal.Com.Ex".hashCode());
             patient.setAddress("address 14");
             patient.setPhoneNumber(1234563890);
             patient.setDOB(Date.valueOf("1989-03-23"));
             patient.setSSN(12345678);
-            patient.setRole(Role.PATIENT);
             patient.setDoctorId(doctor.getId());
 
             // Act
@@ -109,7 +107,6 @@ public class DependentDaoImplTest {
             dependent.setPhoneNumber(patient.getPhoneNumber());
             dependent.setDOB(Date.valueOf("2008-09-14"));
             dependent.setSSN(44786539);
-            dependent.setRole(Role.PATIENT);
             dependent.setGuardianId(patient.getId());
             dependent.setDoctorId(doctor.getId());
 
@@ -145,11 +142,10 @@ public class DependentDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey");
+        doctor.setPassword("Doc.John.Grey".hashCode());
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890);
         doctor.setDOB(Date.valueOf("1987-03-13"));
-        doctor.setRole(Role.DOCTOR);
 
         // Act
         doctor = doctorDao.addDoctor(doctor);
@@ -159,12 +155,11 @@ public class DependentDaoImplTest {
         patient.setEmail("patient@clinic1.com");
         patient.setFirstName("Malcolm");
         patient.setLastName("Ex");
-        patient.setPassword("Mal.Com.Ex");
+        patient.setPassword("Mal.Com.Ex".hashCode());
         patient.setAddress("address 14");
         patient.setPhoneNumber(1234563890);
         patient.setDOB(Date.valueOf("1989-03-23"));
         patient.setSSN(12345678);
-        patient.setRole(Role.PATIENT);
         patient.setDoctorId(doctor.getId());
 
         // Act
@@ -180,7 +175,6 @@ public class DependentDaoImplTest {
         dependent.setPhoneNumber(patient.getPhoneNumber());
         dependent.setDOB(Date.valueOf("2008-09-14"));
         dependent.setSSN(44786539);
-        dependent.setRole(Role.PATIENT);
         dependent.setGuardianId(patient.getId());
         dependent.setDoctorId(doctor.getId());
 

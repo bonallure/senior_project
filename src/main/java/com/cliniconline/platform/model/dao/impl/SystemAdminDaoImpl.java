@@ -101,7 +101,7 @@ public class SystemAdminDaoImpl implements AdminDao {
         systemAdmin.setEmail(rs.getString("email"));
         systemAdmin.setFirstName(rs.getString("f_name"));
         systemAdmin.setLastName(rs.getString("l_name"));
-        systemAdmin.setPassword(rs.getString("password"));
+        systemAdmin.setPassword(rs.getInt("password"));
         systemAdmin.setRole(rs.getString("role"));
 
         return systemAdmin;

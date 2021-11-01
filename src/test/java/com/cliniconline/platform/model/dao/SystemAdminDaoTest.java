@@ -42,7 +42,7 @@ public class SystemAdminDaoTest {
         systemAdmin.setEmail("laurent@cliniconline.com");
         systemAdmin.setFirstName("Laurent");
         systemAdmin.setLastName("Mwamba");
-        systemAdmin.setPassword("password");
+        systemAdmin.setPassword("password".hashCode());
 
         // Act
         systemAdmin = (SystemAdmin) dao.addAdmin(systemAdmin);
@@ -68,7 +68,7 @@ public class SystemAdminDaoTest {
         systemAdmin.setEmail("laurent@cliniconline.com");
         systemAdmin.setFirstName("Laurent");
         systemAdmin.setLastName("Mwamba");
-        systemAdmin.setPassword("password");
+        systemAdmin.setPassword("password".hashCode());
 
         // Act
         systemAdmin = (SystemAdmin) dao.addAdmin(systemAdmin);

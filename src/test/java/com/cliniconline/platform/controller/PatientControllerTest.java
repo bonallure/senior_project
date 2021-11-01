@@ -51,7 +51,7 @@ public class PatientControllerTest {
         // ARRANGE
         AdultPatient patient = new AdultPatient();
         String email = "patient@clinic1.com";
-        String password = "New/Password";
+        int password = "New/Password".hashCode();
         patient.setEmail(email);
         patient.setPassword(password);
 

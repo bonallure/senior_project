@@ -41,7 +41,7 @@ public class SystemAdminController implements AdminController{
     public Admin login(@RequestBody Map admin) {
         SystemAdmin systemAdmin = (SystemAdmin) adminDao.getAdmin((Integer) admin.get("id"));
 
-        if (systemAdmin.getPassword().equals( (String) admin.get("password")))
+        if (systemAdmin.getPassword() == ((String) admin.get("password")).hashCode())
             return systemAdmin;
         else
             return null;
@@ -62,7 +62,7 @@ public class SystemAdminController implements AdminController{
         newDoctor.setEmail((String) doctor.get("email"));
         newDoctor.setFirstName((String) doctor.get("firstName"));
         newDoctor.setLastName((String) doctor.get("lastName"));
-        newDoctor.setPassword((String) doctor.get("password"));
+        newDoctor.setPassword(((String) doctor.get("password")).hashCode());
         newDoctor.setPhoneNumber((Integer) doctor.get("phone"));
         newDoctor.setDOB((Date) doctor.get("dob"));
         return doctorDao.addDoctor(newDoctor);
@@ -74,7 +74,7 @@ public class SystemAdminController implements AdminController{
         patient.setEmail((String) adultPatient.get("email"));
         patient.setFirstName((String) adultPatient.get("firstName"));
         patient.setLastName((String) adultPatient.get("lastName"));
-        patient.setPassword((String) adultPatient.get("password"));
+        patient.setPassword(((String) adultPatient.get("password")).hashCode());
         patient.setAddress((String) adultPatient.get("address"));
         patient.setPhoneNumber((Integer) adultPatient.get("phone"));
         patient.setDOB((Date) adultPatient.get("dob"));
@@ -96,7 +96,7 @@ public class SystemAdminController implements AdminController{
         patient.setEmail((String) dependent.get("email"));
         patient.setFirstName((String) dependent.get("firstName"));
         patient.setLastName((String) dependent.get("lastName"));
-        patient.setPassword((String) dependent.get("password"));
+        patient.setPassword(((String) dependent.get("password")).hashCode());
         patient.setAddress((String) dependent.get("address"));
         patient.setPhoneNumber((Integer) dependent.get("phone"));
         patient.setDOB((Date) dependent.get("dob"));

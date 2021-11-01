@@ -10,6 +10,7 @@ import Message from "./Pages/Message";
 import Calendar from "./Pages/Calendar";
 import PatientLogin from "./Pages/Login/PatientLogin";
 import AdminLogin from "./Pages/Login/AdminLogin";
+import AppointmentForm from "./Pages/Registration/AppointmentForm";
 
 
 export default class App extends Component{
@@ -142,6 +143,35 @@ export default class App extends Component{
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
                                     userId = {this.state.user.id}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/appointment"}
+                            render={props => (
+                                <Appointment
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    userId = {this.state.user.id}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/appointment/new"}
+                            render={props => (
+                                <AppointmentForm
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    userId = {this.state.user.id}
+                                    doctorId = {this.state.user.id}
                                 />
                             )}
                         />

@@ -10,7 +10,7 @@ class Homepage extends React.Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.history.push("/login")
+        this.props.history.push("/patient/login")
     }
 
     render(){

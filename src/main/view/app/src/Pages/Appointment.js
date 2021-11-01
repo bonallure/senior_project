@@ -1,6 +1,7 @@
 import axios from "axios"
 import React from "react";
 import NavBarAuth from "../Componets/NavBarAuth";
+import {alignPropType} from "react-bootstrap/types";
 
 
 
@@ -15,10 +16,15 @@ class Appointment extends React.Component{
         this.state.userId = props.userId
     }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.props.history.push("/patient/appointment/new")
+    }
 
     getAllPatientAppointments() {
         console.log(this.state)
         const url = "http://localhost:8080/patient/appointments/" + this.state.userId
+        console.log(url)
         axios.get(url)
             .then(function (response) {
                 console.log("this is the response", response.data);
@@ -38,6 +44,7 @@ class Appointment extends React.Component{
             <div>
                 <NavBarAuth/>
                 <div className = "Appointment">
+                    <button onClick={this.onSubmit}>New Appointment</button>
                     <p style = {{textAlign: "left"}}> Appointment </p>
                     <div className = "CurrentAppt">
 

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function NavBar() {
   return (
@@ -19,13 +20,19 @@ export default function NavBar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <HomeIcon onClick={(e) => {
+              e.preventDefault();
+              window.location.href='/';}}/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Clinic Online
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button>
+          <Button color="inherit"  onClick={(e) => {
+              e.preventDefault();
+              window.location.href='/patient/login';}} >Login</Button>
+          <Button color="inherit" onClick={(e) => {
+              e.preventDefault();
+              window.location.href='/registration';}}>Register</Button>
         </Toolbar>
       </AppBar>
     </Box>

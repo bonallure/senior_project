@@ -1,7 +1,10 @@
 import axios from "axios"
 import React from "react";
-import NavBarAuth from "../Componets/NavBarAuth";
+import NavBarAuth from "../Componets/NavBar/NavBarAuth";
 import { Paper } from "@mui/material";
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 
 class Appointment extends React.Component{
@@ -66,11 +69,13 @@ class Appointment extends React.Component{
         return(
             <div>
                 <NavBarAuth/>
-                <div className = "Appointment">
-                    <button onClick={this.onClick}>New Appointment</button>
-                    <p style = {{textAlign: "left"}}> Appointment </p>
+                <Container className = "Appointment" maxWidth="xl">
+                    <Box sx={{pt: 2, textAlign: 'right'}}> 
+                        <Button variant="contained"  onClick={this.onClick}>New Appointment</Button>
+                    </Box>
+                    <p style = {{textAlign: "left"}}> Upcoming Appointments </p>
                     <div className = "CurrentAppt">
-                        <Paper elevation={3} style={{padding:'50px 20px',width:600, margin:"20px auto"}}>
+                        <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
                             {this.state.appointments.map(appointment =>(
                                 <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
                                     {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
@@ -78,8 +83,17 @@ class Appointment extends React.Component{
                             ))}
                         </Paper>
                     </div>
-                    <p style = {{textAlign: "left"}}> Upcoming </p>
-                </div>
+                    <p style = {{textAlign: "left"}}> Past Appointments </p>
+                    <div className = "CurrentAppt">
+                        <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
+                            {this.state.appointments.map(appointment =>(
+                                <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
+                                    {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
+                                </Paper>
+                            ))}
+                        </Paper>
+                    </div>
+                </Container>
             </div>
         )
     }

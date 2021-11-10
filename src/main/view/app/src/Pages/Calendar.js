@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarAuth from "../Componets/NavBarAuth";
+import NavBarAuth from "../Componets/NavBar/NavBarAuth";
 
 class Calendar extends React.Component{
     constructor(props){

@@ -1,8 +1,7 @@
 package com.cliniconline.platform.controller;
 
 import com.cliniconline.platform.model.dto.*;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.boot.web.reactive.context.StandardReactiveWebEnvironment;
+import com.cliniconline.platform.viewmodel.PatientViewModel;
 
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +11,7 @@ import java.util.Set;
  */
 public interface UserController {
 
-    User login(Map user);
+    PatientViewModel login(Map user);
 
     User viewAccount(String email);
 

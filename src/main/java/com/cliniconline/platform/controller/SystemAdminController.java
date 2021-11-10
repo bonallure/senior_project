@@ -1,9 +1,9 @@
 package com.cliniconline.platform.controller;
 
-import com.cliniconline.platform.model.dao.AdminDao;
-import com.cliniconline.platform.model.dao.AdultPatientDao;
-import com.cliniconline.platform.model.dao.DependentDao;
-import com.cliniconline.platform.model.dao.DoctorDao;
+import com.cliniconline.platform.dao.AdminDao;
+import com.cliniconline.platform.dao.AdultPatientDao;
+import com.cliniconline.platform.dao.DependentDao;
+import com.cliniconline.platform.dao.DoctorDao;
 import com.cliniconline.platform.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,10 +1,5 @@
 package com.cliniconline.platform.model.dto;
 
-import com.cliniconline.platform.model.dao.AdultPatientDao;
-import com.cliniconline.platform.model.dao.DependentDao;
-import com.cliniconline.platform.model.dao.DoctorDao;
-import org.springframework.beans.factory.annotation.Autowired;
-
 
 /**
  * Created by bonallure on 10/8/21

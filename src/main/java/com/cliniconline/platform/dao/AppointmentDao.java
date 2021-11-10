@@ -1,4 +1,4 @@
-package com.cliniconline.platform.model.dao;
+package com.cliniconline.platform.dao;
 
 import com.cliniconline.platform.model.dto.Appointment;
 import java.util.List;
@@ -20,6 +20,10 @@ public interface AppointmentDao {
     List<Appointment> getAllAppointmentsPerPatient(int patientId);
 
     List<Appointment> getAllAppointmentsPerDoctor(int doctorId);
+
+    List<Appointment> getAllConfirmedAppointmentsPerDoctor(int doctorId);
+
+    List<Appointment> getAllConfirmedAppointmentsPerPatient(int doctorId);
 
     List<Appointment> getAllAppointments();
 }

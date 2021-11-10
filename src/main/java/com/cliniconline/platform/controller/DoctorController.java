@@ -1,7 +1,8 @@
 package com.cliniconline.platform.controller;
 
-import com.cliniconline.platform.model.dao.*;
+import com.cliniconline.platform.dao.*;
 import com.cliniconline.platform.model.dto.*;
+import com.cliniconline.platform.viewmodel.PatientViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +36,12 @@ public class DoctorController implements UserController{
     @RequestMapping(value = "/doctor/login/", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Override
-    public User login(@RequestBody Map doctor) {
+    public PatientViewModel login(@RequestBody Map doctor) {
 
         Doctor doctor1 = doctorDao.getDoctorByEmail((String) doctor.get("email"));
 
         if (doctor1.getPassword() == ((String) doctor.get("password")).hashCode())
-            return doctor1;
+            return null;
         else
             return null;
     }

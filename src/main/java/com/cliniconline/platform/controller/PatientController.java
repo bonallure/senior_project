@@ -1,7 +1,9 @@
 package com.cliniconline.platform.controller;
 
-import com.cliniconline.platform.model.dao.*;
+import com.cliniconline.platform.dao.*;
 import com.cliniconline.platform.model.dto.*;
+import com.cliniconline.platform.service.PatientServiceLayer;
+import com.cliniconline.platform.viewmodel.PatientViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,36 +23,45 @@ public class PatientController implements UserController {
     // Patient Role
     private final Role ROLE = Role.PATIENT;
 
-    // Wiring the data access objects
-    @Autowired
-    protected DoctorDao doctorDao;
-    @Autowired
-    protected AdultPatientDao adultPatientDao;
-    @Autowired
-    protected DependentDao dependentDao;
-    @Autowired
-    protected MessageDao messageDao;
-    @Autowired
-    protected AppointmentDao appointmentDao;
-    @Autowired
-    protected PrescriptionDao prescriptionDao;
+    // declaring the data access objects
+    private DoctorDao doctorDao;
+    private AdultPatientDao adultPatientDao;
+    private DependentDao dependentDao;
+    private MessageDao messageDao;
+    private AppointmentDao appointmentDao;
+    private PrescriptionDao prescriptionDao;
 
-    // Wiring the controller
+    // Wiring the service layer
+    private PatientServiceLayer patientServiceLayer;
+
+    // declaring the controller
     @Autowired
-    public PatientController(){
+    public PatientController(DoctorDao doctorDao, AdultPatientDao adultPatientDao, DependentDao dependentDao,
+                             MessageDao messageDao, AppointmentDao appointmentDao, PrescriptionDao prescriptionDao,
+                             PatientServiceLayer patientServiceLayer){
+
+        this.doctorDao = doctorDao;
+        this.adultPatientDao = adultPatientDao;
+        this.dependentDao = dependentDao;
+        this.messageDao = messageDao;
+        this.appointmentDao = appointmentDao;
+        this.prescriptionDao = prescriptionDao;
+        this.patientServiceLayer = patientServiceLayer;
     }
 
     // Logging in a patient
     @RequestMapping(value = "/patient/login", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Override
-    public User login(@RequestBody Map adultPatient) {
+    public PatientViewModel login(@RequestBody Map adultPatient) {
         AdultPatient adultPatient1 = adultPatientDao.getPatient((String) adultPatient.get("email"));
+        int hashedPassword = adultPatient.get("password").hashCode();
 
-        if (adultPatient1.getPassword() == (( (String) adultPatient.get("password"))).hashCode())
-            return adultPatient1;
-        else
-            return null;
+        boolean isAuthenticated = adultPatient1.getPassword() == hashedPassword;
+
+        PatientViewModel patientViewModel = isAuthenticated ? patientServiceLayer.findPatient(adultPatient1.getId()) : null;
+
+        return patientViewModel;
     }
 
 

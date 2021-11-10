@@ -1,9 +1,8 @@
 package com.cliniconline.platform.model.dao.impl;
 
-import com.cliniconline.platform.model.dao.AdminDao;
+import com.cliniconline.platform.dao.AdminDao;
 import com.cliniconline.platform.model.dto.Admin;
 import com.cliniconline.platform.model.dto.ClinicAdmin;
-import com.cliniconline.platform.model.dto.SystemAdmin;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

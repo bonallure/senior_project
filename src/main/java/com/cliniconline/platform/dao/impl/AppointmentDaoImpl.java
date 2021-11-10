@@ -1,6 +1,6 @@
-package com.cliniconline.platform.model.dao.impl;
+package com.cliniconline.platform.dao.impl;
 
-import com.cliniconline.platform.model.dao.AppointmentDao;
+import com.cliniconline.platform.dao.AppointmentDao;
 import com.cliniconline.platform.model.dto.Appointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -39,6 +39,12 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     private static final String SELECT_ALL_APPOINTMENTS_PER_DOCTOR_SQL =
             "select * from appointment where doctor_id = ?";
+
+    private static final String SELECT_ALL_CONFIRMED_APPOINTMENTS_PER_PATIENT_SQL =
+            "select * from appointment where confirmed = 0 and patient_id = ?";
+
+    private static final String SELECT_ALL_CONFIRMED_APPOINTMENTS_PER_DOCTOR_SQL =
+            "select * from appointment where confirmed = 0 and doctor_id = ?";
 
     // jdbctemplate
     private JdbcTemplate jdbcTemplate;
@@ -109,6 +115,18 @@ public class AppointmentDaoImpl implements AppointmentDao {
     public List<Appointment> getAllAppointmentsPerDoctor(int doctorId) {
 
         return jdbcTemplate.query(SELECT_ALL_APPOINTMENTS_PER_DOCTOR_SQL, this::mapToRowAppointment, doctorId);
+    }
+
+    @Override
+    public List<Appointment> getAllConfirmedAppointmentsPerDoctor(int doctorId) {
+        return jdbcTemplate.query(SELECT_ALL_CONFIRMED_APPOINTMENTS_PER_DOCTOR_SQL,
+                this::mapToRowAppointment, doctorId);
+    }
+
+    @Override
+    public List<Appointment> getAllConfirmedAppointmentsPerPatient(int patientId) {
+        return jdbcTemplate.query(SELECT_ALL_CONFIRMED_APPOINTMENTS_PER_PATIENT_SQL,
+                this::mapToRowAppointment, patientId);
     }
 
     @Override

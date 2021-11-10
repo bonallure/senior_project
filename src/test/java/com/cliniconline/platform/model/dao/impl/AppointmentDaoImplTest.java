@@ -1,12 +1,11 @@
 package com.cliniconline.platform.model.dao.impl;
 
-import com.cliniconline.platform.model.dao.AdultPatientDao;
-import com.cliniconline.platform.model.dao.AppointmentDao;
-import com.cliniconline.platform.model.dao.DoctorDao;
+import com.cliniconline.platform.dao.AdultPatientDao;
+import com.cliniconline.platform.dao.AppointmentDao;
+import com.cliniconline.platform.dao.DoctorDao;
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Appointment;
 import com.cliniconline.platform.model.dto.Doctor;
-import com.cliniconline.platform.model.dto.Role;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

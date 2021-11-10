@@ -1,6 +1,7 @@
 package com.cliniconline.platform.model.dto;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -97,6 +98,15 @@ public class Appointment {
     public List<Date> confirmAppointment(boolean isConfirmed, List<Date> suggestedTimes){
         this.isConfirmed = isConfirmed;
         return suggestedTimes;
+    }
+
+    public AppointmentRequest requestAppointment(){
+        AppointmentRequest request = new AppointmentRequest();
+        request.setAppointmentId(this.id);
+        request.setDoctorId(this.doctorId);
+        request.setPatientId(this.patientId);
+        request.setDate(Date.valueOf(LocalDate.now().toString()));
+        return request;
     }
 
     @Override

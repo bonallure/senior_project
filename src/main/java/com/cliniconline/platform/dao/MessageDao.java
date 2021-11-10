@@ -1,4 +1,4 @@
-package com.cliniconline.platform.model.dao;
+package com.cliniconline.platform.dao;
 
 import com.cliniconline.platform.model.dto.Message;
 

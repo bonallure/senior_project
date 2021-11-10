@@ -1,9 +1,8 @@
-package com.cliniconline.platform.model.dao.impl;
+package com.cliniconline.platform.dao.impl;
 
-import com.cliniconline.platform.model.dao.AdultPatientDao;
+import com.cliniconline.platform.dao.AdultPatientDao;
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Dependent;
-import com.cliniconline.platform.model.dto.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -55,6 +54,17 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
     public AdultPatient getPatient(String email) {
         try {
             return jdbcTemplate.queryForObject(SELECT_ADULT_PATIENT_BY_EMAIL_SQL, this::mapRowToAdultPatient, email);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public AdultPatient getPatientById(int id) {
+        try {
+            return jdbcTemplate.queryForObject(SELECT_ADULT_PATIENT_BY_ID_SQL, this::mapRowToAdultPatient, id);
         }
         catch (EmptyResultDataAccessException e)
         {

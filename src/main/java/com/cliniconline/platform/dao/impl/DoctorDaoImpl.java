@@ -1,8 +1,7 @@
-package com.cliniconline.platform.model.dao.impl;
+package com.cliniconline.platform.dao.impl;
 
-import com.cliniconline.platform.model.dao.DoctorDao;
+import com.cliniconline.platform.dao.DoctorDao;
 import com.cliniconline.platform.model.dto.Doctor;
-import com.cliniconline.platform.model.dto.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,4 +1,4 @@
-package com.cliniconline.platform.model.dao;
+package com.cliniconline.platform.dao;
 
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Dependent;
@@ -18,6 +18,8 @@ public interface AdultPatientDao {
     void deleteAdultPatient(String email);
 
     AdultPatient getPatient(String email);
+
+    AdultPatient getPatientById(int id);
 
     AdultPatient getGuardian(Dependent dependent);
 

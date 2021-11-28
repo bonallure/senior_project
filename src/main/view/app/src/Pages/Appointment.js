@@ -1,7 +1,7 @@
 import axios from "axios"
 import React from "react";
 import NavBarAuth from "../Componets/NavBar/NavBarAuth";
-import { Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -69,31 +69,33 @@ class Appointment extends React.Component{
         return(
             <div>
                 <NavBarAuth/>
-                <Container className = "Appointment" maxWidth="xl">
+                <div className = "Appointment">
                     <Box sx={{pt: 2, textAlign: 'right'}}> 
                         <Button variant="contained"  onClick={this.onClick}>New Appointment</Button>
                     </Box>
-                    <p style = {{textAlign: "left"}}> Upcoming Appointments </p>
-                    <div className = "CurrentAppt">
-                        <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
-                            {this.state.appointments.map(appointment =>(
-                                <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
-                                    {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
-                                </Paper>
-                            ))}
-                        </Paper>
-                    </div>
-                    <p style = {{textAlign: "left"}}> Past Appointments </p>
-                    <div className = "CurrentAppt">
-                        <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
-                            {this.state.appointments.map(appointment =>(
-                                <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
-                                    {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
-                                </Paper>
-                            ))}
-                        </Paper>
-                    </div>
-                </Container>
+                    <Container maxWidth="xl">
+                        <p style = {{textAlign: "left"}}> Upcoming Appointments </p>
+                        <div className = "CurrentAppt">
+                            <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
+                                {this.state.appointments.map(appointment =>(
+                                    <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
+                                        {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
+                                    </Paper>
+                                ))}
+                            </Paper>
+                        </div>
+                        <p style = {{textAlign: "left"}}> Past Appointments </p>
+                        <div className = "CurrentAppt">
+                            <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
+                                {this.state.appointments.map(appointment =>(
+                                    <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
+                                        {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
+                                    </Paper>
+                                ))}
+                            </Paper>
+                        </div>
+                    </Container>
+                </div>
             </div>
         )
     }

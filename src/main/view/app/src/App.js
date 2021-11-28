@@ -9,6 +9,7 @@ import Calendar from "./Pages/Calendar";
 import PatientLogin from "./Pages/Login/PatientLogin";
 import AdminLogin from "./Pages/Login/AdminLogin";
 import AppointmentForm from "./Pages/AppointmentForm";
+import Dashboard from "./Pages/Dashboard";
 
 
 export default class App extends Component{
@@ -208,6 +209,20 @@ export default class App extends Component{
                             path={"/calendar"}
                             render={props => (
                                 <Calendar
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    userId = {this.state.user.id}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/dashboard"}
+                            render={props => (
+                                <Dashboard
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}

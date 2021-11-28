@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Container from '@mui/material/Container';
 
 export default function NavBarAuth() {
   return (
@@ -27,19 +28,19 @@ export default function NavBarAuth() {
             Clinic Online
           </Typography>
           <Box sx={{flexGrow: 1, alignSelf: 'center'}}>
-            <Button color="inherit" sx={{px:2}} onClick={(e) => {
+            <Button color="inherit" sx={{px:5}} onClick={(e) => {
                 e.preventDefault();
                 window.location.href='/';}}>Dashboard</Button>
-            <Button color="inherit" sx={{px:2}} onClick={(e) => {
+            <Button color="inherit" sx={{px:5}} onClick={(e) => {
                 e.preventDefault();
                 window.location.href='/calendar';}}>Calender</Button>
-            <Button color="inherit" sx={{px:2}} onClick={(e) => {
+            <Button color="inherit" sx={{px:5}} onClick={(e) => {
                 e.preventDefault();
                 window.location.href='/appointment';}}>Appointment</Button>
-            <Button color="inherit" sx={{px:2}} onClick={(e) => {
+            <Button color="inherit" sx={{px:5}} onClick={(e) => {
                 e.preventDefault();
                 window.location.href='/message';}}>Message</Button>
-            <Button color="inherit" sx={{px:2}} onClick={(e) => {
+            <Button color="inherit" sx={{px:5}} onClick={(e) => {
                 e.preventDefault();
                 window.location.href='/';}}>Join Call</Button>
           </Box>

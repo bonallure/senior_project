@@ -1,8 +1,8 @@
 package com.cliniconline.platform.controller;
 
-import com.cliniconline.platform.dao.*;
+import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
-import com.cliniconline.platform.viewmodel.PatientViewModel;
+import com.cliniconline.platform.model.viewmodel.PatientViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

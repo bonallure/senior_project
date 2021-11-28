@@ -1,8 +1,8 @@
 package com.cliniconline.platform.model.dao.impl;
 
-import com.cliniconline.platform.dao.AdultPatientDao;
-import com.cliniconline.platform.dao.DoctorDao;
-import com.cliniconline.platform.dao.PrescriptionDao;
+import com.cliniconline.platform.model.dao.AdultPatientDao;
+import com.cliniconline.platform.model.dao.DoctorDao;
+import com.cliniconline.platform.model.dao.PrescriptionDao;
 import com.cliniconline.platform.model.dto.Prescription;
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Doctor;

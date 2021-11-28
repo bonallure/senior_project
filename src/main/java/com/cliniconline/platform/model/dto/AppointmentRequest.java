@@ -1,6 +1,6 @@
 package com.cliniconline.platform.model.dto;
 
-import com.cliniconline.platform.dao.AppointmentDao;
+import com.cliniconline.platform.model.dao.AppointmentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;

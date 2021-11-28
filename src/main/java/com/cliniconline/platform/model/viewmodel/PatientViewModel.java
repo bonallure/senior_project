@@ -1,4 +1,4 @@
-package com.cliniconline.platform.viewmodel;
+package com.cliniconline.platform.model.viewmodel;
 
 import com.cliniconline.platform.model.dto.Appointment;
 import com.cliniconline.platform.model.dto.Doctor;

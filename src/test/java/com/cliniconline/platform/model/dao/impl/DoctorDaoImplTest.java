@@ -1,6 +1,6 @@
 package com.cliniconline.platform.model.dao.impl;
 
-import com.cliniconline.platform.dao.DoctorDao;
+import com.cliniconline.platform.model.dao.DoctorDao;
 import com.cliniconline.platform.model.dto.Doctor;
 import org.junit.Before;
 import org.junit.Test;

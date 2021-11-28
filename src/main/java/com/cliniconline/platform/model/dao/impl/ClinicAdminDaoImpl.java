@@ -1,6 +1,6 @@
-package com.cliniconline.platform.dao.impl;
+package com.cliniconline.platform.model.dao.impl;
 
-import com.cliniconline.platform.dao.AdminDao;
+import com.cliniconline.platform.model.dao.AdminDao;
 import com.cliniconline.platform.model.dto.Admin;
 import com.cliniconline.platform.model.dto.ClinicAdmin;
 import org.springframework.beans.factory.annotation.Autowired;

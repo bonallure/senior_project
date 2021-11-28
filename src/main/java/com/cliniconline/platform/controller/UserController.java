@@ -1,7 +1,7 @@
 package com.cliniconline.platform.controller;
 
 import com.cliniconline.platform.model.dto.*;
-import com.cliniconline.platform.viewmodel.PatientViewModel;
+import com.cliniconline.platform.model.viewmodel.PatientViewModel;
 
 import java.util.Map;
 import java.util.Set;

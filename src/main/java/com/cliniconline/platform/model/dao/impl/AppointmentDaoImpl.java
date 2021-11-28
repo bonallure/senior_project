@@ -1,6 +1,6 @@
-package com.cliniconline.platform.dao.impl;
+package com.cliniconline.platform.model.dao.impl;
 
-import com.cliniconline.platform.dao.AppointmentDao;
+import com.cliniconline.platform.model.dao.AppointmentDao;
 import com.cliniconline.platform.model.dto.Appointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

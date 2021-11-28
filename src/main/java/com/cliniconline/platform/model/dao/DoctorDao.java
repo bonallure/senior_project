@@ -1,7 +1,6 @@
-package com.cliniconline.platform.dao;
+package com.cliniconline.platform.model.dao;
 
 import com.cliniconline.platform.model.dto.Doctor;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

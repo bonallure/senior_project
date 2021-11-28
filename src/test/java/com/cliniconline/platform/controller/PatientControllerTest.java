@@ -1,6 +1,6 @@
 package com.cliniconline.platform.controller;
 
-import com.cliniconline.platform.dao.*;
+import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;

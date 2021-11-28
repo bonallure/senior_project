@@ -1,6 +1,5 @@
 package com.cliniconline.platform.model.dao;
 
-import com.cliniconline.platform.dao.AdminDao;
 import com.cliniconline.platform.model.dto.Admin;
 import com.cliniconline.platform.model.dto.SystemAdmin;
 import org.junit.Before;

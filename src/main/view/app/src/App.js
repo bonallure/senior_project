@@ -10,6 +10,7 @@ import PatientLogin from "./Pages/Login/PatientLogin";
 import AdminLogin from "./Pages/Login/AdminLogin";
 import AppointmentForm from "./Pages/AppointmentForm";
 import Dashboard from "./Pages/Dashboard";
+import DoctorLogin from "./Pages/Login/DoctorLogin";
 
 
 export default class App extends Component{
@@ -134,6 +135,20 @@ export default class App extends Component{
                             path={"/patient/login"}
                             render={props => (
                                 <PatientLogin
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    handleSuccessfulAuth={this.handleSuccessfulAuth}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/doctor/login"}
+                            render={props => (
+                                <DoctorLogin
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}

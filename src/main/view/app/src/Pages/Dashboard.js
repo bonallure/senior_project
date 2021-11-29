@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import NavBarAuth from "../Componets/NavBar/NavBarAuth";
+import NavBarAuth from "../Components/NavBar/NavBarAuth";
 import Card from '@mui/material/Card';
 import { CardHeader, CardContent, Grid, Paper } from "@mui/material";
 import Container from '@mui/material/Container';

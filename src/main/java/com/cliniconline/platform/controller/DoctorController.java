@@ -2,8 +2,12 @@ package com.cliniconline.platform.controller;
 
 import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
+import com.cliniconline.platform.model.viewmodel.DoctorViewModel;
 import com.cliniconline.platform.model.viewmodel.PatientViewModel;
+import com.cliniconline.platform.service.DoctorServiceLayer;
+import com.cliniconline.platform.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,18 +36,19 @@ public class DoctorController implements UserController{
     protected AppointmentDao appointmentDao;
     @Autowired
     protected PrescriptionDao prescriptionDao;
+    @Autowired
+    protected DoctorServiceLayer serviceLayer;
 
-    @RequestMapping(value = "/doctor/login/", method = RequestMethod.POST)
+    @RequestMapping(value = "/doctor/login", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Override
-    public PatientViewModel login(@RequestBody Map doctor) {
-
+    public DoctorViewModel login(@RequestBody Map doctor) {
         Doctor doctor1 = doctorDao.getDoctorByEmail((String) doctor.get("email"));
+        int hashedPassword = doctor.get("password").hashCode();
 
-        if (doctor1.getPassword() == ((String) doctor.get("password")).hashCode())
-            return null;
-        else
-            return null;
+        boolean isAuthenticated = doctor1.getPassword() == hashedPassword;
+
+        return isAuthenticated ? serviceLayer.findDoctor(doctor1.getId()) : null;
     }
 
     @RequestMapping(value = "/doctor/account/{email}", method = RequestMethod.GET)

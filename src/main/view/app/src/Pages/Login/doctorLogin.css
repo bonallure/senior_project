@@ -1,0 +1,64 @@
+p {
+    padding-top: 50px;
+    text-align: center;
+    font-size: 24px;
+}
+
+form {
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.doctorSection {
+    background-image : url("../Images/best-online-therapy_cover-image.webp");
+    height: 90vh;
+    display: flex;
+    text-align: center;
+}
+
+.float-container {
+    top: 0;
+    width: 600px;
+    height: 70%;
+    padding-top: 25px;
+    padding-left: 60px;
+    padding-right: 60px;
+    border: 3px solid transparent;
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    margin: auto;
+}
+.float-child {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    padding-top: 0;
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+
+}
+
+.float-child h2{
+    margin: 0 0 20px;
+    padding: 0;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #044463;
+}
+
+.float-child p{
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+}
+.divider{
+    width:35px;
+    height:auto;
+    display:inline-block;
+}

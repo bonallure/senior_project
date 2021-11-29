@@ -1,8 +1,8 @@
 import axios from "axios"
 import React from "react";
-import Button from "../../Componets/Button";
-import Input from "../../Componets/Input";
-import NavBar from "../../Componets/NavBar/NavBar";
+import Button from "../../Components/Button";
+import Input from "../../Components/Input";
+import NavBar from "../../Components/NavBar/NavBar";
 import "./Login.css"
 
 class AdminLogin extends React.Component{

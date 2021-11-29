@@ -42,7 +42,7 @@ export default function NavBarAuth() {
                 window.location.href='/message';}}>Message</Button>
             <Button color="inherit" sx={{px:5}} onClick={(e) => {
                 e.preventDefault();
-                window.location.href='/';}}>Join Call</Button>
+                window.location.href='http://localhost:3006/';}}>Join Call</Button>
           </Box>
           <AccountCircleIcon sx={{pr:1,  fontSize: 35}}></AccountCircleIcon>
         </Toolbar>

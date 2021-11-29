@@ -1,7 +1,9 @@
 import axios from "axios"
 import React from "react";
 import NavBar from "../../Components/NavBar/NavBar";
-import "./Login.css"
+import "./patientLogin.css"
+import BottomBar from "../../Components/BottomBar";
+import {Button, TextField} from "@mui/material";
 
 class PatientLogin extends React.Component{
     constructor(props) {
@@ -41,20 +43,38 @@ class PatientLogin extends React.Component{
 
     render(){
         return(
-            <div className="PatientLogin">
+            <div>
                 <NavBar/>
-                <p> Login </p>
-                <br />
-                <form onSubmit={this.handleSubmit}>
-                    <input type = "text" id = "email" placeholder= "Email" onChange = {this.handleChange}/>
-                    <br />
-                    <br />
-                    <input type = "password" id = "password" placeholder= "Password" onChange = {this.handleChange}/>
-                    <br />
-                    <br />
-                    <br />
-                    <button type="submit"> Login </button>
-                </form>
+                <section>
+                    <div className="float-container" style={{textAlign:"center"}}>
+                        <h2> Login </h2>
+                        <br />
+                        <form onSubmit={this.handleSubmit}>
+                            <TextField
+                                required
+                                label="Required"
+                                variant="outlined"
+                                id="email"
+                                placeholder="Email"
+                                onChange={this.handleChange}/>
+                            <br />
+                            <br />
+                            <TextField
+                                required
+                                label="Required"
+                                type="password"
+                                variant="filled"
+                                id="password"
+                                placeholder="Password"
+                                onChange={this.handleChange}/>
+                            <br />
+                            <br />
+                            <br />
+                            <Button type="submit" variant="contained"> Login </Button>
+                        </form>
+                    </div>
+                </section>
+                <BottomBar/>
             </div>
         )
     }

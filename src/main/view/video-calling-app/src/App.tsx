@@ -56,7 +56,7 @@ export const VideoCall = () => {
   return (
     <div className="web-rtc-page">
       {connectionStatus === null && <button onClick={() => sendOrAcceptInvitation(true)}>CALL</button>}
-      {connectionStatus === ConnectionStatus.OFFERING && <div className="loader"></div>}
+      {connectionStatus === ConnectionStatus.OFFERING && <div className="loader"/>}
       {connectionStatus === ConnectionStatus.RECEIVING && (
         <button onClick={() => sendOrAcceptInvitation(false, offerSignal)}>ANSWER CALL</button>
       )}

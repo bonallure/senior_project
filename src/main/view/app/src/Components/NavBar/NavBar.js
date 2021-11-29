@@ -5,14 +5,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
+import "./navBar.css"
 
 export default function NavBar() {
+
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar style={{background: "rgba(82,107,190,0.87)"}}>
           <IconButton
             size="large"
             edge="start"
@@ -24,15 +26,18 @@ export default function NavBar() {
               e.preventDefault();
               window.location.href='/';}}/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h4" component="div" align="justify" sx={{ flexGrow: 1 }}>
             Clinic Online
           </Typography>
-          <Button color="inherit"  onClick={(e) => {
+          <Button color="inherit" sx={{px:6}} onClick={(e) => {
               e.preventDefault();
-              window.location.href='/patient/login';}} >Login</Button>
-          <Button color="inherit" onClick={(e) => {
+              window.location.href='/patient/aboutUs';}} >About Us</Button><br/>
+          <Button color="inherit" sx={{px:6}} onClick={(e) => {
               e.preventDefault();
-              window.location.href='/registration';}}>Register</Button>
+              window.location.href='/patient/login';}} >Login</Button><br/><br/>
+          <Button color="inherit" sx={{px:6}} onClick={(e) => {
+              e.preventDefault();
+              window.location.href='/registration';}}>Register</Button><br/>
         </Toolbar>
       </AppBar>
     </Box>

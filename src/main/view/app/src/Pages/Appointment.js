@@ -1,6 +1,6 @@
 import axios from "axios"
 import React from "react";
-import NavBarAuth from "../Componets/NavBar/NavBarAuth";
+import NavBarAuth from "../Components/NavBar/NavBarAuth";
 import { Grid, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';

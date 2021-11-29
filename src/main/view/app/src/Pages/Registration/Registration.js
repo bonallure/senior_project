@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import NavBar from "../../Componets/NavBar/NavBar";
+import NavBar from "../../Components/NavBar/NavBar";
 import "./Registration.css"
 
 class Registration extends React.Component{

@@ -14,37 +14,32 @@ export default function NavBarAuth() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" elevation={0}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="home"
-          >
+          <IconButton size="xlarge" edge="start" color="inherit" aria-label="home">
             <HomeIcon onClick={(e) => {
               e.preventDefault();
               window.location.href='/';}}/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h4" component="div">
             Clinic Online
           </Typography>
           <Box sx={{flexGrow: 1, alignSelf: 'center'}}>
-            <Button color="inherit" sx={{px:5}} onClick={(e) => {
-                e.preventDefault();
-                window.location.href='/';}}>Dashboard</Button>
-            <Button color="inherit" sx={{px:5}} onClick={(e) => {
-                e.preventDefault();
-                window.location.href='/calendar';}}>Calender</Button>
-            <Button color="inherit" sx={{px:5}} onClick={(e) => {
-                e.preventDefault();
-                window.location.href='/appointment';}}>Appointment</Button>
-            <Button color="inherit" sx={{px:5}} onClick={(e) => {
-                e.preventDefault();
-                window.location.href='/message';}}>Message</Button>
-            <Button color="inherit" sx={{px:5}} onClick={(e) => {
-                e.preventDefault();
-                window.location.href='http://localhost:3006/';}}>Join Call</Button>
+            <Button color="inherit" sx={{px:10}} onClick={(e) => {
+              e.preventDefault();
+              window.location.href='/dashboard';}}>Dashboard</Button>
+            <Button color="inherit" sx={{px:10}} onClick={(e) => {
+              e.preventDefault();
+              window.location.href='/calendar';}}>Calendar</Button>
+            <Button color="inherit" sx={{px:10}} onClick={(e) => {
+              e.preventDefault();
+              window.location.href='/appointment';}}>Appointment</Button>
+            <Button color="inherit" sx={{px:10}} onClick={(e) => {
+              e.preventDefault();
+              window.location.href='/message';}}>Message</Button>
+            <Button color="inherit" sx={{px:10}} onClick={(e) => {
+              e.preventDefault();
+              window.location.href='http://localhost:3006/';}}>Join Call</Button>
           </Box>
-          <AccountCircleIcon sx={{pr:1,  fontSize: 35}}></AccountCircleIcon>
+          <AccountCircleIcon sx={{pr: 1, fontSize: 35}}/>
         </Toolbar>
       </AppBar>
     </Box>

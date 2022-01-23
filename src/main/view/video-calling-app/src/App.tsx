@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import SimplePeer, { Instance, SignalData } from "simple-peer";
+import Button from '@mui/material/Button';
 import "./App.scss";
+import {Box, Container} from "@mui/material";
+import NavBarAuth from "./NavBarAuth";
 
 enum ConnectionStatus {
   OFFERING,
@@ -54,15 +57,18 @@ export const VideoCall = () => {
   };
 
   return (
-    <div className="web-rtc-page">
-      {connectionStatus === null && <button onClick={() => sendOrAcceptInvitation(true)}>CALL</button>}
-      {connectionStatus === ConnectionStatus.OFFERING && <div className="loader"/>}
-      {connectionStatus === ConnectionStatus.RECEIVING && (
-        <button onClick={() => sendOrAcceptInvitation(false, offerSignal)}>ANSWER CALL</button>
-      )}
-      <div className="video-container">
-        <video ref={videoSelf} className="video-block" />
-        <video ref={videoCaller} className="video-block" />
+    <div>
+      <NavBarAuth/>
+      <div className="web-rtc-page">
+        {connectionStatus === null && <Button onClick={() => sendOrAcceptInvitation(true)}>JOIN CALL</Button>}
+        {connectionStatus === ConnectionStatus.OFFERING && <div className="loader"/>}
+        {connectionStatus === ConnectionStatus.RECEIVING && (
+            <Button onClick={() => sendOrAcceptInvitation(false, offerSignal)}>ACCEPT PARTICIPANT</Button>
+        )}
+        <div className="video-container">
+          <video ref={videoSelf} className="video-block" />
+          <video ref={videoCaller} className="video-block" />
+        </div>
       </div>
     </div>
   );

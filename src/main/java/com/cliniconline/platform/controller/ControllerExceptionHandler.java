@@ -1,6 +1,6 @@
 package com.cliniconline.platform.controller;
 
-import com.cliniconline.platform.model.CustomErrorResponse;
+import com.cliniconline.platform.util.CustomErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

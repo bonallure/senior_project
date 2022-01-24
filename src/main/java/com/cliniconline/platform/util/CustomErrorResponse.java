@@ -1,4 +1,4 @@
-package com.cliniconline.platform.model;
+package com.cliniconline.platform.util;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

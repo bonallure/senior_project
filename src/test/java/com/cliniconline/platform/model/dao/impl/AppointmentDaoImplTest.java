@@ -71,7 +71,7 @@ note mediumtext
         doctor.setEmail("jgrey@clinic1.com");
         doctor.setPassword("Doc.John.Grey".hashCode());
         doctor.setAddress("address 1");
-        doctor.setPhoneNumber(1234567890);
+        doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
 
         // Act
@@ -84,9 +84,9 @@ note mediumtext
         patient.setLastName("Ex");
         patient.setPassword("Mal.Com.Ex".hashCode());
         patient.setAddress("address 14");
-        patient.setPhoneNumber(1234563890);
+        patient.setPhoneNumber(1234563890L);
         patient.setDOB(Date.valueOf("1989-03-23"));
-        patient.setSSN(12345678);
+        patient.setSSN(12345678L);
         patient.setDoctorId(doctor.getId());
 
         // Act
@@ -141,7 +141,7 @@ note mediumtext
         doctor.setEmail("jgrey@clinic1.com");
         doctor.setPassword("Doc.John.Grey".hashCode());
         doctor.setAddress("address 1");
-        doctor.setPhoneNumber(1234567890);
+        doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
 
         // Act
@@ -154,9 +154,9 @@ note mediumtext
         patient.setLastName("Ex");
         patient.setPassword("Mal.Com.Ex".hashCode());
         patient.setAddress("address 14");
-        patient.setPhoneNumber(1234563890);
+        patient.setPhoneNumber(1234563890L);
         patient.setDOB(Date.valueOf("1989-03-23"));
-        patient.setSSN(12345678);
+        patient.setSSN(12345678L);
         patient.setDoctorId(doctor.getId());
 
         // Act

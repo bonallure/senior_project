@@ -51,7 +51,7 @@ public class DoctorDaoImplTest {
         doctor.setEmail("jgrey@clinic1.com");
         doctor.setPassword("Doc.John.Grey".hashCode());
         doctor.setAddress("address 1");
-        doctor.setPhoneNumber(1234567890);
+        doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
 
         // Act
@@ -80,7 +80,7 @@ public class DoctorDaoImplTest {
         doctor.setEmail("jgrey@clinic1.com");
         doctor.setPassword("Doc.John.Grey".hashCode());
         doctor.setAddress("address 1");
-        doctor.setPhoneNumber(1234567890);
+        doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
 
         // Act

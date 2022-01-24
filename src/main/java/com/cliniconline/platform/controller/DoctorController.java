@@ -26,16 +26,22 @@ public class DoctorController implements UserController{
 
     @Autowired
     protected DoctorDao doctorDao;
+
     @Autowired
     protected AdultPatientDao adultPatientDao;
+
     @Autowired
     protected DependentDao dependentDao;
+
     @Autowired
     protected MessageDao messageDao;
+
     @Autowired
     protected AppointmentDao appointmentDao;
+
     @Autowired
     protected PrescriptionDao prescriptionDao;
+
     @Autowired
     protected DoctorServiceLayer serviceLayer;
 

@@ -13,7 +13,7 @@ public interface AdminController {
 
     Admin viewAccount(int adminId);
 
-    Doctor addDoctor(Map doctor);
+    Doctor addDoctor(Map doctor) throws Exception;
 
     AdultPatient addPatient(Map adultPatient);
 

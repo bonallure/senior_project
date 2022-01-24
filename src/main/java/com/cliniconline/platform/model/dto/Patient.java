@@ -13,9 +13,9 @@ public abstract class Patient implements User{
     private String lastName;
     private int password;
     private String address;
-    private int phoneNumber;
+    private Long phoneNumber;
     private Date DOB;
-    private int SSN;
+    private Long SSN;
     protected final Role role = Role.PATIENT;
     private int doctorId;
 
@@ -65,16 +65,16 @@ public abstract class Patient implements User{
     }
 
     @Override
-    public int getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
     @Override
-    public void setPhoneNumber(int number) {
+    public void setPhoneNumber(Long number) {
         phoneNumber = number;
     }
 
-    public int getSSN() {
+    public Long getSSN() {
         return SSN;
     }
 
@@ -117,7 +117,7 @@ public abstract class Patient implements User{
         this.DOB = DOB;
     }
 
-    public void setSSN(int SSN) {
+    public void setSSN(Long SSN) {
         this.SSN = SSN;
     }
 
@@ -149,9 +149,9 @@ public abstract class Patient implements User{
         result = 31 * result + lastName.hashCode();
         result = 31 * result + password;
         result = 31 * result + address.hashCode();
-        result = 31 * result + phoneNumber;
+        result = 31 * result + phoneNumber.hashCode();
         result = 31 * result + DOB.hashCode();
-        result = 31 * result + SSN;
+        result = 31 * result + SSN.hashCode();
         result = 31 * result + role.hashCode();
         result = 31 * result + doctorId;
         return result;

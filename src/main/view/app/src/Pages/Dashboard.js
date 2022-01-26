@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import NavBarAuth from "../Componets/NavBar/NavBarAuth";
+import NavBarAuth from "../Components/NavBar/NavBarAuth";
 import Card from '@mui/material/Card';
 import { CardHeader, CardContent, Grid, Paper } from "@mui/material";
 import Container from '@mui/material/Container';
@@ -76,7 +76,7 @@ class Dashboard extends React.Component{
                     <Box sx={{pt: 2, position: "relative", left: 400, bottom: 150}}>
                         <Card sx={{ minWidth: 160, maxWidth:250 }}>
                             <CardHeader title="Messages"/>
-                            {this.state.messages.map(message =>(
+                                {this.state.messages.map(message =>(
                                     <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={message.userId}>
                                         Recipient:{}
                                         Date:{}

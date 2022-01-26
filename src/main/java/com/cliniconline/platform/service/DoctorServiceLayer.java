@@ -2,7 +2,7 @@ package com.cliniconline.platform.service;
 
 import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
-import com.cliniconline.platform.model.viewmodel.PatientViewModel;
+import com.cliniconline.platform.model.viewmodel.DoctorViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by bonallure on 11/8/21
+ * Created by bonallure on 11/29/21
  */
 @Service
-public class PatientServiceLayer implements ServiceLayer {
+public class DoctorServiceLayer implements ServiceLayer{
 
     // adding the dao
     private DoctorDao doctorDao;
@@ -24,7 +24,7 @@ public class PatientServiceLayer implements ServiceLayer {
     private PrescriptionDao prescriptionDao;
 
     @Autowired
-    public PatientServiceLayer(DoctorDao doctorDao, AdultPatientDao adultPatientDao, DependentDao dependentDao,
+    public DoctorServiceLayer(DoctorDao doctorDao, AdultPatientDao adultPatientDao, DependentDao dependentDao,
                                MessageDao messageDao, AppointmentDao appointmentDao, PrescriptionDao prescriptionDao){
 
         this.doctorDao = doctorDao;
@@ -35,39 +35,38 @@ public class PatientServiceLayer implements ServiceLayer {
         this.prescriptionDao = prescriptionDao;
     }
 
-    public PatientViewModel findPatient(int id){
+    public DoctorViewModel findDoctor(int id){
 
         //Getting the patient
         /*TODO
-        *  Allow for adultPatient or dependent selection*/
-        AdultPatient adultPatient = adultPatientDao.getPatientById(id);
+         *  Allow for adultPatient or dependent selection*/
+        Doctor doctor = doctorDao.getDoctor(id);
 
-        return buildPatientViewModel(adultPatient);
+        return buildPatientViewModel(doctor);
     }
 
-    private PatientViewModel buildPatientViewModel(AdultPatient adultPatient) {
+    private DoctorViewModel buildPatientViewModel(Doctor doctor) {
 
         // getting the service items
         List<Appointment> appointments = sortAppointments(appointmentDao.getAllAppointments());
-        List<Message> outbox = messageDao.getPatientOutbox(adultPatient.getId());
-        List<Message> inbox = messageDao.getPatientInbox(adultPatient.getId());
+        List<Message> outbox = messageDao.getDoctorOutbox(doctor.getId());
+        List<Message> inbox = messageDao.getDoctorInbox(doctor.getId());
         List<Prescription> prescriptions = prescriptionDao.getAllPrescription();
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(doctorDao.getDoctor(adultPatient.getDoctorId()));
+        List<Patient> patients = new ArrayList<>();
 
-        PatientViewModel pvm = new PatientViewModel();
-        pvm.setId(adultPatient.getId());
-        pvm.setEmail(adultPatient.getEmail());
-        pvm.setFirstName(adultPatient.getFirstName());
-        pvm.setLastName((adultPatient.getLastName()));
-        pvm.setRole(adultPatient.getRole());
-        pvm.setAppointments(appointments);
-        pvm.setOutbox(outbox);
-        pvm.setIntbox(inbox);
-        pvm.setDoctors(doctors);
-        pvm.setPrescriptions(prescriptions);
+        DoctorViewModel dvm = new DoctorViewModel();
+        dvm.setId(doctor.getId());
+        dvm.setEmail(doctor.getEmail());
+        dvm.setFirstName(doctor.getFirstName());
+        dvm.setLastName((doctor.getLastName()));
+        dvm.setRole(doctor.getRole());
+        dvm.setAppointments(appointments);
+        dvm.setOutbox(outbox);
+        dvm.setIntbox(inbox);
+        dvm.setPatients(patients);
+        dvm.setPrescriptions(prescriptions);
 
-        return pvm;
+        return dvm;
     }
 
     private List<Appointment> sortAppointments(List<Appointment> appointments) {

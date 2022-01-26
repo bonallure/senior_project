@@ -11,7 +11,7 @@ import java.util.List;
  * Created by bonallure on 11/10/21
  */
 // This class contains all attributes related to a patient for viewing
-public class PatientViewModel {
+public class PatientViewModel implements UserViewModel{
 
     private int id;
     private String email;

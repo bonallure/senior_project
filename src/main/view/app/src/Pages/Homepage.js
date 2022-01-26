@@ -32,21 +32,17 @@ class Homepage extends React.Component{
             <div>
                 <NavBar/>
                 <section>
-                    <div className="float-container">
+                    <div className="float-container1">
                         <div className="float-child1">
                             <h2>Welcome to Clinic Online</h2>
                             <br/>
                             <p>We offers a complete work environment for the doctors,
-                            and the portal for patients to access their medical information and interact with their doctors.</p>
+                                and the portal for patients to access their medical information and interact with their doctors.
+                            </p>
                         </div>
-                        <div className="float-child2" style={{textAlign:"center"}}>
+                        <div className="float-child2">
                             <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
+                            <br/> <br/> <br/> <br/> <br/> <br/>
                             <br/>
                             <h2>Login or register</h2>
                             <br/>

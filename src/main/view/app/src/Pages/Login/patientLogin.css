@@ -22,7 +22,7 @@ section {
 
 .float-container {
     top: 0;
-    max-width: 600px;
+    width: 600px;
     height: 70%;
     padding-top: 25px;
     padding-left: 60px;

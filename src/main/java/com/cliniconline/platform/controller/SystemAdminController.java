@@ -63,7 +63,7 @@ public class SystemAdminController implements AdminController{
         newDoctor.setFirstName((String) doctor.get("firstName"));
         newDoctor.setLastName((String) doctor.get("lastName"));
         newDoctor.setPassword(((String) doctor.get("password")).hashCode());
-        newDoctor.setPhoneNumber((Integer) doctor.get("phone"));
+        newDoctor.setPhoneNumber((Long) doctor.get("phone"));
         newDoctor.setDOB((Date) doctor.get("dob"));
         return doctorDao.addDoctor(newDoctor);
     }
@@ -76,7 +76,7 @@ public class SystemAdminController implements AdminController{
         patient.setLastName((String) adultPatient.get("lastName"));
         patient.setPassword(((String) adultPatient.get("password")).hashCode());
         patient.setAddress((String) adultPatient.get("address"));
-        patient.setPhoneNumber((Integer) adultPatient.get("phone"));
+        patient.setPhoneNumber((Long) adultPatient.get("phone"));
         patient.setDOB((Date) adultPatient.get("dob"));
         patient.setSSN((Integer) adultPatient.get("ssn"));
         patient.setDoctorId((Integer) adultPatient.get("doctorId"));
@@ -98,7 +98,7 @@ public class SystemAdminController implements AdminController{
         patient.setLastName((String) dependent.get("lastName"));
         patient.setPassword(((String) dependent.get("password")).hashCode());
         patient.setAddress((String) dependent.get("address"));
-        patient.setPhoneNumber((Integer) dependent.get("phone"));
+        patient.setPhoneNumber((Long) dependent.get("phone"));
         patient.setDOB((Date) dependent.get("dob"));
         patient.setSSN((Integer) dependent.get("ssn"));
         patient.setDoctorId((Integer) dependent.get("doctorId"));

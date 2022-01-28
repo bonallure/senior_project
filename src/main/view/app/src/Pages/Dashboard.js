@@ -2,10 +2,10 @@ import React from "react";
 import axios from "axios";
 import NavBarAuth from "../Components/NavBar/NavBarAuth";
 import Card from '@mui/material/Card';
-import { CardHeader, CardContent, Grid, Paper, Button } from "@mui/material";
+import { CardHeader, Paper, Button } from "@mui/material";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Box from "@mui/system";
+import Box from "@mui/material/Box";
 import BottomBar from "../Components/BottomBar";
 
 class Dashboard extends React.Component{
@@ -68,7 +68,6 @@ class Dashboard extends React.Component{
             <div>
                 <NavBarAuth/>
                 <Container maxWidth="xl" sx={{pt: 2}}>
-<<<<<<< HEAD
                     <Card sx={{ minWidth: 160, maxWidth:250 }}>
                         <CardHeader title="Prescriptions"/>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary">
@@ -97,7 +96,6 @@ class Dashboard extends React.Component{
                             </Paper>
                         ))}
                     </Paper>
-=======
                     <Typography sx={{ fontSize: 14 }} color="text.secondary">Hello Dr. </Typography>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary">Today is {new Date().toLocaleTimeString()}.</Typography>
                     <Button>Clock-In</Button>
@@ -152,7 +150,6 @@ class Dashboard extends React.Component{
                             </tr>
                         </table>
                     </div>
->>>>>>> 0a3140362e4bd9ae98f1d1ada134b94f8d3de99d
                 </Container>
                 <BottomBar/>
             </div>

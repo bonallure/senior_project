@@ -136,7 +136,7 @@ public class DependentDaoImpl implements DependentDao {
         dependent.setLastName(rs.getString("l_name"));
         dependent.setPassword(rs.getInt("password"));
         dependent.setAddress(rs.getString("address"));
-        dependent.setPhoneNumber(rs.getInt("phone"));
+        dependent.setPhoneNumber(rs.getLong("phone"));
         dependent.setDOB(rs.getDate("dob"));
         dependent.setSSN(rs.getInt("ssn"));
         dependent.setGuardianId(rs.getInt("guardian_id"));

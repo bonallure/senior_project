@@ -26,9 +26,9 @@ public interface User {
 
     void setPassword(int password);
 
-    int getPhoneNumber();
+    Long getPhoneNumber();
 
-    void setPhoneNumber(int number);
+    void setPhoneNumber(Long number);
 
     Date getDOB();
 

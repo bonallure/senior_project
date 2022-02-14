@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @SpringBootApplication
 public class PlatformApplication{
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(PlatformApplication.class);
+	public static final Logger LOGGER = LoggerFactory.getLogger(PlatformApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(PlatformApplication.class, args);

@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Date;
@@ -23,6 +25,8 @@ public class DoctorDaoImplTest {
 
     @Autowired
     protected DoctorDao dao;
+
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Before
     public void setUp() throws Exception {
@@ -49,7 +53,7 @@ public class DoctorDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey".hashCode());
+        doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
@@ -78,7 +82,7 @@ public class DoctorDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey".hashCode());
+        doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));

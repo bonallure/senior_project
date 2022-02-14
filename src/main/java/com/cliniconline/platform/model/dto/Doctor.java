@@ -11,7 +11,7 @@ public class Doctor implements User{
     private String email;
     private String firstName;
     private String lastName;
-    private int password;
+    private String password;
     private String address;
     private Long phoneNumber;
     private Date DOB;
@@ -33,8 +33,18 @@ public class Doctor implements User{
         this.email = email;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
+    }
+
+    @Override
+    public UserAuthority getUserAuthority() {
+        UserAuthority userAuthority = new UserAuthority();
+        userAuthority.setUsername(this.email);
+        userAuthority.setPassword(this.password);
+        userAuthority.setRole(this.role);
+
+        return userAuthority;
     }
 
     public void setDOB(Date DOB) {
@@ -42,12 +52,12 @@ public class Doctor implements User{
     }
 
     @Override
-    public void changePassword(int password) {
+    public void changePassword(String password) {
         setPassword(password);
     }
 
     @Override
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -114,12 +124,12 @@ public class Doctor implements User{
         Doctor doctor = (Doctor) o;
 
         if (id != doctor.id) return false;
-        if (password != doctor.password) return false;
-        if (phoneNumber != doctor.phoneNumber) return false;
         if (!email.equals(doctor.email)) return false;
         if (!firstName.equals(doctor.firstName)) return false;
         if (!lastName.equals(doctor.lastName)) return false;
+        if (!password.equals(doctor.password)) return false;
         if (!address.equals(doctor.address)) return false;
+        if (!phoneNumber.equals(doctor.phoneNumber)) return false;
         if (!DOB.equals(doctor.DOB)) return false;
         return role == doctor.role;
     }
@@ -130,7 +140,7 @@ public class Doctor implements User{
         result = 31 * result + email.hashCode();
         result = 31 * result + firstName.hashCode();
         result = 31 * result + lastName.hashCode();
-        result = 31 * result + password;
+        result = 31 * result + password.hashCode();
         result = 31 * result + address.hashCode();
         result = 31 * result + phoneNumber.hashCode();
         result = 31 * result + DOB.hashCode();

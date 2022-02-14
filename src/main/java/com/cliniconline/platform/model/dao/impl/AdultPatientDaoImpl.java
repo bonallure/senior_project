@@ -1,6 +1,7 @@
 package com.cliniconline.platform.model.dao.impl;
 
 import com.cliniconline.platform.model.dao.AdultPatientDao;
+import com.cliniconline.platform.model.dao.UserAuthorityDao;
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Dependent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,12 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
     // jdbctemplate
     private JdbcTemplate jdbcTemplate;
 
+    private UserAuthorityDao userAuthorityDao;
+
     @Autowired
-    public AdultPatientDaoImpl(JdbcTemplate jdbcTemplate) {
+    public AdultPatientDaoImpl(JdbcTemplate jdbcTemplate, UserAuthorityDao userAuthorityDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.userAuthorityDao = userAuthorityDao;
     }
 
     @Override
@@ -106,6 +110,8 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
         int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
         adultPatient.setId(id);
 
+        userAuthorityDao.createUserAuthority(adultPatient.getUserAuthority());
+
         return adultPatient;
     }
 
@@ -124,11 +130,14 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
                 adultPatient.getRole(),
                 adultPatient.getDoctorId(),
                 adultPatient.getId());
+
+        userAuthorityDao.updateUserAuthority(adultPatient.getUserAuthority());
     }
 
     @Override
     public void deleteAdultPatient(String email) {
 
+        userAuthorityDao.deleteUserAuthority(this.getPatient(email).getUserAuthority());
         jdbcTemplate.update(DELETE_ADULT_PATIENT_SQL, email);
     }
 
@@ -146,7 +155,7 @@ public class AdultPatientDaoImpl implements AdultPatientDao {
         adultPatient.setEmail(rs.getString("email"));
         adultPatient.setFirstName(rs.getString("f_name"));
         adultPatient.setLastName(rs.getString("l_name"));
-        adultPatient.setPassword(rs.getInt("password"));
+        adultPatient.setPassword(rs.getString("password"));
         adultPatient.setAddress(rs.getString("address"));
         adultPatient.setPhoneNumber(rs.getLong("phone"));
         adultPatient.setDOB(rs.getDate("dob"));

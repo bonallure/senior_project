@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { CookiesProvider} from "react-cookie";
 import Homepage from "./Pages/Homepage";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Appointment from "./Pages/Appointment";
@@ -104,6 +105,7 @@ export default class App extends Component{
 
     render() {
         return (
+            <CookiesProvider>
             <div>
                 <Router>
                     <Switch>
@@ -250,6 +252,7 @@ export default class App extends Component{
                     </Switch>
                 </Router>
             </div>
+            </CookiesProvider>
         )
     }
 }

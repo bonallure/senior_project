@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Date;
@@ -33,6 +35,8 @@ public class AppointmentDaoImplTest {
 
     @Autowired
     protected AppointmentDao dao;
+
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Before
     public void setUp() throws Exception {
@@ -69,7 +73,7 @@ note mediumtext
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey".hashCode());
+        doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
@@ -82,7 +86,7 @@ note mediumtext
         patient.setEmail("patient@clinic1.com");
         patient.setFirstName("Malcolm");
         patient.setLastName("Ex");
-        patient.setPassword("Mal.Com.Ex".hashCode());
+        patient.setPassword(passwordEncoder.encode("Mal.Com.Ex"));
         patient.setAddress("address 14");
         patient.setPhoneNumber(1234563890L);
         patient.setDOB(Date.valueOf("1989-03-23"));
@@ -139,7 +143,7 @@ note mediumtext
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey".hashCode());
+        doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
@@ -152,7 +156,7 @@ note mediumtext
         patient.setEmail("patient@clinic1.com");
         patient.setFirstName("Malcolm");
         patient.setLastName("Ex");
-        patient.setPassword("Mal.Com.Ex".hashCode());
+        patient.setPassword(passwordEncoder.encode("Mal.Com.Ex"));
         patient.setAddress("address 14");
         patient.setPhoneNumber(1234563890L);
         patient.setDOB(Date.valueOf("1989-03-23"));

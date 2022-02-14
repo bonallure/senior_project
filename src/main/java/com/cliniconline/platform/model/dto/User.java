@@ -1,7 +1,6 @@
 package com.cliniconline.platform.model.dto;
 
 import java.sql.Date;
-import java.util.Set;
 
 /**
  * Created by bonallure on 10/8/21
@@ -22,9 +21,9 @@ public interface User {
 
     void setAddress(String address);
 
-    void changePassword(int password);
+    void changePassword(String password);
 
-    void setPassword(int password);
+    void setPassword(String password);
 
     Long getPhoneNumber();
 
@@ -36,5 +35,7 @@ public interface User {
 
     String getEmail();
 
-    int getPassword();
+    String getPassword();
+
+    UserAuthority getUserAuthority();
 }

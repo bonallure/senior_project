@@ -1,6 +1,8 @@
 package com.cliniconline.platform.model.dao.impl;
 
+import com.cliniconline.platform.PlatformApplication;
 import com.cliniconline.platform.model.dao.DoctorDao;
+import com.cliniconline.platform.model.dao.UserAuthorityDao;
 import com.cliniconline.platform.model.dto.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -40,11 +42,14 @@ public class DoctorDaoImpl implements DoctorDao {
     // jdbctemplate
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    public DoctorDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    // userAuthorityDao
+    private UserAuthorityDao userAuthorityDao;
 
+    @Autowired
+    public DoctorDaoImpl(JdbcTemplate jdbcTemplate, UserAuthorityDao userAuthorityDao) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.userAuthorityDao = userAuthorityDao;
+    }
 
     @Override
     public Doctor addDoctor(Doctor doctor) {
@@ -61,6 +66,8 @@ public class DoctorDaoImpl implements DoctorDao {
         int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
         doctor.setId(id);
 
+        userAuthorityDao.createUserAuthority(doctor.getUserAuthority());
+
         return doctor;
     }
 
@@ -76,10 +83,13 @@ public class DoctorDaoImpl implements DoctorDao {
                 doctor.getDOB(),
                 doctor.getRole(),
                 doctor.getId());
+
+        userAuthorityDao.updateUserAuthority(doctor.getUserAuthority());
     }
 
     @Override
     public void deleteDoctor(int doctorId) {
+        userAuthorityDao.deleteUserAuthority(this.getDoctor(doctorId).getUserAuthority());
         jdbcTemplate.update(DELETE_DOCTOR_SQL, doctorId);
     }
 
@@ -101,6 +111,7 @@ public class DoctorDaoImpl implements DoctorDao {
         }
         catch (EmptyResultDataAccessException e)
         {
+            PlatformApplication.LOGGER.error(e.toString());
             return null;
         }
     }
@@ -118,7 +129,7 @@ public class DoctorDaoImpl implements DoctorDao {
         doctor.setEmail(rs.getString("email"));
         doctor.setFirstName(rs.getString("f_name"));
         doctor.setLastName(rs.getString("l_name"));
-        doctor.setPassword(rs.getInt("password"));
+        doctor.setPassword(rs.getString("password"));
         doctor.setPhoneNumber(rs.getLong("phone"));
         doctor.setAddress(rs.getString("address"));
         doctor.setDOB(rs.getDate("dob"));

@@ -1,6 +1,9 @@
 package com.cliniconline.platform.model.dto;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created by bonallure on 10/9/21
@@ -24,8 +27,9 @@ public class Dependent extends Patient implements User{
     }
 
     public boolean isAdult(){
-        Calendar ageOfMaturity = (Calendar) getDOB().clone();
-        ageOfMaturity.add(Calendar.YEAR, -18);
+        LocalDate localDate = getDOB().toLocalDate();
+        Calendar ageOfMaturity = new GregorianCalendar(localDate.getYear() + 18, localDate.getMonthValue(),
+                localDate.getDayOfMonth());
 
         return ageOfMaturity.before(Calendar.getInstance());
     }

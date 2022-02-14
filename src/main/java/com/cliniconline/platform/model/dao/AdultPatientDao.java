@@ -2,6 +2,7 @@ package com.cliniconline.platform.model.dao;
 
 import com.cliniconline.platform.model.dto.AdultPatient;
 import com.cliniconline.platform.model.dto.Dependent;
+import com.cliniconline.platform.model.dto.UserAuthority;
 
 import java.util.List;
 

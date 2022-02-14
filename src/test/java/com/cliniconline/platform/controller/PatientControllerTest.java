@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -43,6 +45,7 @@ public class PatientControllerTest {
     // ObjectMapper used to convert Java objects to JSON and vice versa
     private ObjectMapper mapper = new ObjectMapper();
 
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     // Testing GET /patient/login
     @Test
@@ -50,7 +53,7 @@ public class PatientControllerTest {
         // ARRANGE
         AdultPatient patient = new AdultPatient();
         String email = "patient@clinic1.com";
-        int password = "New/Password".hashCode();
+        String password = passwordEncoder.encode("New/Password");
         patient.setEmail(email);
         patient.setPassword(password);
 

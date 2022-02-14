@@ -11,11 +11,11 @@ public abstract class Patient implements User{
     private String email;
     private String firstName;
     private String lastName;
-    private int password;
+    private String password;
     private String address;
     private Long phoneNumber;
     private Date DOB;
-    private int SSN;
+    private Long SSN;
     protected final Role role = Role.PATIENT;
     private int doctorId;
 
@@ -55,12 +55,12 @@ public abstract class Patient implements User{
     }
 
     @Override
-    public void changePassword(int password) {
+    public void changePassword(String password) {
         this.password = password;
     }
 
     @Override
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -74,7 +74,7 @@ public abstract class Patient implements User{
         phoneNumber = number;
     }
 
-    public int getSSN() {
+    public Long getSSN() {
         return SSN;
     }
 
@@ -92,7 +92,7 @@ public abstract class Patient implements User{
         this.email = email;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -103,7 +103,6 @@ public abstract class Patient implements User{
     public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
-
 
     public String getRole() {
         return role.toString();
@@ -117,8 +116,18 @@ public abstract class Patient implements User{
         this.DOB = DOB;
     }
 
-    public void setSSN(int SSN) {
+    public void setSSN(Long SSN) {
         this.SSN = SSN;
+    }
+
+    @Override
+    public UserAuthority getUserAuthority() {
+        UserAuthority userAuthority = new UserAuthority();
+        userAuthority.setUsername(this.email);
+        userAuthority.setPassword(this.password);
+        userAuthority.setRole(this.role);
+
+        return userAuthority;
     }
 
     @Override
@@ -129,15 +138,15 @@ public abstract class Patient implements User{
         Patient patient = (Patient) o;
 
         if (id != patient.id) return false;
-        if (password != patient.password) return false;
-        if (phoneNumber != patient.phoneNumber) return false;
-        if (SSN != patient.SSN) return false;
         if (doctorId != patient.doctorId) return false;
         if (!email.equals(patient.email)) return false;
         if (!firstName.equals(patient.firstName)) return false;
         if (!lastName.equals(patient.lastName)) return false;
+        if (!password.equals(patient.password)) return false;
         if (!address.equals(patient.address)) return false;
+        if (!phoneNumber.equals(patient.phoneNumber)) return false;
         if (!DOB.equals(patient.DOB)) return false;
+        if (!SSN.equals(patient.SSN)) return false;
         return role == patient.role;
     }
 
@@ -147,11 +156,11 @@ public abstract class Patient implements User{
         result = 31 * result + email.hashCode();
         result = 31 * result + firstName.hashCode();
         result = 31 * result + lastName.hashCode();
-        result = 31 * result + password;
+        result = 31 * result + password.hashCode();
         result = 31 * result + address.hashCode();
         result = 31 * result + phoneNumber.hashCode();
         result = 31 * result + DOB.hashCode();
-        result = 31 * result + SSN;
+        result = 31 * result + SSN.hashCode();
         result = 31 * result + role.hashCode();
         result = 31 * result + doctorId;
         return result;

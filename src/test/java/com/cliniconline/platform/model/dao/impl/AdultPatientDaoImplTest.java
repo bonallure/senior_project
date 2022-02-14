@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Date;
@@ -21,6 +22,9 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class AdultPatientDaoImplTest {
+
+    @Autowired
+    protected PasswordEncoder passwordEncoder;
 
     @Autowired
     protected AdultPatientDao dao;
@@ -61,7 +65,7 @@ public class AdultPatientDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey".hashCode());
+        doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
@@ -74,11 +78,11 @@ public class AdultPatientDaoImplTest {
         patient.setEmail("patient@clinic1.com");
         patient.setFirstName("Malcolm");
         patient.setLastName("Ex");
-        patient.setPassword("Mal.Com.Ex".hashCode());
+        patient.setPassword(passwordEncoder.encode("Mal.Com.Ex"));
         patient.setAddress("address 14");
         patient.setPhoneNumber(1234563890L);
         patient.setDOB(Date.valueOf("1989-03-23"));
-        patient.setSSN(12345678);
+        patient.setSSN(12345678L);
         patient.setDoctorId(doctor.getId());
 
         // Act
@@ -87,6 +91,9 @@ public class AdultPatientDaoImplTest {
         AdultPatient patient1 = dao.getPatient(patient.getEmail());
 
         // Assert the added patient is equal to the patient received
+        System.out.println(patient.getPassword());
+        System.out.println(patient1.getPassword());
+        System.out.println("--------------------------------------");
         assertEquals(patient, patient1);
 
         // Act (delete)
@@ -104,7 +111,7 @@ public class AdultPatientDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey".hashCode());
+        doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
@@ -117,11 +124,11 @@ public class AdultPatientDaoImplTest {
         patient.setEmail("patient@clinic1.com");
         patient.setFirstName("Malcolm");
         patient.setLastName("Ex");
-        patient.setPassword("Mal.Com.Ex".hashCode());
+        patient.setPassword(passwordEncoder.encode("Mal.Com.Ex"));
         patient.setAddress("address 14");
         patient.setPhoneNumber(1234563890L);
         patient.setDOB(Date.valueOf("1989-03-23"));
-        patient.setSSN(12345678);
+        patient.setSSN(12345678L);
         patient.setDoctorId(doctor.getId());
 
         // Act
@@ -131,7 +138,7 @@ public class AdultPatientDaoImplTest {
         assertEquals(patient, patient1);
 
         // Arrange
-        patient.changePassword("New/Password".hashCode());
+        patient.changePassword(passwordEncoder.encode("New/Password"));
 
         // Act
         dao.updateAdultPatient(patient);
@@ -150,7 +157,7 @@ public class AdultPatientDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey".hashCode());
+        doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
@@ -163,11 +170,11 @@ public class AdultPatientDaoImplTest {
         patient.setEmail("patient@clinic1.com");
         patient.setFirstName("Malcolm");
         patient.setLastName("Ex");
-        patient.setPassword("Mal.Com.Ex".hashCode());
+        patient.setPassword(passwordEncoder.encode("Mal.Com.Ex"));
         patient.setAddress("address 14");
         patient.setPhoneNumber(1234563890L);
         patient.setDOB(Date.valueOf("1989-03-23"));
-        patient.setSSN(12345678);
+        patient.setSSN(12345678L);
         patient.setDoctorId(doctor.getId());
 
         // Act

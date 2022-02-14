@@ -3,25 +3,31 @@ import NavBar from "../Components/NavBar/NavBar";
 import "./homepage.css"
 import Button from '@mui/material/Button';
 import BottomBar from "../Components/BottomBar";
+import { withCookies } from 'react-cookie';
 
 class Homepage extends React.Component{
     // declaring state
     state = {
-        isLoggedIn: "",
-        password: ''
+        isLoggedIn: false,
+        password: '',
+        user: undefined
     }
+
     loginPatient = (e) => {
         e.preventDefault();
         this.props.history.push("/patient/login")
     }
+
     loginDoctor = (e) => {
         e.preventDefault();
         this.props.history.push("/doctor/login")
     }
+
     registerPatient = (e) => {
         e.preventDefault();
         this.props.history.push("/patient/register")
     }
+    
     registerDoctor = (e) => {
         e.preventDefault();
         this.props.history.push("/doctor/register")

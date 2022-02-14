@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Date;
@@ -33,6 +35,8 @@ public class DependentDaoImplTest {
 
     @Autowired
     protected DependentDao dao;
+
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Before
     public void setUp() throws Exception {
@@ -73,7 +77,7 @@ public class DependentDaoImplTest {
             doctor.setFirstName("John");
             doctor.setLastName("Grey");
             doctor.setEmail("jgrey@clinic1.com");
-            doctor.setPassword("Doc.John.Grey".hashCode());
+            doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
             doctor.setAddress("address 1");
             doctor.setPhoneNumber(1234567890L);
             doctor.setDOB(Date.valueOf("1987-03-13"));
@@ -86,11 +90,11 @@ public class DependentDaoImplTest {
             patient.setEmail("patient@clinic1.com");
             patient.setFirstName("Malcolm");
             patient.setLastName("Ex");
-            patient.setPassword("Mal.Com.Ex".hashCode());
+            patient.setPassword(passwordEncoder.encode("Mal.Com.Ex"));
             patient.setAddress("address 14");
             patient.setPhoneNumber(1234563890L);
             patient.setDOB(Date.valueOf("1989-03-23"));
-            patient.setSSN(12345678);
+            patient.setSSN(12345678L);
             patient.setDoctorId(doctor.getId());
 
             // Act
@@ -105,7 +109,7 @@ public class DependentDaoImplTest {
             dependent.setAddress("address 4");
             dependent.setPhoneNumber(patient.getPhoneNumber());
             dependent.setDOB(Date.valueOf("2008-09-14"));
-            dependent.setSSN(44786539);
+            dependent.setSSN(44786539L);
             dependent.setGuardianId(patient.getId());
             dependent.setDoctorId(doctor.getId());
 
@@ -141,7 +145,7 @@ public class DependentDaoImplTest {
         doctor.setFirstName("John");
         doctor.setLastName("Grey");
         doctor.setEmail("jgrey@clinic1.com");
-        doctor.setPassword("Doc.John.Grey".hashCode());
+        doctor.setPassword(passwordEncoder.encode("Doc.John.Grey"));
         doctor.setAddress("address 1");
         doctor.setPhoneNumber(1234567890L);
         doctor.setDOB(Date.valueOf("1987-03-13"));
@@ -154,11 +158,11 @@ public class DependentDaoImplTest {
         patient.setEmail("patient@clinic1.com");
         patient.setFirstName("Malcolm");
         patient.setLastName("Ex");
-        patient.setPassword("Mal.Com.Ex".hashCode());
+        patient.setPassword(passwordEncoder.encode("Mal.Com.Ex"));
         patient.setAddress("address 14");
         patient.setPhoneNumber(1234563890L);
         patient.setDOB(Date.valueOf("1989-03-23"));
-        patient.setSSN(12345678);
+        patient.setSSN(12345678L);
         patient.setDoctorId(doctor.getId());
 
         // Act
@@ -173,7 +177,7 @@ public class DependentDaoImplTest {
         dependent.setAddress("address 4");
         dependent.setPhoneNumber(patient.getPhoneNumber());
         dependent.setDOB(Date.valueOf("2008-09-14"));
-        dependent.setSSN(44786539);
+        dependent.setSSN(44786539L);
         dependent.setGuardianId(patient.getId());
         dependent.setDoctorId(doctor.getId());
 

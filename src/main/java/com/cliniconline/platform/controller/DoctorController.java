@@ -1,54 +1,69 @@
 package com.cliniconline.platform.controller;
 
+import com.cliniconline.platform.PlatformApplication;
 import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
 import com.cliniconline.platform.model.viewmodel.DoctorViewModel;
-import com.cliniconline.platform.model.viewmodel.PatientViewModel;
 import com.cliniconline.platform.service.DoctorServiceLayer;
-import com.cliniconline.platform.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * Created by bonallure on 10/25/21
  */
 @RestController
 @CrossOrigin
-public class DoctorController implements UserController{
+public class DoctorController implements UserControllers {
+
+    public class Shift{
+        private boolean onShift;
+        private Date time;
+    }
 
     private final Role ROLE = Role.DOCTOR;
 
     @Autowired
     protected DoctorDao doctorDao;
+
     @Autowired
     protected AdultPatientDao adultPatientDao;
+
     @Autowired
     protected DependentDao dependentDao;
+
     @Autowired
     protected MessageDao messageDao;
+
     @Autowired
     protected AppointmentDao appointmentDao;
+
     @Autowired
     protected PrescriptionDao prescriptionDao;
+
     @Autowired
     protected DoctorServiceLayer serviceLayer;
 
-    @RequestMapping(value = "/doctor/login", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @RequestMapping(value = "/doctor/login/{email}", method = RequestMethod.GET)
     @Override
-    public DoctorViewModel login(@RequestBody Map doctor) {
-        Doctor doctor1 = doctorDao.getDoctorByEmail((String) doctor.get("email"));
-        int hashedPassword = doctor.get("password").hashCode();
-
-        boolean isAuthenticated = doctor1.getPassword() == hashedPassword;
-
-        return isAuthenticated ? serviceLayer.findDoctor(doctor1.getId()) : null;
+    public ResponseEntity<Object> login(@PathVariable String email) {
+        Doctor doctor = doctorDao.getDoctorByEmail(email);
+        PlatformApplication.LOGGER.info(email+ " has logged in");
+        return new ResponseEntity<>(doctor, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/account/{email}", method = RequestMethod.GET)
@@ -56,12 +71,6 @@ public class DoctorController implements UserController{
     @Override
     public User viewAccount(@PathVariable String email) {
         return doctorDao.getDoctorByEmail(email);
-    }
-
-    @RequestMapping(value = "/doctor/{id}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.FOUND)
-    public User getDoctor(@PathVariable int id) {
-        return doctorDao.getDoctor(id);
     }
 
     @RequestMapping(value = "/doctor/patients/{doctorId}", method = RequestMethod.GET)

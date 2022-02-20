@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../Components/NavBar/NavBar";
-import "./homepage.css"
+import "../CSS/homepage.css"
 import Button from '@mui/material/Button';
 import BottomBar from "../Components/BottomBar";
 import { withCookies } from 'react-cookie';

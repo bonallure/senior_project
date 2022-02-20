@@ -3,15 +3,15 @@ import { CookiesProvider} from "react-cookie";
 import Homepage from "./Pages/Homepage";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Appointment from "./Pages/Appointment";
-import Registration from "./Pages/Registration/Registration";
+import Registration from "./Pages/Registration";
 import axios from "axios";
 import Message from "./Pages/Message";
 import Calendar from "./Pages/Calendar";
-import PatientLogin from "./Pages/Login/PatientLogin";
-import AdminLogin from "./Pages/Login/AdminLogin";
+import PatientLogin from "./Pages/PatientLogin";
+import AdminLogin from "./Pages/AdminLogin";
 import AppointmentForm from "./Pages/AppointmentForm";
 import Dashboard from "./Pages/Dashboard";
-import DoctorLogin from "./Pages/Login/DoctorLogin";
+import DoctorLogin from "./Pages/DoctorLogin";
 
 
 export default class App extends Component{

@@ -1,10 +1,10 @@
 import axios from "axios"
 import React from "react";
-import NavBar from "../../Components/NavBar/NavBar";
-import "./doctorLogin.css"
-import BottomBar from "../../Components/BottomBar";
+import NavBar from "../Components/NavBar/NavBar";
+import "../CSS/doctorLogin.css"
+import BottomBar from "../Components/BottomBar";
 import {Button, TextField} from "@mui/material";
-import DoctorNavBar from "../../Components/NavBar/DoctorNavBar";
+import DoctorNavBar from "../Components/NavBar/DoctorNavBar";
 import {Link} from "@material-ui/core";
 import {withCookies} from "react-cookie";
 import Container from "@mui/material/Container";

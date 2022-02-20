@@ -6,7 +6,7 @@ import { CardHeader, Paper, Button } from "@mui/material";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
-import BottomBar from "../Components/BottomBar";
+import Footer from "../Components/Footer";
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -151,7 +151,7 @@ class Dashboard extends React.Component{
                         </table>
                     </div>
                 </Container>
-                <BottomBar/>
+                <Footer/>
             </div>
         )
     }

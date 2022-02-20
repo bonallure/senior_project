@@ -2,7 +2,7 @@ import axios from "axios"
 import React from "react";
 import NavBar from "../Components/NavBar/NavBar";
 import "../CSS/doctorLogin.css"
-import BottomBar from "../Components/BottomBar";
+import Footer from "../Components/Footer";
 import {Button, TextField} from "@mui/material";
 import DoctorNavBar from "../Components/NavBar/DoctorNavBar";
 import {Link} from "@material-ui/core";
@@ -120,7 +120,7 @@ class DoctorLogin extends React.Component{
                         </form>
                     </div>
                 </section>
-                <BottomBar/>
+                <Footer/>
             </div>
         )
     }

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
-import "./navBar.css"
+import "../../CSS/navBar.css"
 
 export default function DoctorNavBar() {
 

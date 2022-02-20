@@ -1,8 +1,8 @@
 import React from "react";
 import NavBar from "../Components/NavBar/NavBar";
-import "./homepage.css"
+import "../CSS/homepage.css"
 import Button from '@mui/material/Button';
-import BottomBar from "../Components/BottomBar";
+import Footer from "../Components/Footer";
 import { withCookies } from 'react-cookie';
 
 class Homepage extends React.Component{
@@ -64,7 +64,7 @@ class Homepage extends React.Component{
                         </div>
                     </div>
                 </section>
-                <BottomBar/>
+                <Footer/>
             </div>
         );
     };

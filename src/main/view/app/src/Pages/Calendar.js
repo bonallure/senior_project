@@ -12,8 +12,7 @@ class Calendar extends React.Component {
         super(props)
         this.state = {
             userId: "",
-            date: useState(new Date()),
-            changeDate: useState(new Date())
+            date: null
         }
         this.state.userId = props.userId;
     }
@@ -24,6 +23,12 @@ class Calendar extends React.Component {
     }
 
     render() {
+        function changeDate(newValue) {
+            this.date = newValue;
+        }
+
+        const today = new Date();
+
         return (
             <div>
                 <NavBarAuth />
@@ -32,10 +37,14 @@ class Calendar extends React.Component {
                         <StaticDatePicker
                             orientation="landscape"
                             openTo="day"
-                            value={date}
+                            value={today}
                             shouldDisableDate={isWeekend}
-                            onChange={changeDate}
-                            renderInput={(params) => <TextField {...params} />}
+                            onChange={(newValue) => {
+                                changeDate(newValue);
+                            }}
+                            renderInput={(params) => (
+                                <TextField {...params} helperText={params?.inputProps?.placeholder} />
+                            )}
                         />
                     </LocalizationProvider>
                 </Container>

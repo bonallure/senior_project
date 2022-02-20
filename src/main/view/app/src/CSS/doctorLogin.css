@@ -14,7 +14,7 @@ body {
     font-family: sans-serif;
 }
 .doctorSection {
-    background-image : url("../Images/best-online-therapy_cover-image.webp");
+    background-image : url("../Components/Images/best-online-therapy_cover-image.webp");
     height: 90vh;
     display: flex;
     text-align: center;

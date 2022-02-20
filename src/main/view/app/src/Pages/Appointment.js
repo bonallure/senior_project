@@ -5,11 +5,18 @@ import { Grid, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import {withCookies} from "react-cookie";
 
 
 class Appointment extends React.Component{
+    state = {
+        user: undefined
+    }
+
     constructor(props) {
         super(props);
+        const {cookies} = props;
+        this.state.csrfToken = cookies.get('XSRF-TOKEN');
         this.state = {
             userId: props.userId,
             appointments: [],
@@ -101,4 +108,4 @@ class Appointment extends React.Component{
     }
 }
 
-export default Appointment;
+export default withCookies(Appointment);

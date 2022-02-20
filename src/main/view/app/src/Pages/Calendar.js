@@ -1,38 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBarAuth from "../Components/NavBar/NavBarAuth";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import isWeekend from 'date-fns/isWeekend';
 import TextField from '@mui/material/TextField';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
-import { Container } from "@mui/material";
+import { Container, Paper } from "@mui/material";
 
-class Calendar extends React.Component{
-    constructor(props){
+class Calendar extends React.Component {
+    constructor(props) {
         super(props)
         this.state = {
             userId: "",
-            date: new Date()
+            date: useState(new Date()),
+            changeDate: useState(new Date())
         }
         this.state.userId = props.userId;
     }
 
     //onClick open appointment request
+    handleClick() {
+        alert('Appointment')
+    }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <NavBarAuth/>
+                <NavBarAuth />
                 <Container>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <StaticDatePicker
                             orientation="landscape"
                             openTo="day"
-                            value={this.state.date}
+                            value={date}
                             shouldDisableDate={isWeekend}
-                            // onChange={(newValue) => {
-                            //     setValue(newValue);
-                            // }}
+                            onChange={changeDate}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>

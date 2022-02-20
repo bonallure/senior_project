@@ -18,6 +18,9 @@ class Calendar extends React.Component{
     }
 
     //onClick open appointment request
+    handleClick(){
+        alert('Appointment')
+    }
 
     render(){
         return(
@@ -33,9 +36,13 @@ class Calendar extends React.Component{
                             // onChange={(newValue) => {
                             //     setValue(newValue);
                             // }}
+                            onclick={this.handleClick}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>
+                </Container>
+                <Container id="appointment">
+
                 </Container>
             </div>
         )

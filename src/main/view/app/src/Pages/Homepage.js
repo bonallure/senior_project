@@ -37,34 +37,32 @@ class Homepage extends React.Component{
         this.props.history.push("/doctor/register")
     };
 
-    imgStyle = {
-        maxWidth: "100%",
-        maxHeight: "100%",
-        display: "block" /* remove extra space below image */
-    };
-
-    styledBackground = styled(Background, this.imgStyle);
-
     render(){
 
         const leftPaperStyle={
             backgroundColor: "transparent",
-            width: 900,
-            maxWidth: '45%',
+            width: 650,
+            // maxWidth: '45%',
             height: 500,
-            position: "static",
-            alignSelf: "left"
+            alignSelf: "left",
+            position: "relative",
+            right: 300,
+            left: 10
         };
 
         const rightPaperStyle={
             backgroundColor: "transparent",
-            maxWidth: '45%',
+            width: 400,
+            // maxWidth: '45%',
             height: 500,
             textAlign: 'center',
             alignContent: 'center',
             alignItems: 'center',
             marginRight: 5,
-            marginLeft: 5
+            marginLeft: 5,
+            position: "relative",
+            right: 10,
+            left: 100
         };
 
         const containerStyle = {

@@ -89,11 +89,11 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--<plugin>
+			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				&lt;!&ndash; Use the latest released version:
-                https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/ &ndash;&gt;
+				<!-- Use the latest released version:
+                https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/ -->
 				<version>1.12.1</version>
 				<configuration>
 					<workingDirectory>src/main/view/app</workingDirectory>
@@ -105,7 +105,7 @@
 							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
-							&lt;!&ndash; See https://nodejs.org/en/download/ for latest node and npm (lts) versions &ndash;&gt;
+							<!-- See https://nodejs.org/en/download/ for latest node and npm (lts) versions -->
 							<nodeVersion>v16.3.0</nodeVersion>
 							<npmVersion>8.5.0</npmVersion>
 						</configuration>
@@ -123,7 +123,7 @@
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>install &#45;&#45;save-dev @babel/core</arguments>
+							<arguments>install --save-dev @babel/core</arguments>
 						</configuration>
 					</execution>
 					<execution>
@@ -136,7 +136,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 		</plugins>
 	</build>
 </project>

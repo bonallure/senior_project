@@ -12,6 +12,7 @@ import Footer from "../Components/Footer";
 
 class Appointment extends React.Component{
     state = {
+        isAuthenticated: true,
         user: undefined
     }
 
@@ -20,9 +21,9 @@ class Appointment extends React.Component{
         const {cookies} = props;
         this.state.csrfToken = cookies.get('XSRF-TOKEN');
         this.state = {
-            userId: props.userId,
-            appointments: [],
-            doctorName: ""
+            user: props.user,
+            appointments: user.appointments,
+            doctorName: user.name
         }
     }
 
@@ -45,7 +46,7 @@ class Appointment extends React.Component{
 
     getAllPatientAppointments() {
         console.log(this.state)
-        const url = "http://localhost:8080/patient/appointments/" + this.state.userId
+        const url = "http://localhost:8080/doctor/appointments/" + this.state.user.id
         console.log(url)
         axios.get(url)
             .then(response =>{

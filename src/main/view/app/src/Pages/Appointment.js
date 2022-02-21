@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import {withCookies} from "react-cookie";
+import "../CSS/appointment.css"
+import Footer from "../Components/Footer";
 
 
 class Appointment extends React.Component{
@@ -77,32 +79,39 @@ class Appointment extends React.Component{
             <div>
                 <NavBarAuth/>
                 <div className = "Appointment">
-                    <Box sx={{pt: 2, textAlign: 'right'}}> 
+                    <Box sx={{pt: 2, pr: 2, textAlign: 'right'}}> 
                         <Button variant="contained"  onClick={this.onClick}>New Appointment</Button>
                     </Box>
                     <Container maxWidth="xl">
-                        <p style = {{textAlign: "left"}}> Upcoming Appointments </p>
+                        <p style = {{textAlign: "left", color: "white"}}> Upcoming Appointments </p>
                         <div className = "CurrentAppt">
                             <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
                                 {this.state.appointments.map(appointment =>(
                                     <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
-                                        {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
+                                        Date: {appointment.date} 
+                                        Reason: {appointment.type} 
+                                        Physician:  {appointment.doctorId}
+                                        Link: {appointment.link}
                                     </Paper>
                                 ))}
                             </Paper>
                         </div>
-                        <p style = {{textAlign: "left"}}> Past Appointments </p>
+                        <p style = {{textAlign: "left", color: "white", position: "relative"}}> Past Appointments </p>
                         <div className = "CurrentAppt">
-                            <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
+                            <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto", position: "relative"}}>
                                 {this.state.appointments.map(appointment =>(
                                     <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
-                                        {appointment.date}, {appointment.type}, with Doctor whose Id is {appointment.doctorId}
+                                        Date: {appointment.date} 
+                                        Reason: {appointment.type} 
+                                        Physician: {appointment.doctorId}
+                                        Notes: {appointment.note}
                                     </Paper>
                                 ))}
                             </Paper>
                         </div>
                     </Container>
                 </div>
+                <Footer/>
             </div>
         )
     }

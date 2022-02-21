@@ -10,10 +10,18 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Container from '@mui/material/Container';
 
 export default function NavBarAuth() {
+
+  const toolbarStyle = {
+    background: "lightgray",
+    left: 0,
+    bottom: 0,
+    width: "100%"
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" elevation={0}>
-        <Toolbar>
+        <Toolbar sx={toolbarStyle}>
           <IconButton size="xlarge" edge="start" color="inherit" aria-label="home">
             <HomeIcon onClick={(e) => {
               e.preventDefault();

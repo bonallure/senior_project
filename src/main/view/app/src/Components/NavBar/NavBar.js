@@ -10,11 +10,21 @@ import "../../CSS/navBar.css"
 
 export default function NavBar() {
 
+    const toolbarStyle = {
+        alignItems: 'flex-start',
+        background: "rgba(82,107,190,0.87)",
+        paddingTop: 10,
+        paddingBottom: 3,
+        // Override media queries injected by theme.mixins.toolbar
+        '@media all': {
+        minHeight: 128,
+        }
+    }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar style={{background: "rgba(82,107,190,0.87)"}}>
+      <AppBar position="fixed">
+        <Toolbar style={toolbarStyle}>
           <IconButton
             size="large"
             edge="start"

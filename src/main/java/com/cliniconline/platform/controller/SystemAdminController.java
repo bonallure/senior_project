@@ -98,19 +98,6 @@ public class SystemAdminController implements AdminController{
         Doctor result = serviceLayer.saveDoctor(doctor);
         return ResponseEntity.created(new URI("/admin/doctor/" + result.getId()))
                 .body(result);
-        // ---- old code below
-//        Doctor newDoctor = new Doctor();
-//        String password = (String) doctor.get("password");
-//        String encryptedPassword = passwordEncoder.encode(password);
-//
-//        newDoctor.setEmail((String) doctor.get("email"));
-//        newDoctor.setFirstName((String) doctor.get("firstName"));
-//        newDoctor.setLastName((String) doctor.get("lastName"));
-//        newDoctor.setPassword(encryptedPassword);
-//        newDoctor.setPhoneNumber(Long.valueOf((String) doctor.get("phone")));
-//        newDoctor.setDOB(Date.valueOf((String) doctor.get("dob")));
-//        newDoctor.setAddress((String) doctor.get("dob"));
-//        return serviceLayer.saveDoctor(newDoctor);
     }
 
     // GET ALL DOCTORS

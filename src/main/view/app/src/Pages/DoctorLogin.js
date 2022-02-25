@@ -83,7 +83,7 @@ class DoctorLogin extends React.Component{
 
     render(){
 
-        const errorMessage = this.message
+        const errorMessage = this.message;
 
         return(
             <div>

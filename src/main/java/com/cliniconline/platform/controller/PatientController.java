@@ -1,9 +1,10 @@
 package com.cliniconline.platform.controller;
 
+import com.cliniconline.platform.PlatformApplication;
 import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
-import com.cliniconline.platform.service.PatientServiceLayer;
 import com.cliniconline.platform.model.viewmodel.PatientViewModel;
+import com.cliniconline.platform.service.PatientServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -53,20 +53,22 @@ public class PatientController implements UserControllers {
     @RequestMapping(value = "/patient/login/{email}", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @Override
-    public ResponseEntity<User> login(@PathVariable String email) {
+    public ResponseEntity<Object> login(@PathVariable String email) {
         AdultPatient adultPatient = adultPatientDao.getPatient("email");
+        PatientViewModel viewModel = patientServiceLayer.findPatient(adultPatient.getId());
 
-            return ResponseEntity.ok().body(adultPatient);
+        return new ResponseEntity<>(viewModel, HttpStatus.OK);
     }
 
 
     @RequestMapping(value = "/patient/account/{email}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
-    public User viewAccount(@PathVariable String email) {
+    public ResponseEntity<Object> viewAccount(@PathVariable String email) {
+        Patient patient =  adultPatientDao.getPatient(email);
+        PlatformApplication.LOGGER.info(email, " requested their account information");
 
-        // System.out.println(email);
-        return adultPatientDao.getPatient(email);
+        return new ResponseEntity<>(patient, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/dependents/{adultPatientId}", method = RequestMethod.GET)
@@ -78,43 +80,52 @@ public class PatientController implements UserControllers {
     @RequestMapping(value = "/patient/message", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
-    public Message sendMessage(@RequestBody Message message) {
-        return messageDao.addMessage(message);
+    public ResponseEntity<Object> sendMessage(@RequestBody Message message) {
+        return new ResponseEntity<>(messageDao.addMessage(message), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/message/{messageId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
-    public Message viewMessage(@PathVariable int messageId) {
-        return messageDao.getMessage(messageId);
+    public ResponseEntity<Object> viewMessage(@PathVariable int messageId) {
+
+        return new ResponseEntity<>(messageDao.getMessage(messageId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/messages/inbox/{patientId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
-    public Set<Message> viewInbox(@PathVariable int patientId) {
-        return new HashSet<>(messageDao.getPatientInbox(patientId));
+    public ResponseEntity<Object> viewInbox(@PathVariable int patientId) {
+        Set<Message> inbox = new HashSet<>(messageDao.getPatientInbox(patientId));
+
+        return new ResponseEntity<>(inbox, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/messages/outbox/{patientId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
-    public Set<Message> viewOutbox(@PathVariable int patientId) {
-        return new HashSet<>(messageDao.getPatientOutbox(patientId));
+    public ResponseEntity<Object> viewOutbox(@PathVariable int patientId) {
+        Set<Message> outbox =  new HashSet<>(messageDao.getPatientOutbox(patientId));
+
+        return new ResponseEntity<>(outbox, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/appointments/{patientId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
-    public Set<Appointment> viewAppointments(@PathVariable int patientId) {
-        return new HashSet<>(appointmentDao.getAllAppointmentsPerPatient(patientId));
+    public ResponseEntity<Object> viewAppointments(@PathVariable int patientId) {
+        Set<Appointment> appointments = new HashSet<>(appointmentDao.getAllAppointmentsPerPatient(patientId));
+
+        return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/appointment/{appointmentId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
-    public Appointment viewAppointment(@PathVariable int appointmentId) {
-        return appointmentDao.getAppointment(appointmentId);
+    public ResponseEntity<Object> viewAppointment(@PathVariable int appointmentId) {
+        Appointment appointment = appointmentDao.getAppointment(appointmentId);
+
+        return new ResponseEntity<>(appointment, HttpStatus.OK);
     }
 
     @Override
@@ -130,7 +141,7 @@ public class PatientController implements UserControllers {
     @RequestMapping(value = "/patient/appointment", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
-    public Appointment addAppointment(@RequestBody Map appointment) {
+    public ResponseEntity<Object> addAppointment(@RequestBody Map appointment) {
 
         System.out.println(appointment);
         Appointment newAppointment = new Appointment();
@@ -140,7 +151,10 @@ public class PatientController implements UserControllers {
         newAppointment.setType("VIDEO");
         newAppointment.setNote((String) appointment.get("note"));
         newAppointment.setDate(Date.valueOf((String) appointment.get("date")));
-        return appointmentDao.addAppointment(newAppointment);
+
+        newAppointment =  appointmentDao.addAppointment(newAppointment);
+
+        return new ResponseEntity<>(newAppointment, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/appointment/{appointmentId}", method = RequestMethod.DELETE)
@@ -153,14 +167,18 @@ public class PatientController implements UserControllers {
     @RequestMapping(value = "/patient/prescriptions/{patientId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
-    public Set<Prescription> viewPrescriptions(@PathVariable int patientId) {
-        return new HashSet<>(prescriptionDao.getAllPrescriptionsPerPatient(patientId));
+    public ResponseEntity<Object> viewPrescriptions(@PathVariable int patientId) {
+        Set<Prescription> prescriptions = new HashSet<>(prescriptionDao.getAllPrescriptionsPerPatient(patientId));
+
+        return new ResponseEntity<>(prescriptions, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/prescription/{prescriptionId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     @Override
-    public Prescription viewPrescription(@PathVariable int prescriptionId) {
-        return prescriptionDao.getPrescription(prescriptionId);
+    public ResponseEntity<Object> viewPrescription(@PathVariable int prescriptionId) {
+        Prescription prescription = prescriptionDao.getPrescription(prescriptionId);
+
+        return new ResponseEntity<>(prescription, HttpStatus.OK);
     }
 }

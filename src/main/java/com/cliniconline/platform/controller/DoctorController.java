@@ -62,66 +62,80 @@ public class DoctorController implements UserControllers {
     @Override
     public ResponseEntity<Object> login(@PathVariable String email) {
         Doctor doctor = doctorDao.getDoctorByEmail(email);
+        DoctorViewModel viewModel = serviceLayer.findDoctor(doctor.getId());
         PlatformApplication.LOGGER.info(email+ " has logged in");
-        return new ResponseEntity<>(doctor, HttpStatus.OK);
+
+        return new ResponseEntity<>(viewModel, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/account/{email}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
-    public User viewAccount(@PathVariable String email) {
-        return doctorDao.getDoctorByEmail(email);
+    public ResponseEntity<Object> viewAccount(@PathVariable String email) {
+        Doctor doctor = doctorDao.getDoctorByEmail(email);
+        PlatformApplication.LOGGER.info(email+ " requested their account information");
+        return new ResponseEntity<>(doctor, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/patients/{doctorId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
-    public Set<User> getPatients(@PathVariable int doctorId) {
+    public ResponseEntity<Object> getPatients(@PathVariable int doctorId) {
         Set<User> patients =  new HashSet<>(dependentDao.getAllDependentsPerDoctor(doctorId));
         patients.addAll(adultPatientDao.getAllAdultPatientByDoctor(doctorId));
 
-        return patients;
+
+        return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/message", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
-    public Message sendMessage(@RequestBody Message message) {
-        return messageDao.addMessage(message);
+    public ResponseEntity<Object> sendMessage(@RequestBody Message message) {
+
+        return new ResponseEntity<>(messageDao.addMessage(message), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/message/{messageId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
-    public Message viewMessage(@PathVariable int messageId) {
-        return messageDao.getMessage(messageId);
+    public ResponseEntity<Object> viewMessage(@PathVariable int messageId) {
+        return new ResponseEntity<>(messageDao.getMessage(messageId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/messages/inbox/{doctorId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
-    public Set<Message> viewInbox(@PathVariable int doctorId) {
-        return new HashSet<>(messageDao.getDoctorInbox(doctorId));
+    public ResponseEntity<Object> viewInbox(@PathVariable int doctorId) {
+        Set<Message> inbox = new HashSet<>(messageDao.getDoctorInbox(doctorId));
+
+        return new ResponseEntity<>(inbox, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/messages/outbox/{doctorId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
-    public Set<Message> viewOutbox(@PathVariable int doctorId) {
-        return new HashSet<>(messageDao.getDoctorOutbox(doctorId));
+    public ResponseEntity<Object> viewOutbox(@PathVariable int doctorId) {
+        Set<Message> outbox = new HashSet<>(messageDao.getDoctorOutbox(doctorId));
+
+        return new ResponseEntity<>(outbox, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/appointments/{doctorId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
-    public Set<Appointment> viewAppointments(@PathVariable int doctorId) {
-        return new HashSet<>(appointmentDao.getAllAppointmentsPerDoctor(doctorId));
+    public ResponseEntity<Object> viewAppointments(@PathVariable int doctorId) {
+        Set<Appointment> appointments = new HashSet<>(appointmentDao.getAllAppointmentsPerDoctor(doctorId));
+
+        return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/appointment/{appointmentId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
-    public Appointment viewAppointment(@PathVariable int appointmentId) {
-        return appointmentDao.getAppointment(appointmentId);
+    public ResponseEntity<Object> viewAppointment(@PathVariable int appointmentId) {
+        Appointment appointment = appointmentDao.getAppointment(appointmentId);
+
+        return new ResponseEntity<>(appointment, HttpStatus.OK);
     }
 
     @Override
@@ -137,8 +151,19 @@ public class DoctorController implements UserControllers {
     @RequestMapping(value = "/doctor/appointment", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
-    public Appointment addAppointment(Map appointment) {
-        return appointmentDao.addAppointment((Appointment) appointment);
+    public ResponseEntity<Object> addAppointment(Map appointment) {
+
+        Appointment newAppointment = new Appointment();
+        newAppointment.setPatientId((Integer) appointment.get("patientId"));
+        newAppointment.setDoctorId((int) appointment.get("doctorId"));
+        newAppointment.setLink((String) appointment.get("link"));
+        newAppointment.setType("VIDEO");
+        newAppointment.setNote((String) appointment.get("note"));
+        newAppointment.setDate(Date.valueOf((String) appointment.get("date")));
+
+        newAppointment = appointmentDao.addAppointment((Appointment) appointment);
+
+        return new ResponseEntity<>(newAppointment, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/appointment/{appointmentId}", method = RequestMethod.DELETE)
@@ -151,27 +176,35 @@ public class DoctorController implements UserControllers {
     @RequestMapping(value = "/doctor/prescriptions/{doctorId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
-    public Set<Prescription> viewPrescriptions(@PathVariable int doctorId) {
-        return new HashSet<>(prescriptionDao.getAllPrescriptionsPerDoctor(doctorId));
+    public ResponseEntity<Object> viewPrescriptions(@PathVariable int doctorId) {
+        Set<Prescription> prescriptions = new HashSet<>(prescriptionDao.getAllPrescriptionsPerDoctor(doctorId));
+
+        return new ResponseEntity<>(prescriptions, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/prescriptions/patient/{patientId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
-    public Set<Prescription> viewPatientPrescriptions(@PathVariable int patientId) {
-        return new HashSet<>(prescriptionDao.getAllPrescriptionsPerPatient(patientId));
+    public ResponseEntity<Object> viewPatientPrescriptions(@PathVariable int patientId) {
+        Set<Prescription> prescriptions = new HashSet<>(prescriptionDao.getAllPrescriptionsPerPatient(patientId));
+
+        return new ResponseEntity<>(prescriptions, HttpStatus.OK);
     }
 
 
     @RequestMapping(value = "/doctor/prescription/{prescriptionId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
-    public Prescription viewPrescription(@PathVariable int prescriptionId) {
-        return prescriptionDao.getPrescription(prescriptionId);
+    public ResponseEntity<Object> viewPrescription(@PathVariable int prescriptionId) {
+        Prescription prescription = prescriptionDao.getPrescription(prescriptionId);
+
+        return new ResponseEntity<>(prescription, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/doctor/prescription", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Prescription writePrescription(Prescription prescription){
-        return prescriptionDao.addPrescription(prescription);
+    public ResponseEntity<Object> writePrescription(Prescription prescription){
+        Prescription prescription1 = prescriptionDao.addPrescription(prescription);
+
+        return new ResponseEntity<>(prescription1, HttpStatus.OK);
     }
 }

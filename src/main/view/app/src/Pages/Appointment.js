@@ -22,8 +22,6 @@ class Appointment extends React.Component{
         this.state.csrfToken = cookies.get('XSRF-TOKEN');
         this.state = {
             user: props.user,
-            appointments: user.appointments,
-            doctorName: user.name
         }
     }
 

@@ -1,6 +1,7 @@
 package com.cliniconline.platform.model.viewmodel;
 
 import com.cliniconline.platform.model.dto.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class DoctorViewModel implements UserViewModel{
     private String firstName;
     private String lastName;
     private String role;
+    private Doctor doctor;
     private List<Appointment> appointments;
     private List<Message> outbox;
     private List<Message> inbox;
@@ -57,6 +59,22 @@ public class DoctorViewModel implements UserViewModel{
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public List<Message> getInbox() {
+        return inbox;
+    }
+
+    public void setInbox(List<Message> inbox) {
+        this.inbox = inbox;
     }
 
     public List<Appointment> getAppointments() {

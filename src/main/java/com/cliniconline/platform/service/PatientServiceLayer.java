@@ -56,6 +56,7 @@ public class PatientServiceLayer implements ServiceLayer {
         doctors.add(doctorDao.getDoctor(adultPatient.getDoctorId()));
 
         PatientViewModel pvm = new PatientViewModel();
+        pvm.setPatient(adultPatient);
         pvm.setId(adultPatient.getId());
         pvm.setEmail(adultPatient.getEmail());
         pvm.setFirstName(adultPatient.getFirstName());
@@ -63,7 +64,7 @@ public class PatientServiceLayer implements ServiceLayer {
         pvm.setRole(adultPatient.getRole());
         pvm.setAppointments(appointments);
         pvm.setOutbox(outbox);
-        pvm.setIntbox(inbox);
+        pvm.setInbox(inbox);
         pvm.setDoctors(doctors);
         pvm.setPrescriptions(prescriptions);
 

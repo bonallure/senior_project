@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background-image: url("../Components/Images/telepsychology-therapy-zoom.jpg");
+    background-color: #a5bfd4;
+    /*background-image: url("../Components/Images/telepsychology-therapy-zoom.jpg");*/
 
     /* Set a specific height */
     min-height: 500px;
@@ -47,16 +48,16 @@ body {
     padding: 0;
     font-size: 45px;
     text-transform: uppercase;
-    color: white;
+    color: black;
     /*color: #044463;*/
 }
 
 .float-child1 p{
     margin: 0;
     padding: 0;
-    font-size: 18px;
+    font-size: 22px;
     /*text-transform: uppercase;*/
-    color: black;
+    color: #4a545c;
     /*color: #044463;*/
 }
 

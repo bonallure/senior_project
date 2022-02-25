@@ -1,9 +1,8 @@
 package com.cliniconline.platform.model.viewmodel;
 
-import com.cliniconline.platform.model.dto.Appointment;
-import com.cliniconline.platform.model.dto.Doctor;
-import com.cliniconline.platform.model.dto.Message;
-import com.cliniconline.platform.model.dto.Prescription;
+import com.cliniconline.platform.model.dto.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class PatientViewModel implements UserViewModel{
     private String firstName;
     private String lastName;
     private String role;
+    private User patient;
     private List<Appointment> appointments;
     private List<Message> outbox;
     private List<Message> inbox;
@@ -64,6 +64,14 @@ public class PatientViewModel implements UserViewModel{
         this.role = role;
     }
 
+    public User getPatient() {
+        return patient;
+    }
+
+    public void setPatient(User patient) {
+        this.patient = patient;
+    }
+
     public List<Appointment> getAppointments() {
         return appointments;
     }
@@ -80,11 +88,11 @@ public class PatientViewModel implements UserViewModel{
         this.outbox = messages;
     }
 
-    public List<Message> getIntbox() {
+    public List<Message> getInbox() {
         return inbox;
     }
 
-    public void setIntbox(List<Message> messages) {
+    public void setInbox(List<Message> messages) {
         this.inbox = messages;
     }
 

@@ -15,35 +15,35 @@ public interface UserControllers {
 
     ResponseEntity<?> login(String email);
 
-    User viewAccount(String email);
+    ResponseEntity<?> viewAccount(String email);
 
     // Set<Dependent> getDependents(int adultPatientID);
 
     // void addDependent(Dependent dependent);
 
-    Message sendMessage(Message message);
+    ResponseEntity<?> sendMessage(Message message);
 
-    Message viewMessage(int messageId);
+    ResponseEntity<?> viewMessage(int messageId);
 
-    Set<Message> viewInbox(int userId);
+    ResponseEntity<?> viewInbox(int userId);
 
-    Set<Message> viewOutbox(int userId);
+    ResponseEntity<?> viewOutbox(int userId);
 
-    Set<Appointment> viewAppointments(int userID);
+    ResponseEntity<?> viewAppointments(int userID);
 
-    Appointment viewAppointment(int appointmentId);
+    ResponseEntity<?> viewAppointment(int appointmentId);
 
     void joinAppointment(int appointment, int user_id);
 
     void endAppointment(int appointmentId);
 
-    Appointment addAppointment(Map appointment);
+    ResponseEntity<?> addAppointment(Map appointment);
 
     void cancelAppointment(int appointmentId);
 
-    Set<Prescription> viewPrescriptions(int userId);
+    ResponseEntity<?> viewPrescriptions(int userId);
 
-    Prescription viewPrescription(int prescriptionId);
+    ResponseEntity<?> viewPrescription(int prescriptionId);
 
     // void writePrescription(Long prescriptionId);
 }

@@ -56,6 +56,7 @@ public class DoctorServiceLayer implements ServiceLayer{
 
         DoctorViewModel dvm = new DoctorViewModel();
         dvm.setId(doctor.getId());
+        dvm.setDoctor(doctor);
         dvm.setEmail(doctor.getEmail());
         dvm.setFirstName(doctor.getFirstName());
         dvm.setLastName((doctor.getLastName()));

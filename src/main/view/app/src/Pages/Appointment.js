@@ -79,7 +79,7 @@ class Appointment extends React.Component{
         return(
             <div>
                 <NavBarAuth/>
-                <div className = "Appointment">
+                <div className = "Appointment" >
                     <Box sx={{pt: 2, pr: 2, textAlign: 'right'}}> 
                         <Button variant="contained"  onClick={this.onClick}>New Appointment</Button>
                     </Box>

@@ -1,5 +1,6 @@
 .Appointment{
     background-image: url("../Components/Images/rm283-nunny-263.jpg");
+    background-size: 100%;
     height: 600px;
 }
 

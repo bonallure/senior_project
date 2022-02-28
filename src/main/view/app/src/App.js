@@ -106,7 +106,7 @@ class App extends Component{
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
 //         mode: 'cors', // no-cors, *cors, same-origin
 //         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//         credentials: 'include', // include, *same-origin, omit
+        credentials: 'include', // include, *same-origin, omit
         headers: {
           "Authorization": `Basic ${Base64.encode(`${this.state.credentials.email}:${this.state.credentials.password}`)}`,
           'Content-Type': 'application/json'
@@ -116,24 +116,22 @@ class App extends Component{
 //         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
         body: JSON.stringify(data) // body data type must match "Content-Type" header
       });
-      return response.json(); // parses JSON response into native JavaScript objects
+      return response; // parses JSON response into native JavaScript objects
     }
 
     async getFetch(theUrl, creds){
-        console.log(theUrl, creds);
         const response = await fetch(theUrl, {
             headers: new Headers({
                 "Authorization": `Basic ${Base64.encode(`${creds.email}:${creds.password}`)}`
 //                 "content-type": "API-Key"
-            })
-//             credentials: 'include'
+            }),
+            credentials: 'include'
         });
         return response;
     }
 
     async handleDoctorLogin() {
-        const {email, password} = this.state.credentials;
-        const theUrl = "http://localhost:8080/doctor/login/" + email;
+        const theUrl = "http://localhost:8080/doctor/login/" + this.state.credentials.email;
         let value = null;
 //         const res = await axios.get("http://localhost:8080/doctor/login/" + email, {
 //             auth: {username: email, password: password},
@@ -260,6 +258,7 @@ class App extends Component{
                                     handleAppointments={this.handleAppointments}
                                     user={this.state.user}
                                     credentials={this.state.credentials}
+                                    getFetch={this.getFetch}
                                 />
                             )}
                         />

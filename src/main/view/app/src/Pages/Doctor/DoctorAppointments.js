@@ -50,18 +50,16 @@ class DoctorAppointments extends React.Component{
         })
     }
 
-    getAllPatientAppointments() {
+    async getAllPatientAppointments() {
         console.log(this.state)
-        const url = "http://localhost:8080/doctor/appointments/" + this.state.user.id
-        console.log(url)
-        axios.get(url)
-            .then(response =>{
-                console.log("this is the response", response.data);
-                this.updateState(response.data)
-            })
-            .catch(function (error) {
-                console.log("this is the error", error);
-            });
+        const url = "http://localhost:8080/doctor/appointments/" + this.props.user.id;
+        const response = await this.props.getFetch(url, this.props.credentials);
+        if (response.status === 200) {
+            let body = await response.text();
+            body = await JSON.parse(body);
+            console.log(body);
+            this.setState({appointment: body});
+        }
     }
 
     getDoctor() {
@@ -76,10 +74,12 @@ class DoctorAppointments extends React.Component{
     }
 
     componentDidMount() {
-        // this.getAllPatientAppointments()
+        this.getAllPatientAppointments()
         // this.getDoctor()
     }
 
+    componentDidUpdate(){
+    }
     render(){
 
         if (this.state.hasError) {
@@ -97,7 +97,7 @@ class DoctorAppointments extends React.Component{
                         <p style = {{textAlign: "left", color: "white"}}> Upcoming Appointments </p>
                         <div className = "CurrentAppt">
                             <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto"}}>
-                                {this.state.user.appointments.map(appointment =>(
+                                {this.state.appointments.map(appointment =>(
                                     <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
                                         Date: {appointment.date}
                                         Reason: {appointment.type}
@@ -110,7 +110,7 @@ class DoctorAppointments extends React.Component{
                         <p style = {{textAlign: "left", color: "white", position: "relative"}}> Past Appointments </p>
                         <div className = "CurrentAppt">
                             <Paper elevation={3} style={{padding:'50px 20px',width:'auto', margin:"20px auto", position: "relative"}}>
-                                {this.state.user.appointments.map(appointment =>(
+                                {this.state.appointments.map(appointment =>(
                                     <Paper elevation={6} style={{margin:"10px", padding:"15px", textAlign:"left"}} key={appointment.userId}>
                                         Date: {appointment.date}
                                         Reason: {appointment.type}

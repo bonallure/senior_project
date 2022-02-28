@@ -47,16 +47,16 @@ class DoctorNewAppointment extends React.Component{
                      note: "",
                      patientId: this.patientId
                      };
-        console.log(body);
         const url = "http://localhost:8080/doctor/addAppointment";
-        const res = await axios.post(url, body);
-//         const res = await this.props.postData(url, body);
+//         const res = await axios.post(url, body);
+        const res = await this.props.postData(url, body);
         console.log("response below");
         console.log(res);
-        console.log("cookie below");
-        console.log(document.cookie);
         if (res.status === 200) {
-            this.setState({newAppointment: res.data});
+            let data = await res.text();
+            data = await JSON.parse(data);
+            console.log(data);
+            this.setState({newAppointment: data});
         }
     }
 

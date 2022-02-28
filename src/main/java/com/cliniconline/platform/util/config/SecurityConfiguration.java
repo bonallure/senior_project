@@ -26,7 +26,7 @@ import java.util.Arrays;
 /**
  * Created by bonallure on 1/23/22
  */
-@Configuration
+//@Configuration
 @CrossOrigin
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -83,6 +83,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin"));
         configuration.addAllowedHeader("Content-Type");
         configuration.addAllowedHeader("Authorization");
+        configuration.addAllowedHeader("x-xsrf-token");
+        configuration.addAllowedHeader("Cookie");
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

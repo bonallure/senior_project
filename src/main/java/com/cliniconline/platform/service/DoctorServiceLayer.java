@@ -52,7 +52,8 @@ public class DoctorServiceLayer implements ServiceLayer{
         List<Message> outbox = messageDao.getDoctorOutbox(doctor.getId());
         List<Message> inbox = messageDao.getDoctorInbox(doctor.getId());
         List<Prescription> prescriptions = prescriptionDao.getAllPrescription();
-        List<Patient> patients = new ArrayList<>();
+        List<Patient> patients = new ArrayList<>(adultPatientDao.getAllAdultPatientByDoctor(doctor.getId()));
+        patients.addAll(dependentDao.getAllDependentsPerDoctor(doctor.getId()));
 
         DoctorViewModel dvm = new DoctorViewModel();
         dvm.setId(doctor.getId());

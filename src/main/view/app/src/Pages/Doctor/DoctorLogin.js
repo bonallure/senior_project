@@ -1,28 +1,29 @@
-import axios from "axios"
 import React from "react";
-import NavBar from "../Components/NavBar/NavBar";
-import "../CSS/doctorLogin.css"
-import Footer from "../Components/Footer";
+import "../../CSS/doctorLogin.css"
+import Footer from "../../Components/Footer";
 import {Button, TextField} from "@mui/material";
-import DoctorNavBar from "../Components/NavBar/DoctorNavBar";
-import {Link} from "@material-ui/core";
+import DoctorNavBar from "../../Components/NavBar/DoctorNavBar";
 import {withCookies} from "react-cookie";
 import Container from "@mui/material/Container";
 
 class DoctorLogin extends React.Component{
-
-    state = {
-        isAuthenticated: false,
-        user: undefined
-    }
-
     constructor(props) {
         super(props);
-        const {cookies} = props;
-        this.state.csrfToken = cookies.get('XSRF-TOKEN');
-        this.login = this.login.bind(this);
-        //this.logout = this.logout.bind(this);
+        this.state = {
+            csrfToken: props.csrfToken,
+            isLoggedIn: props.isLoggedIn,
+            user: props.user,
+            credentials: {}
+        }
     }
+
+    loginDoctor = async (e) => {
+        e.preventDefault();
+        await this.props.handleLogin();
+        if (this.props.isLoggedIn) {
+            this.props.history.push("/doctor/appointments");
+        }
+    };
 
     // async componentDidMount() {
     //     const response = await fetch('/api/user', {credentials: 'include'});
@@ -53,34 +54,6 @@ class DoctorLogin extends React.Component{
 
     message = "";
 
-    async login() {
-        const {email, password} = this.state;
-        const res = await axios.get("http://localhost:8080/doctor/login/" + email, {
-            auth: {username: email, password: password}
-        });
-        if (res.status === 200) {
-            console.log(res.data);
-            this.state.user = res.data;
-            this.state.isAuthenticated = true;
-            this.props.handleSuccessfulAuth(res.data);
-        } else {
-            if (res.status === 404) {
-                console.log("user not found");
-                this.message = <h2> User not found</h2>;
-            }
-            if (res.status === 401) {
-                console.log("bad password");
-                this.message = <h2> Bad credentials</h2>;
-            }
-        }
-        console.log(this.state)
-    }
-    handleChange = (e) => {
-        const {id, value} = e.target
-        this.state[id] = value
-        console.log("hi")
-    }
-
     render(){
 
         const errorMessage = this.message;
@@ -99,7 +72,7 @@ class DoctorLogin extends React.Component{
                                 variant="outlined"
                                 id="email"
                                 placeholder="Email"
-                                onChange={this.handleChange}/>
+                                onChange={this.props.handleChange}/>
                             <br />
                             <br />
                             <TextField
@@ -109,11 +82,14 @@ class DoctorLogin extends React.Component{
                                 variant="filled"
                                 id="password"
                                 placeholder="Password"
-                                onChange={this.handleChange}/>
+                                onChange={this.props.handleChange}/>
                             <br />
                             <br />
                             <br />
-                            <Button onClick={this.login} variant="contained"> Login </Button>
+                            <Button onClick={this.loginDoctor}
+                                    variant="contained">
+                                Login
+                            </Button>
                             <Container fluid>
                                 {errorMessage}
                             </Container>

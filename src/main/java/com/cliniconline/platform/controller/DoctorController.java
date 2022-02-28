@@ -5,9 +5,9 @@ import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
 import com.cliniconline.platform.model.viewmodel.DoctorViewModel;
 import com.cliniconline.platform.service.DoctorServiceLayer;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,6 +57,8 @@ public class DoctorController implements UserControllers {
     protected DoctorServiceLayer serviceLayer;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    private Logger logger = PlatformApplication.LOGGER;
 
     @RequestMapping(value = "/doctor/login/{email}", method = RequestMethod.GET)
     @Override
@@ -148,11 +150,12 @@ public class DoctorController implements UserControllers {
 
     }
 
-    @RequestMapping(value = "/doctor/appointment", method = RequestMethod.POST)
+    @RequestMapping(value = "/doctor/addAppointment", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
-    public ResponseEntity<Object> addAppointment(Map appointment) {
-
+    public ResponseEntity<Object> addAppointment(@RequestBody Map appointment) {
+        logger.info("New doctor appointment");
+        logger.info(appointment.toString());
         Appointment newAppointment = new Appointment();
         newAppointment.setPatientId((Integer) appointment.get("patientId"));
         newAppointment.setDoctorId((int) appointment.get("doctorId"));
@@ -161,8 +164,8 @@ public class DoctorController implements UserControllers {
         newAppointment.setNote((String) appointment.get("note"));
         newAppointment.setDate(Date.valueOf((String) appointment.get("date")));
 
-        newAppointment = appointmentDao.addAppointment((Appointment) appointment);
-
+        newAppointment = appointmentDao.addAppointment(newAppointment);
+        logger.info("New appointment added. appointmentId: "+newAppointment.getId());
         return new ResponseEntity<>(newAppointment, HttpStatus.OK);
     }
 

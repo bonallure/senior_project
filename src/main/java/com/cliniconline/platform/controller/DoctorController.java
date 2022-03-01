@@ -65,7 +65,8 @@ public class DoctorController implements UserControllers {
     public ResponseEntity<Object> login(@PathVariable String email) {
         Doctor doctor = doctorDao.getDoctorByEmail(email);
         DoctorViewModel viewModel = serviceLayer.findDoctor(doctor.getId());
-        PlatformApplication.LOGGER.info(email+ " has logged in");
+        logger.info(email+ " has logged in");
+        logger.info(viewModel.toString());
 
         return new ResponseEntity<>(viewModel, HttpStatus.OK);
     }
@@ -147,7 +148,6 @@ public class DoctorController implements UserControllers {
 
     @Override
     public void endAppointment(int appointmentId) {
-
     }
 
     @RequestMapping(value = "/doctor/addAppointment", method = RequestMethod.POST)

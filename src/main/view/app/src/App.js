@@ -41,6 +41,7 @@ class App extends Component{
         this.setState({csrfToken: CSRF_TOKEN});
         this.setState({instance: instance});
     }
+
     handleSuccessfulDoctorAuth() {
         console.log("doctor view model: "+ this.state.user);
         this.history.push("/doctor/appointments");
@@ -90,7 +91,6 @@ class App extends Component{
             .catch(error => {
                 console.log("check login error", error);
             });
-
     }
 
     handleChange = (e) => {
@@ -106,7 +106,7 @@ class App extends Component{
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
 //         mode: 'cors', // no-cors, *cors, same-origin
 //         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'include', // include, *same-origin, omit
+//         credentials: 'include', // include, *same-origin, omit
         headers: {
           "Authorization": `Basic ${Base64.encode(`${this.state.credentials.email}:${this.state.credentials.password}`)}`,
           'Content-Type': 'application/json'
@@ -125,7 +125,7 @@ class App extends Component{
                 "Authorization": `Basic ${Base64.encode(`${creds.email}:${creds.password}`)}`
 //                 "content-type": "API-Key"
             }),
-            credentials: 'include'
+//             credentials: 'include'
         });
         return response;
     }

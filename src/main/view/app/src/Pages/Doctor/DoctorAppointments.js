@@ -52,14 +52,25 @@ class DoctorAppointments extends React.Component{
 
     async getAllPatientAppointments() {
         console.log(this.state)
-        const url = "http://localhost:8080/doctor/appointments/" + this.props.user.id;
-        const response = await this.props.getFetch(url, this.props.credentials);
-        if (response.status === 200) {
-            let body = await response.text();
-            body = await JSON.parse(body);
-            console.log(body);
-            this.setState({appointment: body});
-        }
+        const url = "http://localhost:8080/doctor/appointments/" + this.state.user.id
+        console.log(url)
+        axios.get(url)
+            .then(response =>{
+                console.log("this is the response", response.data);
+                this.updateState(response.data)
+            })
+            .catch(function (error) {
+                console.log("this is the error", error);
+            });
+//         console.log(this.state)
+//         const url = "http://localhost:8080/doctor/appointments/" + this.props.user.id;
+//         const response = await this.props.getFetch(url, this.props.credentials);
+//         if (response.status === 200) {
+//             let body = await response.text();
+//             body = await JSON.parse(body);
+//             console.log(body);
+//             this.setState({appointment: body});
+//         }
     }
 
     getDoctor() {
@@ -74,7 +85,7 @@ class DoctorAppointments extends React.Component{
     }
 
     componentDidMount() {
-        this.getAllPatientAppointments()
+//         this.getAllPatientAppointments()
         // this.getDoctor()
     }
 

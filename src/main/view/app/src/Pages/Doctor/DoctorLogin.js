@@ -2,7 +2,7 @@ import React from "react";
 import "../../CSS/doctorLogin.css"
 import Footer from "../../Components/Footer";
 import {Button, TextField} from "@mui/material";
-import DoctorNavBar from "../../Components/NavBar/DoctorNavBar";
+import NavBar from "../../Components/NavBar/NavBar";
 import {withCookies} from "react-cookie";
 import Container from "@mui/material/Container";
 
@@ -60,7 +60,7 @@ class DoctorLogin extends React.Component{
 
         return(
             <div>
-                <DoctorNavBar/>
+                <NavBar/>
                 <section className="doctorSection">
                     <div className="float-container" style={{textAlign:"center"}}>
                         <h2> Login </h2>

@@ -1,8 +1,8 @@
 import axios from "axios"
 import React from "react";
-import NavBar from "../Components/NavBar/NavBar";
-import "../CSS/patientLogin.css"
-import Footer from "../Components/Footer";
+import NavBar from "../../Components/NavBar/NavBar";
+import "../../CSS/patientLogin.css"
+import Footer from "../../Components/Footer";
 import {Button, TextField} from "@mui/material";
 
 class PatientLogin extends React.Component{

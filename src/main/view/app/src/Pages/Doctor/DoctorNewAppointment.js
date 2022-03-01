@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarAuth from "../../Components/NavBar/NavBarAuth";
+import NavBarAuthDoc from "../../Components/NavBar/NavBarAuthDoc";
 import axios from "axios";
 import {withCookies} from "react-cookie";
 import InputLabel from '@mui/material/InputLabel';
@@ -10,7 +10,6 @@ import Select from '@mui/material/Select';
 class DoctorNewAppointment extends React.Component{
     constructor(props) {
         super(props);
-
         this.state = {
             credentials: props.credentials,
             patients: props.patients,
@@ -18,6 +17,7 @@ class DoctorNewAppointment extends React.Component{
             link: "",
             isConfirmed: false,
             note: "",
+            user: props.user
         };
         this.patientId = "";
     }
@@ -73,7 +73,7 @@ class DoctorNewAppointment extends React.Component{
         const names = ["laurent", "abby", "johnny"];
         return(
             <div>
-                <NavBarAuth/>
+                <NavBarAuthDoc props={this.props}/>
                 <p> New Appointment </p>
                 <br />
                 <form>

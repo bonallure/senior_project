@@ -3,18 +3,22 @@ import { withCookies } from "react-cookie";
 import { Base64 } from 'js-base64';
 import Homepage from "./Pages/Homepage";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Appointment from "./Pages/Appointment";
-import Registration from "./Pages/Registration";
 import axios from "axios";
-import Message from "./Pages/Message";
-import Calendar from "./Pages/Calendar";
-import PatientLogin from "./Pages/PatientLogin";
 import AdminLogin from "./Pages/AdminLogin";
-import AppointmentForm from "./Pages/AppointmentForm";
-import Dashboard from "./Pages/Dashboard";
 import DoctorLogin from "./Pages/Doctor/DoctorLogin";
 import DoctorAppointments from "./Pages/Doctor/DoctorAppointments";
 import DoctorNewAppointment from "./Pages/Doctor/DoctorNewAppointment";
+import DoctorMessages from "./Pages/Doctor/DoctorMessages"
+import DoctorRegistration from "./Pages/Doctor/DoctorRegistration";
+import DoctorDashboard from "./Pages/Doctor/DoctorDashboard";
+import DoctorCalendar from "./Pages/Doctor/DoctorCalendar";
+import PatientLogin from "./Pages/Patient/PatientLogin";
+import PatientAppointments from "./Pages/Patient/PatientAppointments";
+import PatientNewAppointment from "./Pages/Patient/PatientNewAppointment";
+import PatientMessages from "./Pages/Patient/PatientMessages"
+import PatientRegistration from "./Pages/Patient/PatientRegistration";
+import PatientDashboard from "./Pages/Patient/PatientDashboard";
+import PatientCalendar from "./Pages/Patient/PatientCalendar";
 
 
 class App extends Component{
@@ -29,8 +33,6 @@ class App extends Component{
         };
         this.handleDoctorLogin = this.handleDoctorLogin.bind(this);
         this.postData = this.postData.bind(this);
-        // this.handleLogin = this.handleLogin.bind(this)
-        // this.handleLogout = this.handleLogout.bind(this)
     }
 
     componentDidMount(){
@@ -45,7 +47,6 @@ class App extends Component{
     handleSuccessfulDoctorAuth() {
         console.log("doctor view model: "+ this.state.user);
         this.history.push("/doctor/appointments");
-        // this.props.history.push("/doctor/appointments");
     }
 
     handleSuccessfulRetrieval(data) {
@@ -98,19 +99,17 @@ class App extends Component{
         this.state.credentials[id] = value;
     }
 
-    // Example POST method implementation:
+    //  POST method implementation:
     async postData(url, data) {
       console.log(data);
       // Default options are marked with *
       const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
 //         mode: 'cors', // no-cors, *cors, same-origin
-//         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 //         credentials: 'include', // include, *same-origin, omit
         headers: {
           "Authorization": `Basic ${Base64.encode(`${this.state.credentials.email}:${this.state.credentials.password}`)}`,
           'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
 //         redirect: 'follow', // manual, *follow, error
 //         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
@@ -185,34 +184,7 @@ class App extends Component{
                                 />
                             )}
                         />
-                        <Route
-                            exact
-                            path={"/systemAdmin/login"}
-                            render={props => (
-                                <AdminLogin
-                                    {...props}
-                                    handleLogin={this.handleLogin}
-                                    handleLogout={this.handleLogout}
-                                    handleSuccessfulAuth={this.handleSuccessfulAuth}
-                                    isLoggedIn={this.state.isLoggedIn}
-                                    checkLoginStatus={this.checkLoginStatus}
-                                />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path={"/patient/login"}
-                            render={props => (
-                                <PatientLogin
-                                    {...props}
-                                    handleLogin={this.handleLogin}
-                                    handleLogout={this.handleLogout}
-                                    handleSuccessfulAuth={this.handleSuccessfulAuth}
-                                    isLoggedIn={this.state.isLoggedIn}
-                                    checkLoginStatus={this.checkLoginStatus}
-                                />
-                            )}
-                        />
+    /************************* DOCTOR ROUTES ********************************/
                         <Route
                             exact
                             path={"/doctor/login"}
@@ -227,21 +199,6 @@ class App extends Component{
                                     user={this.state.user}
                                     checkLoginStatus={this.checkLoginStatus}
 //                                     instance={this.state.instance}
-                                />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path={"/registration"}
-                            render={props => (
-                                <Registration
-                                    {...props}
-                                    handleLogin={this.handleLogin}
-                                    handleLogout={this.handleLogout}
-                                    isLoggedIn={this.state.isLoggedIn}
-                                    checkLoginStatus={this.checkLoginStatus}
-                                    userId = {this.state.user.id}
-
                                 />
                             )}
                         />
@@ -264,9 +221,113 @@ class App extends Component{
                         />
                         <Route
                             exact
+                            path={"/doctor/appointment/new"}
+                            render={props => (
+                                <DoctorNewAppointment
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    patients= {this.state.user.patients}
+                                    doctorId = {this.state.user.id}
+                                    credentials={this.state.credentials}
+                                    postData={this.postData}
+                                    user={this.state.user}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/doctor/messages"}
+                            render={props => (
+                                <DoctorMessages
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    user={this.state.user}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/doctor/calendar"}
+                            render={props => (
+                                <DoctorCalendar
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    user={this.state.user}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/doctor/dashboard"}
+                            render={props => (
+                                <DoctorDashboard
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    user={this.state.user}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/registration"}
+                            render={props => (
+                                <DoctorRegistration
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    userId = {this.state.user.id}
+                                />
+                            )}
+                        />
+/************************* ADMIN ROUTES ********************************/
+                        <Route
+                            exact
+                            path={"/systemAdmin/login"}
+                            render={props => (
+                                <AdminLogin
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    handleSuccessfulAuth={this.handleSuccessfulAuth}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                />
+                            )}
+                        />
+/************************* PATIENT ROUTES ********************************/
+                        <Route
+                            exact
+                            path={"/patient/login"}
+                            render={props => (
+                                <PatientLogin
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    handleSuccessfulAuth={this.handleSuccessfulAuth}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
                             path={"/patient/appointments"}
                             render={props => (
-                                <Appointment
+                                <PatientAppointments
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}
@@ -281,78 +342,75 @@ class App extends Component{
                         />
                         <Route
                             exact
-                            path={"/doctor/appointment/new"}
-                            render={props => (
-                                <DoctorNewAppointment
-                                    {...props}
-                                    handleLogin={this.handleLogin}
-                                    handleLogout={this.handleLogout}
-                                    isLoggedIn={this.state.isLoggedIn}
-                                    checkLoginStatus={this.checkLoginStatus}
-                                    patients= {this.state.user.patients}
-                                    doctorId = {this.state.user.id}
-                                    credentials={this.state.credentials}
-                                    postData={this.postData}
-                                />
-                            )}
-                        />
-                        <Route
-                            exact
                             path={"/patient/appointment/new"}
                             render={props => (
-                                <AppointmentForm
+                                <PatientNewAppointment
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
-                                    userId = {this.state.user.id}
-                                    doctorId = {this.state.user.id}
+                                    user={this.state.user}
                                 />
                             )}
                         />
                         <Route
                             exact
-                            path={"/message"}
+                            path={"/patient/messages"}
                             render={props => (
-                                <Message
+                                <PatientMessages
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
-                                    userId = {this.state.user.id}
+                                    user={this.state.user}
                                 />
                             )}
                         />
                         <Route
                             exact
-                            path={"/calendar"}
+                            path={"/patient/calendar"}
                             render={props => (
-                                <Calendar
+                                <PatientCalendar
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
-                                    userId = {this.state.user.id}
+                                    user={this.state.user}
                                 />
                             )}
                         />
                         <Route
                             exact
-                            path={"/dashboard"}
+                            path={"/patient/dashboard"}
                             render={props => (
-                                <Dashboard
+                                <PatientDashboard
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
-                                    userId = {this.state.user.id}
+                                    user={this.state.user}
                                 />
                             )}
                         />
+                        <Route
+                            exact
+                            path={"/registration"}
+                            render={props => (
+                                <PatientRegistration
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    user = {this.state.user}
+                                />
+                            )}
+                        />
+/************************* OTHER ROUTES ********************************/
                     </Switch>
                 </Router>
             </div>

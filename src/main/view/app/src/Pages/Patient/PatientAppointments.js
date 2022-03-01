@@ -1,13 +1,13 @@
 import axios from "axios"
 import React from "react";
-import NavBarAuth from "../Components/NavBar/NavBarAuth";
+import NavBarAuthDoc from "../../Components/NavBar/NavBarAuthDoc";
 import { Grid, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import {withCookies} from "react-cookie";
-import "../CSS/appointment.css"
-import Footer from "../Components/Footer";
+import "../../CSS/appointment.css"
+import Footer from "../../Components/Footer";
 
 
 class Appointment extends React.Component{
@@ -76,7 +76,7 @@ class Appointment extends React.Component{
     render(){
         return(
             <div>
-                <NavBarAuth/>
+                <NavBarAuthDoc/>
                 <div className = "Appointment" >
                     <Box sx={{pt: 2, pr: 2, textAlign: 'right'}}> 
                         <Button variant="contained"  onClick={this.onClick}>New Appointment</Button>

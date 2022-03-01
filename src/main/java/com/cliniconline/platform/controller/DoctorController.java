@@ -13,13 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 
 /**
  * Created by bonallure on 10/25/21
@@ -60,6 +57,8 @@ public class DoctorController implements UserControllers {
 
     private Logger logger = PlatformApplication.LOGGER;
 
+
+    /**************************************************************************************** ACCOUNT ****************/
     @RequestMapping(value = "/doctor/login/{email}", method = RequestMethod.GET)
     @Override
     public ResponseEntity<Object> login(@PathVariable String email) {
@@ -86,10 +85,10 @@ public class DoctorController implements UserControllers {
         Set<User> patients =  new HashSet<>(dependentDao.getAllDependentsPerDoctor(doctorId));
         patients.addAll(adultPatientDao.getAllAdultPatientByDoctor(doctorId));
 
-
         return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 
+    /**************************************************************************************** MESSAGE ****************/
     @RequestMapping(value = "/doctor/message", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
@@ -123,6 +122,7 @@ public class DoctorController implements UserControllers {
         return new ResponseEntity<>(outbox, HttpStatus.OK);
     }
 
+    /************************************************************************************ APPOINTMENT ****************/
     @RequestMapping(value = "/doctor/appointments/{doctorId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
@@ -141,15 +141,6 @@ public class DoctorController implements UserControllers {
         return new ResponseEntity<>(appointment, HttpStatus.OK);
     }
 
-    @Override
-    public void joinAppointment(int appointment, int user_id) {
-
-    }
-
-    @Override
-    public void endAppointment(int appointmentId) {
-    }
-
     @RequestMapping(value = "/doctor/addAppointment", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
@@ -166,6 +157,7 @@ public class DoctorController implements UserControllers {
 
         newAppointment = appointmentDao.addAppointment(newAppointment);
         logger.info("New appointment added. appointmentId: "+newAppointment.getId());
+
         return new ResponseEntity<>(newAppointment, HttpStatus.OK);
     }
 
@@ -176,6 +168,7 @@ public class DoctorController implements UserControllers {
         appointmentDao.deleteAppointment(appointmentId);
     }
 
+    /*********************************************************************************** PRESCRIPTION ****************/
     @RequestMapping(value = "/doctor/prescriptions/{doctorId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
@@ -193,7 +186,6 @@ public class DoctorController implements UserControllers {
         return new ResponseEntity<>(prescriptions, HttpStatus.OK);
     }
 
-
     @RequestMapping(value = "/doctor/prescription/{prescriptionId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     @Override
@@ -209,5 +201,15 @@ public class DoctorController implements UserControllers {
         Prescription prescription1 = prescriptionDao.addPrescription(prescription);
 
         return new ResponseEntity<>(prescription1, HttpStatus.OK);
+    }
+
+    /*****************************************************************************************************************/
+    @Override
+    public void joinAppointment(int appointment, int user_id) {
+
+    }
+
+    @Override
+    public void endAppointment(int appointmentId) {
     }
 }

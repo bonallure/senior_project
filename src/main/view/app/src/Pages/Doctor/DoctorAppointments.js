@@ -1,6 +1,6 @@
 import axios from "axios"
 import React from "react";
-import NavBarAuth from "../../Components/NavBar/NavBarAuth";
+import NavBarAuthDoc from "../../Components/NavBar/NavBarAuthDoc";
 import { Grid, Paper } from "@mui/material";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -15,6 +15,7 @@ class DoctorAppointments extends React.Component{
     constructor(props) {
         super(props);
         const {cookies} = props;
+        // console.log(props);
         // this.state.csrfToken = cookies.get('XSRF-TOKEN');
         this.state = {
             hasError: false,
@@ -89,8 +90,9 @@ class DoctorAppointments extends React.Component{
         // this.getDoctor()
     }
 
-    componentDidUpdate(){
-    }
+    // componentDidUpdate(){
+    // }
+    
     render(){
 
         if (this.state.hasError) {
@@ -99,7 +101,7 @@ class DoctorAppointments extends React.Component{
         }
         return(
             <div>
-                <NavBarAuth/>
+                <NavBarAuthDoc props={this.props}/>
                 <div className = "Appointment" >
                     <Box sx={{pt: 2, pr: 2, textAlign: 'right'}}>
                         <Button variant="contained"  onClick={this.onClick}>New Appointment</Button>

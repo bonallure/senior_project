@@ -41,13 +41,19 @@ export default function NavBar() {
           </Typography>
           <Button color="inherit" sx={{px:6}} onClick={(e) => {
               e.preventDefault();
-              window.location.href='/patient/aboutUs';}} >About Us</Button><br/>
+              window.location.href='/aboutUs';}} >About Us</Button><br/>
           <Button color="inherit" sx={{px:6}} onClick={(e) => {
               e.preventDefault();
-              window.location.href='/patient/login';}} >Login</Button><br/><br/>
+              window.location.href='/patient/login';}} >Patient Login</Button><br/><br/>
           <Button color="inherit" sx={{px:6}} onClick={(e) => {
               e.preventDefault();
-              window.location.href='/registration';}}>Register</Button><br/>
+              window.location.href='/patient/registration';}}>Patient Register</Button><br/>
+          <Button color="inherit" sx={{px:6}} onClick={(e) => {
+            e.preventDefault();
+            window.location.href='/doctor/login';}} >Doctor Login</Button><br/><br/>
+          <Button color="inherit" sx={{px:6}} onClick={(e) => {
+            e.preventDefault();
+            window.location.href='/doctor/registration';}}>Doctor Register</Button><br/>
         </Toolbar>
       </AppBar>
     </Box>

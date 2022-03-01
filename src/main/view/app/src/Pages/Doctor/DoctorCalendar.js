@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavBarAuth from "../Components/NavBar/NavBarAuth";
+import NavBarAuthDoc from "../../Components/NavBar/NavBarAuthDoc";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import isWeekend from 'date-fns/isWeekend';
@@ -31,7 +31,7 @@ class Calendar extends React.Component {
 
         return (
             <div>
-                <NavBarAuth />
+                <NavBarAuthDoc props={this.props}/>
                 <Container>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <StaticDatePicker

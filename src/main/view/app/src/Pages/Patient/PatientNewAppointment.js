@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarAuth from "../Components/NavBar/NavBarAuth";
+import NavBarAuth from "../../Components/NavBar/NavBarAuthDoc";
 import axios from "axios";
 
 class AppointmentForm extends React.Component{

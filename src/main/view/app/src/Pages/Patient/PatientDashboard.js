@@ -1,12 +1,12 @@
 import React from "react";
 import axios from "axios";
-import NavBarAuth from "../Components/NavBar/NavBarAuth";
+import NavBarAuthDoc from "../../Components/NavBar/NavBarAuthDoc";
 import Card from '@mui/material/Card';
 import { CardHeader, Paper, Button } from "@mui/material";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
-import Footer from "../Components/Footer";
+import Footer from "../../Components/Footer";
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -66,7 +66,7 @@ class Dashboard extends React.Component{
     render(){
         return(
             <div>
-                <NavBarAuth/>
+                <NavBarAuthDoc/>
                 <Container maxWidth="xl" sx={{pt: 2}}>
                     <Card sx={{ minWidth: 160, maxWidth:250 }}>
                         <CardHeader title="Prescriptions"/>

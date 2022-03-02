@@ -5,6 +5,7 @@ import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
 import com.cliniconline.platform.model.viewmodel.DoctorViewModel;
 import com.cliniconline.platform.service.DoctorServiceLayer;
+import com.sun.tools.jconsole.JConsoleContext;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -93,7 +96,7 @@ public class DoctorController implements UserControllers {
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
     public ResponseEntity<Object> sendMessage(@RequestBody Message message) {
-
+        logger.info(message.getDate()+"T"+message.getTime()+ ": New message from doctor with id: "+ message.getDoctorId());
         return new ResponseEntity<>(messageDao.addMessage(message), HttpStatus.OK);
     }
 

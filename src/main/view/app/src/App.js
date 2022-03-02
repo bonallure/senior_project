@@ -9,6 +9,7 @@ import DoctorLogin from "./Pages/Doctor/DoctorLogin";
 import DoctorAppointments from "./Pages/Doctor/DoctorAppointments";
 import DoctorNewAppointment from "./Pages/Doctor/DoctorNewAppointment";
 import DoctorMessages from "./Pages/Doctor/DoctorMessages"
+import DoctorNewMessage from "./Pages/Doctor/DoctorNewMessage"
 import DoctorRegistration from "./Pages/Doctor/DoctorRegistration";
 import DoctorDashboard from "./Pages/Doctor/DoctorDashboard";
 import DoctorCalendar from "./Pages/Doctor/DoctorCalendar";
@@ -36,12 +37,12 @@ class App extends Component{
     }
 
     componentDidMount(){
-        const CSRF_TOKEN = document.cookie.match(new RegExp(`XSRF-TOKEN=([^;]+)`))[1];
-        const instance = axios.create({
-          headers: { "X-XSRF-TOKEN": CSRF_TOKEN }
-        });
-        this.setState({csrfToken: CSRF_TOKEN});
-        this.setState({instance: instance});
+        // const CSRF_TOKEN = document.cookie.match(new RegExp(`XSRF-TOKEN=([^;]+)`))[1];
+        // const instance = axios.create({
+        //   headers: { "X-XSRF-TOKEN": CSRF_TOKEN }
+        // });
+        // this.setState({csrfToken: CSRF_TOKEN});
+        // this.setState({instance: instance});
     }
 
     handleSuccessfulDoctorAuth() {
@@ -247,6 +248,24 @@ class App extends Component{
                                     handleLogout={this.handleLogout}
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
+                                    user={this.state.user}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/doctor/message/new"}
+                            render={props => (
+                                <DoctorNewMessage
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    patients= {this.state.user.patients}
+                                    doctorId = {this.state.user.id}
+                                    credentials={this.state.credentials}
+                                    postData={this.postData}
                                     user={this.state.user}
                                 />
                             )}

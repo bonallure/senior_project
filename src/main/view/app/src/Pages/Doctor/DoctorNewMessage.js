@@ -6,23 +6,18 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-
-class DoctorNewAppointment extends React.Component{
+class DoctorNewMessage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             credentials: props.credentials,
             patients: props.patients,
             doctorId: props.doctorId,
-            link: "",
-            isConfirmed: false,
-            note: "",
             user: props.user
         };
         this.patientId = "";
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-
 
     handlePatientChange = (e) => {
         console.log(e.target);
@@ -39,16 +34,21 @@ class DoctorNewAppointment extends React.Component{
     }
 
     // submit event handler
-    async handleAppointmentSubmit() {
-        const body = {date: this.state.date,
-                     doctorId: this.state.doctorId,
-                     isConfirmed: false,
-                     link: "",
-                     note: "",
-                     patientId: this.patientId
-                     };
-        const url = "http://localhost:8080/doctor/addAppointment";
-//         const res = await axios.post(url, body);
+    async handleSubmit(e) {
+        e.preventDefault();
+        console.log(this.state);
+        const date = new Date();
+        const body = {date: date.toLocaleDateString('en-GB').split('/').reverse().join('-'),
+            time: new Date().getTime(),
+            senderRole: "DOCTOR",
+            recipientRole: "PATIENT",
+            doctorId: this.state.doctorId,
+            patientId: this.patientId,
+            message: this.state.message,
+            parentMessageId: null
+        };
+        console.log("body", body);
+        const url = "http://localhost:8080/doctor/message";
         const res = await this.props.postData(url, body);
         console.log("response below");
         console.log(res);
@@ -56,17 +56,10 @@ class DoctorNewAppointment extends React.Component{
             let data = await res.text();
             data = await JSON.parse(data);
             console.log(data);
-            this.setState({newAppointment: data});
+            this.setState({newMessage: data});
+            console.log(this.state.newMessage);
+            this.props.history.push("/doctor/messages");
         }
-    }
-
-    handleNewAppointment = async (e) => {
-        e.preventDefault();
-        await this.handleAppointmentSubmit();
-        if (this.state.newAppointment){
-            this.props.history.push("/doctor/appointments");
-        }
-
     }
 
     render() {
@@ -88,14 +81,14 @@ class DoctorNewAppointment extends React.Component{
                       </Select>
                     <br />
                     <br />
-                    <input type="date" id="date" placeholder= "Enter a date" onChange={this.handleChange}/>
+                    <input type="text" id="message" placeholder= "Compose your message" onChange={this.handleChange}/>
                     <br />
                     <br />
                     <br />
-                    <button type="submit" onClick={this.handleNewAppointment}> Submit </button>
+                    <button type="submit" onClick={this.handleSubmit}> Submit </button>
                 </form>
             </div>
         )
     }
 }
-export default withCookies(DoctorNewAppointment);
+export default withCookies(DoctorNewMessage);

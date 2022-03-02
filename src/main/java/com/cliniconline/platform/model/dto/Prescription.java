@@ -1,7 +1,7 @@
 package com.cliniconline.platform.model.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 import java.time.Instant;
 
 /**
@@ -13,7 +13,7 @@ public class Prescription {
     private int id;
     private int doctorId;
     private int patientId;
-    private LocalDate date_prescribed;
+    private Date date_prescribed;
     private String medicine;
     private String dosage;
     private int quantity;
@@ -22,12 +22,12 @@ public class Prescription {
     public Prescription() {
     }
 
-    public LocalDate getDate_prescribed() {
+    public java.sql.Date getDate_prescribed() {
         return date_prescribed;
     }
 
     public void setDate_prescribed(Date date_prescribed) {
-        this.date_prescribed = LocalDate.parse(date_prescribed.toString());
+        this.date_prescribed = date_prescribed;
     }
 
     public int getDoctorId() {

@@ -49,6 +49,7 @@ class NavBarAuth extends React.Component{
               <Button color="inherit" sx={{px:10}} onClick={this.onClick} id='/doctor/calendar'>Calendar</Button>
               <Button color="inherit" sx={{px:10}} onClick={this.onClick} id='/doctor/appointments'>Appointments</Button>
               <Button color="inherit" sx={{px:10}} onClick={this.onClick} id="/doctor/messages">Messages</Button>
+              <Button color="inherit" sx={{px:10}} onClick={this.onClick} id="/doctor/prescriptions">Prescriptions</Button>
               <Button color="inherit" sx={{px:10}} onClick={this.onClick} id='http://localhost:3006/'>Join Call</Button>
             </Box>
             <AccountCircleIcon sx={{pr: 1, fontSize: 35}}/>

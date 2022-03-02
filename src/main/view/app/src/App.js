@@ -20,6 +20,8 @@ import PatientMessages from "./Pages/Patient/PatientMessages"
 import PatientRegistration from "./Pages/Patient/PatientRegistration";
 import PatientDashboard from "./Pages/Patient/PatientDashboard";
 import PatientCalendar from "./Pages/Patient/PatientCalendar";
+import DoctorPrescriptions from "./Pages/Doctor/DoctorPrescriptions";
+import DoctorNewPrescription from "./Pages/Doctor/DoctorNewPrescription";
 
 
 class App extends Component{
@@ -257,6 +259,38 @@ class App extends Component{
                             path={"/doctor/message/new"}
                             render={props => (
                                 <DoctorNewMessage
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    patients= {this.state.user.patients}
+                                    doctorId = {this.state.user.id}
+                                    credentials={this.state.credentials}
+                                    postData={this.postData}
+                                    user={this.state.user}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/doctor/prescriptions"}
+                            render={props => (
+                                <DoctorPrescriptions
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
+                                    user={this.state.user}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/doctor/prescription/new"}
+                            render={props => (
+                                <DoctorNewPrescription
                                     {...props}
                                     handleLogin={this.handleLogin}
                                     handleLogout={this.handleLogout}

@@ -181,7 +181,7 @@ public class DoctorController implements UserControllers {
         return new ResponseEntity<>(prescriptions, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/patient/prescriptions/patient/{patientId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/doctor/prescriptions/patient/{patientId}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.FOUND)
     public ResponseEntity<Object> viewPatientPrescriptions(@PathVariable int patientId) {
         Set<Prescription> prescriptions = new HashSet<>(prescriptionDao.getAllPrescriptionsPerPatient(patientId));
@@ -198,9 +198,9 @@ public class DoctorController implements UserControllers {
         return new ResponseEntity<>(prescription, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/doctor/prescription", method = RequestMethod.PUT)
+    @RequestMapping(value = "/doctor/prescription", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public ResponseEntity<Object> writePrescription(Prescription prescription){
+    public ResponseEntity<Object> writePrescription(@RequestBody Prescription prescription){
         Prescription prescription1 = prescriptionDao.addPrescription(prescription);
 
         return new ResponseEntity<>(prescription1, HttpStatus.OK);

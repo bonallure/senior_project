@@ -16,7 +16,7 @@ public class Appointment {
     private Date date;
     private String link;
     private String location = null;
-    private AppointmentType type;
+    private AppointmentType type = AppointmentType.VIDEO;
     private boolean isConfirmed;
     private String note;
 

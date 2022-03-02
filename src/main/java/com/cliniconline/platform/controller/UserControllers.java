@@ -37,7 +37,7 @@ public interface UserControllers {
 
     void endAppointment(int appointmentId);
 
-    ResponseEntity<?> addAppointment(Map appointment);
+    ResponseEntity<?> addAppointment(Appointment appointment);
 
     void cancelAppointment(int appointmentId);
 

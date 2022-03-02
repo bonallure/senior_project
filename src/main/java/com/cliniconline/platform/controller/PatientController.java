@@ -141,20 +141,9 @@ public class PatientController implements UserControllers {
     @RequestMapping(value = "/patient/appointment", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
-    public ResponseEntity<Object> addAppointment(@RequestBody Map appointment) {
+    public ResponseEntity<Object> addAppointment(@RequestBody Appointment appointment) {
 
-        System.out.println(appointment);
-        Appointment newAppointment = new Appointment();
-        newAppointment.setPatientId((Integer) appointment.get("patientId"));
-        newAppointment.setDoctorId((int) appointment.get("doctorId"));
-        newAppointment.setLink((String) appointment.get("link"));
-        newAppointment.setType("VIDEO");
-        newAppointment.setNote((String) appointment.get("note"));
-        newAppointment.setDate(Date.valueOf((String) appointment.get("date")));
-
-        newAppointment =  appointmentDao.addAppointment(newAppointment);
-
-        return new ResponseEntity<>(newAppointment, HttpStatus.OK);
+        return new ResponseEntity<>(appointmentDao.addAppointment(appointment), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/appointment/{appointmentId}", method = RequestMethod.DELETE)

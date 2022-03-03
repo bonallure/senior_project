@@ -37,27 +37,20 @@ public class DoctorController implements UserControllers {
 
     @Autowired
     protected DoctorDao doctorDao;
-
     @Autowired
     protected AdultPatientDao adultPatientDao;
-
     @Autowired
     protected DependentDao dependentDao;
-
     @Autowired
     protected MessageDao messageDao;
-
     @Autowired
     protected AppointmentDao appointmentDao;
-
     @Autowired
     protected PrescriptionDao prescriptionDao;
-
     @Autowired
     protected DoctorServiceLayer serviceLayer;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     private Logger logger = PlatformApplication.LOGGER;
 
 
@@ -149,6 +142,7 @@ public class DoctorController implements UserControllers {
     @Override
     public ResponseEntity<Object> addAppointment(@RequestBody Appointment appointment) {
         logger.info("New doctor appointment");
+        appointment.setRequester(ROLE);
         Appointment newAppointment = appointmentDao.addAppointment(appointment);
         logger.info("New appointment added. appointmentId: "+ newAppointment.getId());
 

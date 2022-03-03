@@ -20,8 +20,8 @@ import java.util.TimeZone;
 public class MessageDaoImpl implements MessageDao {
 
     private static final String INSERT_MESSAGE_SQL =
-            "insert into message (recipient_role, sender_role, doctor_id, patient_id, date, time, parent_message_id, message) " +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?)";
+            "insert into message (recipient_role, sender_role, doctor_id, patient_id, date, time, parent_message_id, message, read) " +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SELECT_MESSAGE_SQL =
             "select * from message where id = ?";
@@ -46,7 +46,7 @@ public class MessageDaoImpl implements MessageDao {
 
     private static final String UPDATE_MESSAGE_SQL =
             "update message set recipient_role = ?, sender_role = ?, doctor_id = ?, patient_id = ?, date = ?, time = ?," +
-                    " parent_message_id = ?, message = ? where id = ?";
+                    " parent_message_id = ?, message = ?, read = ? where id = ?";
 
 
     // jdbctemplate
@@ -69,7 +69,8 @@ public class MessageDaoImpl implements MessageDao {
                 message.getDate(),
                 message.getTime(),
                 message.getParentMessageId(),
-                message.getMessage());
+                message.getMessage(),
+                message.isRead());
         int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
         message.setId(id);
 
@@ -88,7 +89,8 @@ public class MessageDaoImpl implements MessageDao {
                 message.getTime(),
                 message.getParentMessageId(),
                 message.getMessage(),
-                message.getId());
+                message.getId(),
+                message.isRead());
     }
 
     @Override
@@ -149,6 +151,7 @@ public class MessageDaoImpl implements MessageDao {
         message.setTime(rs.getTime("time", new GregorianCalendar(TimeZone.getTimeZone("GMT-6:00"))));
         message.setParentMessageId(rs.getInt("parent_message_id"));
         message.setMessage(rs.getString("message"));
+        message.setRead(rs.getBoolean("isRead"));
 
         return message;
     }

@@ -2,6 +2,7 @@ package com.cliniconline.platform.model.dao.impl;
 
 import com.cliniconline.platform.model.dao.AppointmentDao;
 import com.cliniconline.platform.model.dto.Appointment;
+import com.cliniconline.platform.model.dto.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,8 +19,8 @@ import java.util.List;
 public class AppointmentDaoImpl implements AppointmentDao {
 
     private static final String INSERT_APPOINTMENT_SQL =
-            "insert into appointment (doctor_id, patient_id, date, link, location, type, confirmed, note) " +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?)";
+            "insert into appointment (doctor_id, patient_id, date, link, location, type, confirmed, note, requester, time) " +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SELECT_APPOINTMENT_SQL =
             "select * from appointment where id = ?";
@@ -32,7 +33,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     private static final String UPDATE_APPOINTMENT_SQL =
             "update appointment set doctor_id = ?, patient_id = ?, date = ?, link = ?, location = ?, type = ?, " +
-                    "confirmed = ?, note = ? where id = ?";
+                    "confirmed = ?, note = ?, time = ?, requester = ? where id = ?";
 
     private static final String SELECT_ALL_APPOINTMENTS_PER_PATIENT_SQL =
             "select * from appointment where patient_id = ?";
@@ -65,7 +66,9 @@ public class AppointmentDaoImpl implements AppointmentDao {
                 appointment.getLocation(),
                 appointment.getType(),
                 appointment.isConfirmed(),
-                appointment.getNote());
+                appointment.getNote(),
+                appointment.getRequester(),
+                appointment.getTime());
         int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
         appointment.setId(id);
 
@@ -84,7 +87,9 @@ public class AppointmentDaoImpl implements AppointmentDao {
                 appointment.getType(),
                 appointment.isConfirmed(),
                 appointment.getNote(),
-                appointment.getId());
+                appointment.getId(),
+                appointment.getRequester(),
+                appointment.getTime());
     }
 
     @Override
@@ -148,6 +153,8 @@ public class AppointmentDaoImpl implements AppointmentDao {
         appointment.setType(rs.getString("type"));
         appointment.setConfirmed(rs.getBoolean("confirmed"));
         appointment.setNote(rs.getString("note"));
+        appointment.setTime(rs.getTime("time"));
+        appointment.setRequester(Role.getRole(rs.getString("requester")));
 
         return appointment;
     }

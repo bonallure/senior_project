@@ -5,6 +5,7 @@ import com.cliniconline.platform.model.dao.*;
 import com.cliniconline.platform.model.dto.*;
 import com.cliniconline.platform.model.viewmodel.PatientViewModel;
 import com.cliniconline.platform.service.PatientServiceLayer;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,16 +31,12 @@ public class PatientController implements UserControllers {
     // Autowiring the data access objects
     @Autowired
     private AdultPatientDao adultPatientDao;
-
     @Autowired
     private DependentDao dependentDao;
-
     @Autowired
     private MessageDao messageDao;
-
     @Autowired
     private AppointmentDao appointmentDao;
-
     @Autowired
     private PrescriptionDao prescriptionDao;
 
@@ -47,6 +44,7 @@ public class PatientController implements UserControllers {
     @Autowired
     private PatientServiceLayer patientServiceLayer;
 
+    private Logger logger = PlatformApplication.LOGGER;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     // Logging in a patient
@@ -142,8 +140,11 @@ public class PatientController implements UserControllers {
     @ResponseStatus(value = HttpStatus.CREATED)
     @Override
     public ResponseEntity<Object> addAppointment(@RequestBody Appointment appointment) {
+        appointment.setRequester(ROLE);
+        Appointment newAppointment = appointmentDao.addAppointment(appointment);
+        logger.info("New appointment added. appointmentId: "+ newAppointment.getId());
 
-        return new ResponseEntity<>(appointmentDao.addAppointment(appointment), HttpStatus.OK);
+        return new ResponseEntity<>(newAppointment, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/patient/appointment/{appointmentId}", method = RequestMethod.DELETE)

@@ -21,7 +21,7 @@ class DoctorLogin extends React.Component{
         e.preventDefault();
         await this.props.handleLogin();
         if (this.props.isLoggedIn) {
-            this.props.history.push("/doctor/appointments");
+            this.props.history.push("/doctor/dashboard");
         }
     };
 

@@ -328,6 +328,10 @@ class App extends Component{
                                     handleLogout={this.handleLogout}
                                     isLoggedIn={this.state.isLoggedIn}
                                     checkLoginStatus={this.checkLoginStatus}
+                                    patients= {this.state.user.patients}
+                                    doctorId = {this.state.user.id}
+                                    credentials={this.state.credentials}
+                                    postData={this.postData}
                                     user={this.state.user}
                                 />
                             )}

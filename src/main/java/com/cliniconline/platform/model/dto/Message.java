@@ -20,6 +20,7 @@ public class Message {
     private int parentMessageId;
     private int doctorId;
     private int patientId;
+    private boolean read = false;
 
     public Message() {
     }
@@ -39,6 +40,26 @@ public class Message {
         newMessage.setDoctorId(this.doctorId);
         newMessage.setPatientId(this.patientId);
         return newMessage;
+    }
+
+    public void setRecipientRole(Role recipientRole) {
+        this.recipientRole = recipientRole;
+    }
+
+    public void setSenderRole(Role senderRole) {
+        this.senderRole = senderRole;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
+    public boolean isRead() {
+        return read;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
     }
 
     public LocalTime getTime() {
@@ -124,11 +145,12 @@ public class Message {
         if (parentMessageId != message1.parentMessageId) return false;
         if (doctorId != message1.doctorId) return false;
         if (patientId != message1.patientId) return false;
+        if (read != message1.read) return false;
         if (recipientRole != message1.recipientRole) return false;
         if (senderRole != message1.senderRole) return false;
         if (!message.equals(message1.message)) return false;
-        if (!(date.compareTo(message1.date) == 0)) return false;
-        return (time.compareTo(message1.time) == 0);
+        if (!date.equals(message1.date)) return false;
+        return time.equals(message1.time);
     }
 
     @Override
@@ -137,12 +159,29 @@ public class Message {
         result = 31 * result + recipientRole.hashCode();
         result = 31 * result + senderRole.hashCode();
         result = 31 * result + message.hashCode();
-        result = 31 * result + date.toString().hashCode();
-        result = 31 * result + time.toString().hashCode();
+        result = 31 * result + date.hashCode();
+        result = 31 * result + time.hashCode();
         result = 31 * result + parentMessageId;
         result = 31 * result + doctorId;
         result = 31 * result + patientId;
+        result = 31 * result + (read ? 1 : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", recipientRole=" + recipientRole +
+                ", senderRole=" + senderRole +
+                ", message='" + message + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", parentMessageId=" + parentMessageId +
+                ", doctorId=" + doctorId +
+                ", patientId=" + patientId +
+                ", read=" + read +
+                '}';
     }
 }
 

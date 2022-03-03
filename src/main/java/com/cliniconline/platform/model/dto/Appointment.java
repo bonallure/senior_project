@@ -1,7 +1,9 @@
 package com.cliniconline.platform.model.dto;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -14,11 +16,13 @@ public class Appointment {
     private int doctorId;
     private int patientId;
     private Date date;
+    private Time time;
     private String link;
     private String location = null;
     private AppointmentType type = AppointmentType.VIDEO;
     private boolean isConfirmed;
     private String note;
+    private Role requester;
 
     public Appointment() {
     }
@@ -109,6 +113,26 @@ public class Appointment {
         return request;
     }
 
+    public void setType(AppointmentType type) {
+        this.type = type;
+    }
+
+    public Role getRequester() {
+        return requester;
+    }
+
+    public void setRequester(Role requester) {
+        this.requester = requester;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -121,10 +145,12 @@ public class Appointment {
         if (patientId != that.patientId) return false;
         if (isConfirmed != that.isConfirmed) return false;
         if (!date.equals(that.date)) return false;
-        if (link != null ? !link.equals(that.link) : that.link != null) return false;
-        if (location != null ? !location.equals(that.location) : that.location != null) return false;
+        if (!time.equals(that.time)) return false;
+        if (!link.equals(that.link)) return false;
+        if (!location.equals(that.location)) return false;
         if (type != that.type) return false;
-        return note != null ? note.equals(that.note) : that.note == null;
+        if (!note.equals(that.note)) return false;
+        return requester == that.requester;
     }
 
     @Override
@@ -133,11 +159,30 @@ public class Appointment {
         result = 31 * result + doctorId;
         result = 31 * result + patientId;
         result = 31 * result + date.hashCode();
-        result = 31 * result + (link != null ? link.hashCode() : 0);
-        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + time.hashCode();
+        result = 31 * result + link.hashCode();
+        result = 31 * result + location.hashCode();
         result = 31 * result + type.hashCode();
         result = 31 * result + (isConfirmed ? 1 : 0);
-        result = 31 * result + (note != null ? note.hashCode() : 0);
+        result = 31 * result + note.hashCode();
+        result = 31 * result + requester.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", doctorId=" + doctorId +
+                ", patientId=" + patientId +
+                ", date=" + date +
+                ", time=" + time +
+                ", link='" + link + '\'' +
+                ", location='" + location + '\'' +
+                ", type=" + type +
+                ", isConfirmed=" + isConfirmed +
+                ", note='" + note + '\'' +
+                ", requester=" + requester +
+                '}';
     }
 }

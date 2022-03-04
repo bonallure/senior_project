@@ -2,22 +2,22 @@
   color: white;
   padding: 20px;
   text-align: center;
-  button {
-    display: block;
-    margin: 0px auto;
-    padding: 10px 25px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 20px;
-  }
-  .video-container {
-    display: flex;
-    justify-content: center;
-    .video-block {
-      height: 200px;
-      width: 300px;
-    }
-  }
+}
+button {
+  display: block;
+  margin: 0px auto;
+  padding: 10px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.video-container {
+  display: flex;
+  justify-content: center;
+}
+.video-block {
+  height: 200px;
+  width: 300px;
 }
 
 .loader {
@@ -30,6 +30,7 @@
   border-top: 10px solid #ffffff;
   animation: spin 1s infinite linear;
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -38,3 +39,4 @@
     transform: rotate(360deg);
   }
 }
+  

@@ -22,7 +22,7 @@ import PatientDashboard from "./Pages/Patient/PatientDashboard";
 import PatientCalendar from "./Pages/Patient/PatientCalendar";
 import DoctorPrescriptions from "./Pages/Doctor/DoctorPrescriptions";
 import DoctorNewPrescription from "./Pages/Doctor/DoctorNewPrescription";
-
+import DoctorVideoCall from "./Pages/Doctor/DoctorVideoCall";
 
 class App extends Component{
     constructor(props) {
@@ -332,6 +332,20 @@ class App extends Component{
                                     doctorId = {this.state.user.id}
                                     credentials={this.state.credentials}
                                     postData={this.postData}
+                                    user={this.state.user}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path={"/doctor/videoCall"}
+                            render={props => (
+                                <DoctorVideoCall
+                                    {...props}
+                                    handleLogin={this.handleLogin}
+                                    handleLogout={this.handleLogout}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    checkLoginStatus={this.checkLoginStatus}
                                     user={this.state.user}
                                 />
                             )}

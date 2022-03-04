@@ -9,7 +9,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Container from '@mui/material/Container';
 
-class NavBarAuth extends React.Component{
+class NavBarAuthDoc extends React.Component{
 
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ class NavBarAuth extends React.Component{
               <Button color="inherit" sx={{px:10}} onClick={this.onClick} id='/doctor/appointments'>Appointments</Button>
               <Button color="inherit" sx={{px:10}} onClick={this.onClick} id="/doctor/messages">Messages</Button>
               <Button color="inherit" sx={{px:10}} onClick={this.onClick} id="/doctor/prescriptions">Prescriptions</Button>
-              <Button color="inherit" sx={{px:10}} onClick={this.onClick} id='http://localhost:3006/'>Join Call</Button>
+              <Button color="inherit" sx={{px:10}} onClick={this.onClick} id='/doctor/videoCall'>Join Call</Button>
             </Box>
             <AccountCircleIcon sx={{pr: 1, fontSize: 35}}/>
           </Toolbar>
@@ -60,4 +60,4 @@ class NavBarAuth extends React.Component{
   }
 }
 
-export default  NavBarAuth;
+export default  NavBarAuthDoc;

@@ -11,18 +11,26 @@ import Footer from "../../Components/Footer";
 
 
 class Appointment extends React.Component{
-    state = {
-        isAuthenticated: true,
-        user: undefined
-    }
 
     constructor(props) {
         super(props);
         const {cookies} = props;
         this.state.csrfToken = cookies.get('XSRF-TOKEN');
         this.state = {
+            hasError: false,
             user: props.user,
+            appointments: props.user.appointments
         }
+    }
+
+    static getDerivedStateFromError(error) {
+        // Update state so the next render will show the fallback UI.
+        return { hasError: true };
+    }
+
+    componentDidCatch(error, errorInfo) {
+        // You can also log the error to an error reporting service
+        console.log(error, errorInfo);
     }
 
     onClick = (e) => {
@@ -42,9 +50,9 @@ class Appointment extends React.Component{
         })
     }
 
-    getAllPatientAppointments() {
+    async getAllPatientAppointments() {
         console.log(this.state)
-        const url = "http://localhost:8080/doctor/appointments/" + this.state.user.id
+        const url = "http://localhost:8080/patient/appointments/" + this.state.user.id
         console.log(url)
         axios.get(url)
             .then(response =>{
@@ -57,7 +65,7 @@ class Appointment extends React.Component{
     }
 
     getDoctor() {
-        const url = "http://localhost:8080/doctor/13"
+        const url = "http://localhost:8080/doctor" + this.state.user.id
         axios.get(url)
             .then(response =>{
                 console.log("this is the response", response.data);
@@ -69,14 +77,18 @@ class Appointment extends React.Component{
     }
 
     componentDidMount() {
-        this.getAllPatientAppointments()
+        //this.getAllPatientAppointments()
         // this.getDoctor()
     }
 
-    render(){
+    render(){   
+        if (this.state.hasError) {
+            // You can render any custom fallback UI
+            return <h1>Something went wrong.</h1>;
+        }
         return(
             <div>
-                <NavBarAuthDoc/>
+                <NavBarAuthDoc props={this.props}/>
                 <div className = "Appointment" >
                     <Box sx={{pt: 2, pr: 2, textAlign: 'right'}}> 
                         <Button variant="contained"  onClick={this.onClick}>New Appointment</Button>
